@@ -2,6 +2,7 @@ package edu.upenn.cis.cis455.m1.server.implementations;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -16,6 +17,7 @@ public class BasicRequest extends Request {
 	private String url;
 	private String protocol;
 	private Map<String, String> headers;
+	private String body;
 	
 	private BasicRequest() {
 		
@@ -23,86 +25,72 @@ public class BasicRequest extends Request {
 	
 	@Override
 	public String requestMethod() {
-		// TODO Auto-generated method stub
-		return null;
+		return method.toString();
 	}
 
 	@Override
 	public String host() {
-		// TODO Auto-generated method stub
-		return null;
+		return headers.get("host");
 	}
 
 	@Override
 	public String userAgent() {
-		// TODO Auto-generated method stub
-		return null;
+		return headers.get("useragent");
 	}
 
 	@Override
 	public int port() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Integer.parseInt(headers.get("port"));
 	}
 
 	@Override
 	public String pathInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return headers.get("pathinfo");
 	}
 
 	@Override
 	public String url() {
-		// TODO Auto-generated method stub
-		return null;
+		return url;
 	}
 
 	@Override
 	public String uri() {
-		// TODO Auto-generated method stub
-		return null;
+		return url;
 	}
 
 	@Override
 	public String protocol() {
-		// TODO Auto-generated method stub
-		return null;
+		return protocol;
 	}
 
 	@Override
 	public String contentType() {
-		// TODO Auto-generated method stub
-		return null;
+		return headers.get("content-type");
 	}
 
 	@Override
 	public String ip() {
-		// TODO Auto-generated method stub
-		return null;
+		return headers.get("remote-addr");
 	}
 
 	@Override
 	public String body() {
-		// TODO Auto-generated method stub
-		return null;
+		return body;
 	}
 
 	@Override
 	public int contentLength() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Integer.parseInt(headers.get("content-length"));
 	}
 
 	@Override
 	public String headers(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return headers.get(name);
 	}
 
 	@Override
 	public Set<String> headers() {
-		// TODO Auto-generated method stub
-		return null;
+		return headers.keySet();
 	}
 	
 	public static class BasicRequestFactory {
@@ -113,14 +101,13 @@ public class BasicRequest extends Request {
 			requiredHeaders = new ArrayList<>();
 			requiredHeaders.add("host");
 			requiredHeaders.add("useragent");
-			requiredHeaders.add("port");
-			requiredHeaders.add("pathinfo");
-			requiredHeaders.add("contentType");
-			requiredHeaders.add("ip");
+			requiredHeaders.add("content-type");
+			requiredHeaders.add("content-length");
+			requiredHeaders.add("remote-addr");
 		}
 		
 		public BasicRequest getBasicRequest(HttpMethod method, 
-				String url, String protocolVersion, Map<String, String> headers) {
+				String url, String protocolVersion, Map<String, String> headers, String body) {
 			BasicRequest request = new BasicRequest();
 			request.method = method;
 			if ("HTTP/1.1".equals(protocolVersion) || "HTTP/1.2".equals(protocolVersion)) {
@@ -137,7 +124,25 @@ public class BasicRequest extends Request {
 					throw new IllegalArgumentException ("Missing header: " + header);
 				}
 			}
-			request.headers = headers;
+			request.headers = new HashMap(headers);
+			String port = "80";
+			String host = headers.get("host");
+			int idx = host.lastIndexOf(':');
+			if (idx != -1) {
+				port = host.substring(idx + 1);
+			}
+			request.headers.put("port", port);
+			
+			int start = url.lastIndexOf(host) + 1;
+			int end = url.indexOf('?');
+			if (end == -1) end = url.length();
+			if (start >= end) {
+				throw new IllegalArgumentException("malformat url or host");
+			}
+			String pathInfo = url.substring(start, end);
+			request.headers.put("pathinfo", pathInfo);
+			
+			request.body = body;
 			return request;
 		}
 		

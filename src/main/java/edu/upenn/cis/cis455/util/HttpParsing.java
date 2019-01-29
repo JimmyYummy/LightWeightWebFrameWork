@@ -38,11 +38,13 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringBufferInputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -414,5 +416,38 @@ public class HttpParsing {
             return "image/jpeg";
             
         return "octet/stream";
+    }
+    
+    public static void main(String[] args ){
+    	Map<String, String> headers = new HashMap<>();;
+    	Map<String, List<String>> parms = new HashMap<>();
+    	InputStream in = new StringBufferInputStream("POST https://www.tutorialspoint.com:80/cgi-bin/process.cgi?check=first&check=second&pass=true HTTP/1.1\n" + 
+    			"User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)\n" + 
+    			"Host: www.tutorialspoint.com:80\n" + 
+    			"Content-Type: text/xml; charset=utf-8\n" + 
+    			"Content-Length: length\n" + 
+    			"Accept-Language: en-us\n" + 
+    			"Accept-Encoding: gzip, deflate\n" + 
+    			"Connection: Keep-Alive\n" + 
+    			"\n" + 
+    			"<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" + 
+    			"<string xmlns=\"http://clearforest.com/\">string</string>");
+    	
+    	try {
+			String url = parseRequest("0.0.0.0", in, headers, parms);
+			System.out.println(url);
+	    	System.out.println(headers);
+	    	System.out.println(parms);
+	    	byte[] b = new byte[200];
+	    	in.read(b);
+	    	System.out.println(new String(b));
+	    	
+		} catch (HaltException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

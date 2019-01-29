@@ -34,7 +34,7 @@ public class HttpWorker {
 					Map<String, String> headers = new HashMap<>();
 					Map<String, List<String>> parms = new HashMap<>();
 					String uri = HttpParsing.parseRequest(clientAddr, in, headers, parms);
-					logger.info("Accepting request for " + uri + " from " + clientAddr);
+					logger.info("Accepting request for " + uri + " from " + clientAddr + "with header" + headers);
 					//TODO: send an 100 response
 					if (headers.get("protocolVersion").equals("HTTP/1.1")) {
 						HttpIoHandler.sendResponse(sc, req, BasicResposne.get100Response());
