@@ -1,6 +1,7 @@
 package edu.upenn.cis.cis455;
 
 import org.apache.logging.log4j.Level;
+import java.util.*;
 
 public class WebServer {
     public static void main(String[] args) {
@@ -9,7 +10,7 @@ public class WebServer {
         // TODO: make sure you parse *BOTH* command line arguments properly
 
         // TODO: launch your server daemon        
-        
+        System.out.println(Arrays.toString(args));
         System.out.println("Waiting to handle requests!");
     }
 
