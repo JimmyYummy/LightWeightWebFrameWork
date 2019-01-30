@@ -19,8 +19,27 @@ import edu.upenn.cis.cis455.util.HttpParsing;
  * Stub class for a thread worker for
  * handling Web requests
  */
-public class HttpWorker {
+public class HttpWorker implements Runnable{
     final static Logger logger = LogManager.getLogger(HttpWorker.class);
+    private HttpTaskQueue taskQueue;
+    private boolean isActive;
+    
+    public HttpWorker(HttpTaskQueue taskQueue) {
+    	this.taskQueue = taskQueue;
+    	this.isActive = false;
+    }
+    
+	@Override
+	public void run() {
+		while (isActive) {
+			HttpTask task = taskQueue.poll();
+			work(task.getSocket());
+		}
+	}
+	
+	public void turnOffWorker() {
+		this.isActive = false;
+	}
 
 	public void work(Socket sc) {
 		// get the header of the request

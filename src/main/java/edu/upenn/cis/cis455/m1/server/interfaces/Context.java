@@ -1,5 +1,7 @@
 package edu.upenn.cis.cis455.m1.server.interfaces;
 
+import java.util.Collection;
+
 import edu.upenn.cis.cis455.handlers.Route;
 
 public interface Context {
@@ -17,5 +19,5 @@ public interface Context {
 	
 	public Route getRoute(String path);
 	
-	
+	public Collection<String> getRegisteredPaths();
 }

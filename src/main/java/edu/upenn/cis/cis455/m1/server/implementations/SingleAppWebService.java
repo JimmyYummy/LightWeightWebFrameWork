@@ -163,5 +163,9 @@ public class SingleAppWebService extends WebService {
 		public Route getRoute(String path) {
 			return routeResolver.getOrDefault(path, null);
 		}
+		
+		public Collection<String> getRegisteredPaths() {
+			return routeResolver.keySet();
+		}
 	}
 }
