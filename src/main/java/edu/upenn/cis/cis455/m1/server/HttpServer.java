@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.logging.log4j.LogManager;
@@ -24,37 +27,32 @@ public class HttpServer implements ThreadManager {
     final static Logger logger = LogManager.getLogger(HttpServer.class);
 	
 	private AtomicInteger appCount;
-	HttpTaskQueue taskQueue;
-	ThreadPool pool;
+	private HttpTaskQueue taskQueue;
+	private ThreadPool pool;
+	private Map<Integer, Context> contextMap;
 	
 	public HttpServer() {
 		logger.info("Creatign the HttpServer");
 		taskQueue = new HttpTaskQueue();
 		appCount = new AtomicInteger(0);
 		pool = null;
+		contextMap = new HashMap<>();
 	}
 	
 	public void start(Context context) {	
 		if (pool == null) {
-			
-			pool = SOMETHING;
-			new Thread (() -> {
-				logger.info("Creating the thread pool");
-				try {
-					while (isActive()) {
-						// TODO: if has available thread, do the task
-					}
-				} finally {
-					//TODO: close all the stuff
-					logger.info("Closing the thread pool");
-				}
-				
-			}).start();;
+			pool = new HttpThreadPool(context.getThreadNum());
 		}
 		
+		if (contextMap.containsKey(context.getPort())) {
+			throw new IllegalArgumentException("Port already in use");
+		}
+		
+		
 		new Thread(()-> {
+			ServerSocket socket = null;
 			try {
-				ServerSocket socket = new ServerSocket(context.getPort());
+				socket = new ServerSocket(context.getPort());
 				appCount.incrementAndGet();
 				logger.info("Listening on port: " + context.getPort());
 				while (true) {
@@ -62,9 +60,16 @@ public class HttpServer implements ThreadManager {
 					taskQueue.offer(new HttpTask(sc));
 				}
 			} catch (IOException e) {
-				logger.debug(e);
+				logger.error(e);
 			} finally {
 				appCount.decrementAndGet();
+				if (socket != null) {
+					try {
+						socket.close();
+					} catch (IOException e) {
+						logger.error(e);
+					}
+				}
 			}
 		}).start();
 	}
@@ -97,5 +102,65 @@ public class HttpServer implements ThreadManager {
     public void error(HttpWorker worker) {
         // TODO Auto-generated method stub
         
+    }
+    
+    public class HttpThreadPool implements ThreadPool{
+    	
+    	
+    	private List<HttpWorker> workers;
+    	
+    	private HttpThreadPool(int num) {
+    		logger.info("creating the threadpool");
+    		workers = new ArrayList<>(num);
+    		addThreads(num);
+    		logger.info("HttpThreadPool running");
+    	}
+    	
+		@Override
+		public void addThread() {
+			HttpWorker t = new HttpWorker(this);
+    		workers.add(t);
+    		t.start();
+    		logger.info("created new worker, current pool size: " + workers.size());
+		}
+
+    	@Override
+    	public void addThreads(int num) {
+    		for (int i = 0; i < num; i++);
+    		addThread();
+    	}
+    	
+
+		@Override
+		public void closeThread(Thread t) {
+			HttpWorker w = (HttpWorker) t;
+			if (workers.contains(w)) {
+				w.turnOffWorker();
+			} else {
+				throw new IllegalArgumentException("No a thread in the pool");
+			}
+			logger.info("deleted http worker, current pool size: " + workers.size());
+		}
+
+		@Override
+		public int closeThreads(int n) {
+			for (int i = 0; i < n; i++) {
+				if (workers.size() == 0) return i;
+				workers.remove(workers.size() - 1).turnOffWorker();
+			}
+			return n;
+		}
+		
+    	@Override
+    	public void closeAll() {
+    		for (HttpWorker w: workers) {
+    			w.turnOffWorker();
+    		}
+    		logger.info("All the workers are turned off");
+    	}
+    	
+    	public HttpTaskQueue getTaskQueue() {
+    		return taskQueue;
+    	}
     }
 }

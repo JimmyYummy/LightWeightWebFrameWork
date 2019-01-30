@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import edu.upenn.cis.cis455.exceptions.HaltException;
+import edu.upenn.cis.cis455.m1.server.HttpServer.HttpThreadPool;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicRequest;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicResposne;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
@@ -19,26 +20,26 @@ import edu.upenn.cis.cis455.util.HttpParsing;
  * Stub class for a thread worker for
  * handling Web requests
  */
-public class HttpWorker implements Runnable{
+public class HttpWorker extends Thread {
     final static Logger logger = LogManager.getLogger(HttpWorker.class);
-    private HttpTaskQueue taskQueue;
-    private boolean isActive;
+    private HttpThreadPool pool;
+    private boolean keepActive;
     
-    public HttpWorker(HttpTaskQueue taskQueue) {
-    	this.taskQueue = taskQueue;
-    	this.isActive = false;
+    public HttpWorker(HttpThreadPool pool) {
+    	this.pool = pool;
+    	this.keepActive = false;
     }
     
 	@Override
 	public void run() {
-		while (isActive) {
-			HttpTask task = taskQueue.poll();
+		while (keepActive) {
+			HttpTask task = pool.getTaskQueue().poll();
 			work(task.getSocket());
 		}
 	}
 	
 	public void turnOffWorker() {
-		this.isActive = false;
+		this.keepActive = false;
 	}
 
 	public void work(Socket sc) {
@@ -62,6 +63,7 @@ public class HttpWorker implements Runnable{
 					
 					//TODO: handle the request and response
 					
+					// check if persistent connection
 					if (headers.get("protocolVersion").equals("HTTP/1.0")
 							|| parms.containsKey("connection") && parms.get("connection").contains("close")) {
 						break;

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.upenn.cis.cis455.m1.server.interfaces.WebService;
+import edu.upenn.cis.cis455.m1.server.implementations.SingleAppWebService;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
 import edu.upenn.cis.cis455.m1.server.interfaces.Response;
@@ -15,12 +16,16 @@ import edu.upenn.cis.cis455.m2.server.interfaces.Session;
 
 
 public class ServiceFactory {
-
+	
+	private static WebService ws;
     /**
      * Get the HTTP server associated with port 8080
      */
     public static WebService getServerInstance() {
-        return null;
+    	if (ws == null) {
+    		ws = new SingleAppWebService();
+    	}
+        return ws;
     }
     
     /**
