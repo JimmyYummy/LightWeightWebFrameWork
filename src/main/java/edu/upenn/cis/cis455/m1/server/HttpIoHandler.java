@@ -1,12 +1,18 @@
 package edu.upenn.cis.cis455.m1.server;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,21 +34,86 @@ import edu.upenn.cis.cis455.util.HttpParsing;
  * Handles marshalling between HTTP Requests and Responses
  */
 public class HttpIoHandler {
-    final static Logger logger = LogManager.getLogger(HttpIoHandler.class);
+	final static Logger logger = LogManager.getLogger(HttpIoHandler.class);
 
-    /**
+	/**
      * Sends an exception back, in the form of an HTTP response code and message.  Returns true
      * if we are supposed to keep the connection open (for persistent connections).
      */
     public static boolean sendException(Socket socket, Request request, HaltException except) {
-        return true;
-    }
+    	BufferedWriter writer = null;
+    	boolean keepOpen = false;
+			try {
+				writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+				String firstLine = String.format("%d %s %s\r\n\r\n", 
+						except.statusCode(), HttpParsing.explainStatus(except.statusCode()), request.protocol());
+				writer.append(firstLine);
+				writer.append("Server: CIS-550/JingWang\r\n");
+				writer.append(String.format("Last-Modified: %s", getDate()));
+				if (request.protocol().equals("HTTP/1.1")) {
+					writer.append(String.format("Date: %s\r\n", getDate()));
+					keepOpen = true;
+				}
+				if (request.headers("connection").toLowerCase().equals("close")) {
+					writer.append("Connection: close\r\n");
+					keepOpen = false;
+				}
+				writer.append("\r\n");
+				writer.append(except.body());
+				writer.append("\r\n");
+				
+			} catch (IOException e) {
+				logger.error(e);
+			} finally {
+				if (writer != null) {
+					try {
+						writer.close();
+					} catch (IOException e) {
+						logger.error(e);
+					}
+				}
+			}
+			return keepOpen;
 
-    /**
+		}
+
+	
+	
+	private static String getDate() {
+    	ZoneId zone = ZoneId.of("GMT");
+    	ZonedDateTime zonedDT = ZonedDateTime.of(LocalDateTime.now(), zone);
+    	return zonedDT.format(DateTimeFormatter.RFC_1123_DATE_TIME);
+	}
+
+	/**
      * Sends data back.   Returns true if we are supposed to keep the connection open (for 
      * persistent connections).
      */
     public static boolean sendResponse(Socket socket, Request request, Response response) {
-        return true;
+    	BufferedWriter writer = null;
+			try {
+				writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+				String firstLine = String.format("%d %s %s\r\n\r\n", 
+						response.status(), HttpParsing.explainStatus(response.status()), request.protocol());
+				writer.append(firstLine);
+				
+				writer.append(response.getHeaders());
+				writer.append("\r\n");
+				
+				writer.append(response.body());
+				writer.append("\r\n");
+			} catch (IOException e) {
+				logger.error(e);
+			} finally {
+				if (writer != null) {
+					try {
+						writer.close();
+					} catch (IOException e) {
+						logger.error(e);
+					}
+				}
+			}
+			return request.protocol().equals("HTTP/1.1") 
+					&& ! request.headers("connection").toLowerCase().equals("close");
     }
 }

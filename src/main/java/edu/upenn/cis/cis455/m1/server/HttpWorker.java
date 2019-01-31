@@ -55,19 +55,16 @@ public class HttpWorker extends Thread {
 					Map<String, List<String>> parms = new HashMap<>();
 					String uri = HttpParsing.parseRequest(clientAddr, in, headers, parms);
 					logger.info("Accepting request for " + uri + " from " + clientAddr + "with header" + headers);
+					//TODO: generate the request object, take care of chucked request
+					req = BasicRequest.BasicRequestFactory.getBasicRequest(uri, in, headers, parms);
 					//TODO: send an 100 response
 					if (headers.get("protocolVersion").equals("HTTP/1.1")) {
 						HttpIoHandler.sendResponse(sc, req, BasicResposne.get100Response());
-					}
-					//TODO: generate the request object, take care of chucked request
-					
+					}					
 					//TODO: handle the request and response
 					
 					// check if persistent connection
-					if (headers.get("protocolVersion").equals("HTTP/1.0")
-							|| parms.containsKey("connection") && parms.get("connection").contains("close")) {
-						break;
-					}
+					
 				} catch (HaltException e) {
 					if (req != null) {
 						HttpIoHandler.sendException(sc, req, e);

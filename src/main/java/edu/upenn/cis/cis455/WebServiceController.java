@@ -34,7 +34,7 @@ package edu.upenn.cis.cis455;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.handlers.Filter;
 import edu.upenn.cis.cis455.handlers.Route;
-import edu.upenn.cis.cis455.m2.server.interfaces.WebService;
+import edu.upenn.cis.cis455.m1.server.interfaces.WebService;
 
 public class WebServiceController {
     
@@ -43,7 +43,7 @@ public class WebServiceController {
     
     protected static WebService getInstance() {
         // TODO: get a singletone instance of the WebService from the ServiceFactory
-        throw new UnsupportedOperationException("Not yet implemented!");
+        return ServiceFactory.getServerInstance();
     }
     
     ///////////////////////////////////////////////////
