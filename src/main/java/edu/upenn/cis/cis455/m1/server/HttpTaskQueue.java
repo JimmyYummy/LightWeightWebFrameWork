@@ -3,26 +3,29 @@ package edu.upenn.cis.cis455.m1.server;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import edu.upenn.cis.cis455.m1.server.implementations.BasicRequest;
+
 /**
  * Stub class for implementing the queue of HttpTasks
  */
 public class HttpTaskQueue {
+	
+	final static Logger logger = LogManager.getLogger(HttpTaskQueue.class);
+	
 	private Queue<HttpTask> q;
-	private int size;
 	
 	public HttpTaskQueue() {
 		q = new LinkedList<HttpTask>();
-		size = 1000;
 	}
 	
-	public void setSize(int s) {
-		size = s;
-	}
-	
-	public void offer(HttpTask t) {
-		while (q.size() >= size);
+	public synchronized void offer(HttpTask t) {
 		q.offer(t);
-		this.notifyAll();
+		if (q.size() == 1) {
+			this.notify();
+		}
 	}
 	
 	public synchronized HttpTask poll() {
@@ -30,12 +33,10 @@ public class HttpTaskQueue {
 			try {
 				this.wait();
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.error(e);
 			}
 		}
 		HttpTask t = q.poll();
-		this.notifyAll();
 		return t;
 	}
 }
