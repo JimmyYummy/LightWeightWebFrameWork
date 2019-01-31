@@ -3,14 +3,22 @@ package edu.upenn.cis.cis455.m1.server.implementations;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import edu.upenn.cis.cis455.exceptions.HaltException;
+import edu.upenn.cis.cis455.handlers.Filter;
+import edu.upenn.cis.cis455.handlers.Route;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
@@ -19,52 +27,71 @@ import edu.upenn.cis.cis455.util.HttpParsing;
 
 public class BasicRequestHandler implements HttpRequestHandler {
 	final static Logger logger = LogManager.getLogger(BasicRequestHandler.class);
-			
-	private Map<Integer, Context> contexts;
-
-	public BasicRequestHandler() {
-		contexts = new HashMap<>();
+		
+	@SuppressWarnings("unused")
+	private Path rootPath;
+	private Map<Path, Route> routes;
+	private List<Path> routePathRanking;
+	private Map<Path, Filter> filters;
+	private Context context;
+	
+	public BasicRequestHandler(Path rootPath) {
+		this.rootPath = rootPath;
+	}
+	
+	public BasicRequestHandler(Context context) {
+		rootPath = Paths.get(context.getFileLocation());
+		routes = context.getRoutes();
+		filters = context.getFilters();
+		this.context = context;
+		List<Path> routePathRanking = new ArrayList<>(routes.keySet());
+		Collections.sort(routePathRanking, Comparator.reverseOrder());
 	}
 
 	@Override
 	public void handle(Request request, Response response) throws HaltException {
-		if (! contexts.containsKey(request.port())) {
-			throw new HaltException(401, "Connection Refused on the port");
-		}
-		Context localContext = contexts.get(request.port());
-		String path = request.pathInfo();
+		Path requestPath = Paths.get(request.pathInfo());
 		// check filter here
-		boolean processed = false;
-		if (processed) {
+		for (Map.Entry<Path, Filter> filterPair : filters.entrySet()) {
+			if (requestPath.startsWith(filterPair.getKey())) {
+				try {
+					filterPair.getValue().handle(request, response);
+				} catch (Exception e) {
+					logger.error(e);
+					throw new HaltException(500, "Error while handling the request.");
+				}
+			}
+		}
+		if (response.status() != 200) {
 			throw new HaltException(401, "Unauthorized");
 		}
 		// chexck special url here
-		if (specialURlHandle(localContext, path, request, response)) {
+		if (specialURlHandle(requestPath, request, response)) {
 			return;
 		}
 		// find the route here
-		for (String routingPath : localContext.getRegisteredPaths()) {
-			if (isMatch(routingPath, path)) {
+		for (Path routePath : routePathRanking) {
+			if (requestPath.startsWith(routePath)) {
 				try {
-					localContext.getRoute(routingPath).handle(request, response);
+					routes.get(routePath).handle(request, response);
 				} catch (Exception e) {
 					logger.error(e);
-					throw new HaltException(500, "Internal Error");
+					throw new HaltException(500, "Error while handling the request.");
 				}
-				return;
+				break;
 			}
 		}
-		fileFetchingHandle(request, response, localContext.getFileLocation());
-			
+		fileFetchingHandle(request, response, requestPath, rootPath);
 	}
 	
-	private void fileFetchingHandle(Request request, Response response, String pathPrefix) throws HaltException {
-		File requestedFile = new File(pathPrefix + request.pathInfo());
+	private void fileFetchingHandle(Request request, Response response, Path requsetPath, Path root) throws HaltException {
+		//TODO: update the str to Path
+		File requestedFile = new File(root + request.pathInfo());
 		if (! requestedFile.exists()) {
 			throw new HaltException(404, "Not Found");
 		}
 		try {
-			byte[] allBytes = Files.readAllBytes(Paths.get(pathPrefix + request.pathInfo()));
+			byte[] allBytes = Files.readAllBytes(Paths.get(root + request.pathInfo()));
 			response.bodyRaw(allBytes);
 			response.type(HttpParsing.getMimeType(request.pathInfo()));
 			response.status(200);
@@ -74,12 +101,10 @@ public class BasicRequestHandler implements HttpRequestHandler {
 		}
 	}
 	
-	private boolean isMatch(String routePath, String reqPath) {
-		return reqPath.startsWith(routePath);
-	}
 	
-	private boolean specialURlHandle(Context context, String path, Request req, Response res) {
+	private boolean specialURlHandle(Path path, Request req, Response res) {
 		boolean handled = false;
+		//TODO: chagne strign to path
 		if ("/shutdown".equals(path)) {
 			handled = true;
 			context.setUnactive();
@@ -88,14 +113,5 @@ public class BasicRequestHandler implements HttpRequestHandler {
 			//TODO: implement /control response
 		}
 		return handled;
-	}
-	
-	/**
-	 * 
-	 * @param context
-	 * @return whether there is a previous mapping for the class path
-	 */
-	public boolean setContext(int port, Context context) {
-		return contexts.put(port, context) == null;
 	}
 }

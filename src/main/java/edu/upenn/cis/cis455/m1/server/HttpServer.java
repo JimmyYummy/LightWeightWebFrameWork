@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,9 +12,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import edu.upenn.cis.cis455.m1.server.implementations.BasicResposne;
+import edu.upenn.cis.cis455.m1.server.implementations.BasicRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
-import edu.upenn.cis.cis455.m1.server.interfaces.Response;
+import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.ThreadPool;
 
 /**
@@ -29,14 +28,14 @@ public class HttpServer implements ThreadManager {
 	private AtomicInteger appCount;
 	private HttpTaskQueue taskQueue;
 	private ThreadPool pool;
-	private Map<Integer, Context> contextMap;
+	public HandlerResolver handlerResolver;
 	
 	public HttpServer() {
 		logger.info("Creatign the HttpServer");
 		taskQueue = new HttpTaskQueue();
 		appCount = new AtomicInteger(0);
 		pool = null;
-		contextMap = new HashMap<>();
+		handlerResolver = new HandlerResolver();
 	}
 	
 	public void start(Context context) {	
@@ -44,11 +43,9 @@ public class HttpServer implements ThreadManager {
 			pool = new HttpThreadPool(context.getThreadNum());
 		}
 		
-		if (contextMap.containsKey(context.getPort())) {
-			throw new IllegalArgumentException("Port already in use");
-		}
+		handlerResolver.addHandler(context);
 		
-		
+		// create new listener thread
 		new Thread(()-> {
 			ServerSocket socket = null;
 			try {
@@ -73,6 +70,10 @@ public class HttpServer implements ThreadManager {
 			}
 		}).start();
 	}
+	
+	private HttpServer passInstance() {
+		return this;
+	} 
 	
 	
     @Override
@@ -118,7 +119,7 @@ public class HttpServer implements ThreadManager {
     	
 		@Override
 		public void addThread() {
-			HttpWorker t = new HttpWorker(this);
+			HttpWorker t = new HttpWorker(passInstance());
     		workers.add(t);
     		t.start();
     		logger.info("created new worker, current pool size: " + workers.size());
@@ -158,9 +159,24 @@ public class HttpServer implements ThreadManager {
     		}
     		logger.info("All the workers are turned off");
     	}
+    }
+    
+    class HandlerResolver {
+    	private Map<Integer, HttpRequestHandler> handlerMap;
     	
-    	public HttpTaskQueue getTaskQueue() {
-    		return taskQueue;
+    	private HandlerResolver() {
+    		handlerMap = new HashMap<>();
     	}
+
+		private void addHandler(Context context) {
+			if (handlerMap.containsKey(context.getPort())) {
+				throw new IllegalArgumentException("Port already in use");
+			}
+			handlerMap.put(context.getPort(), new BasicRequestHandler(context));
+		}
+		
+		public HttpRequestHandler getHandler(int port) {
+			return handlerMap.getOrDefault(port, null);
+		}
     }
 }

@@ -1,9 +1,12 @@
 package edu.upenn.cis.cis455.m1.server.implementations;
+import edu.upenn.cis.cis455.handlers.Filter;
 import edu.upenn.cis.cis455.handlers.Route;
 import edu.upenn.cis.cis455.m1.server.HttpServer;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m1.server.interfaces.WebService;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 /**
  * The single app web service implementation
@@ -65,7 +68,7 @@ public class SingleAppWebService extends WebService {
 		if (! context.isRunning) {
 			this.awaitInitialization();
 		}
-		this.context.routeResolver.put(path, route);
+		this.context.routeResolver.put(Paths.get(path), route);
 	}
 
 	/* (non-Javadoc)
@@ -103,7 +106,8 @@ public class SingleAppWebService extends WebService {
 	
 	public class SingleAppContext implements Context {
 		
-		private Map<String, Route> routeResolver;
+		private Map<Path, Route> routeResolver;
+		private Map<Path, Filter> filterResolver;
 		private int port;
 		private String ipaddr;
 		private String fileLocation;
@@ -113,6 +117,7 @@ public class SingleAppWebService extends WebService {
 		
 		private SingleAppContext() {
 			routeResolver = new HashMap<>();
+			filterResolver = new HashMap<>(0);
 			port = 8080;
 			ipaddr = "0.0.0.0";
 			fileLocation = "./www";
@@ -160,12 +165,13 @@ public class SingleAppWebService extends WebService {
 			this.isActive = false;
 		}
 		
-		public Route getRoute(String path) {
-			return routeResolver.getOrDefault(path, null);
+		public Map<Path, Route> getRoutes() {
+			return routeResolver;
 		}
 		
-		public Collection<String> getRegisteredPaths() {
-			return routeResolver.keySet();
+		public Map<Path, Filter> getFilters() {
+			return filterResolver;
 		}
+		
 	}
 }

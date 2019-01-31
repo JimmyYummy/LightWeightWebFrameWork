@@ -1,7 +1,9 @@
 package edu.upenn.cis.cis455.m1.server.interfaces;
 
-import java.util.Collection;
+import java.nio.file.Path;
+import java.util.Map;
 
+import edu.upenn.cis.cis455.handlers.Filter;
 import edu.upenn.cis.cis455.handlers.Route;
 
 public interface Context {
@@ -17,7 +19,7 @@ public interface Context {
 	
 	public void setUnactive();
 	
-	public Route getRoute(String path);
+	public Map<Path, Route> getRoutes();
 	
-	public Collection<String> getRegisteredPaths();
+	public Map<Path, Filter> getFilters();
 }
