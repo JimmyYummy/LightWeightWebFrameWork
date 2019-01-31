@@ -1,5 +1,6 @@
 package edu.upenn.cis.cis455;
 
+import java.io.IOException;
 import java.net.Socket;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -7,7 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import edu.upenn.cis.cis455.m1.server.interfaces.WebService;
+import edu.upenn.cis.cis455.exceptions.HaltException;
+import edu.upenn.cis.cis455.m1.server.implementations.BasicRequest;
+import edu.upenn.cis.cis455.m1.server.implementations.BasicResponse;
 import edu.upenn.cis.cis455.m1.server.implementations.SingleAppWebService;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
@@ -16,6 +23,8 @@ import edu.upenn.cis.cis455.m2.server.interfaces.Session;
 
 
 public class ServiceFactory {
+	
+	final static Logger logger = LogManager.getLogger(ServiceFactory.class);
 	
 	private static WebService ws;
     /**
@@ -36,6 +45,13 @@ public class ServiceFactory {
                          boolean keepAlive,
                          Map<String, String> headers,
                          Map<String, List<String>> parms) {
+        try {
+			return BasicRequest.BasicRequestFactory.getBasicRequest(uri, socket.getInputStream(), headers, parms);
+		} catch (HaltException e) {
+			logger.error(e);
+		} catch (IOException e) {
+			logger.error(e);
+		}
         return null;
     }
     
@@ -43,6 +59,7 @@ public class ServiceFactory {
      * Gets a request handler for files (i.e., static content) or dynamic content
      */
     public static HttpRequestHandler createRequestHandlerInstance(Path serverRoot) {
+    	//TODO
         return null;
     }
 
@@ -50,7 +67,7 @@ public class ServiceFactory {
      * Gets a new HTTP Response object
      */
     public static Response createResponse() {
-        return null;
+        return new BasicResponse();
     }
 
     /**

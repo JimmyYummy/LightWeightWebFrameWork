@@ -30,10 +30,10 @@ package edu.upenn.cis.cis455.m1.server.interfaces;
 
 import java.io.UnsupportedEncodingException;
 
-import edu.upenn.cis.cis455.m1.server.implementations.BasicResposne;
+import edu.upenn.cis.cis455.m1.server.implementations.BasicResponse;
 
 public abstract class Response {
-	private static BasicResposne commonResponse;
+	private static BasicResponse commonResponse;
 
 	
     protected int statusCode = 200;
@@ -82,8 +82,7 @@ public abstract class Response {
     
     public static Response get100Response() {
     	if (commonResponse == null) {
-    		commonResponse = new BasicResposne();
-    		commonResponse.setVersion("HTTP/1.1");
+    		commonResponse = new BasicResponse();
     		commonResponse.status(100);
     	}
     	return commonResponse;
