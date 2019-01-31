@@ -38,6 +38,10 @@ public class BasicRequestHandler implements HttpRequestHandler {
 		if (processed) {
 			throw new HaltException(401, "Unauthorized");
 		}
+		// chexck special url here
+		if (specialURlHandle(localContext, path, request, response)) {
+			return;
+		}
 		// find the route here
 		for (String routingPath : localContext.getRegisteredPaths()) {
 			if (isMatch(routingPath, path)) {
@@ -72,6 +76,18 @@ public class BasicRequestHandler implements HttpRequestHandler {
 	
 	private boolean isMatch(String routePath, String reqPath) {
 		return reqPath.startsWith(routePath);
+	}
+	
+	private boolean specialURlHandle(Context context, String path, Request req, Response res) {
+		boolean handled = false;
+		if ("/shutdown".equals(path)) {
+			handled = true;
+			context.setUnactive();
+		} else if ("/control".equals(path)) {
+			handled = true;
+			//TODO: implement /control response
+		}
+		return handled;
 	}
 	
 	/**
