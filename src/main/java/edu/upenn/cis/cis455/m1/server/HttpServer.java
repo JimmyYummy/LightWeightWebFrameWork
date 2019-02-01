@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.selector.ContextSelector;
 
 import edu.upenn.cis.cis455.m1.server.implementations.BasicRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
@@ -28,7 +30,8 @@ public class HttpServer implements ThreadManager {
 	private AtomicInteger appCount;
 	private HttpTaskQueue taskQueue;
 	private ThreadPool pool;
-	public HandlerResolver handlerResolver;
+	private HandlerResolver handlerResolver;
+	private Collection<Context> contexts;
 	
 	public HttpServer() {
 		logger.info("Creatign the HttpServer");
@@ -36,6 +39,7 @@ public class HttpServer implements ThreadManager {
 		appCount = new AtomicInteger(0);
 		pool = null;
 		handlerResolver = new HandlerResolver();
+		contexts = new ArrayList<>();
 	}
 	
 	public void start(Context context) {	
@@ -71,22 +75,26 @@ public class HttpServer implements ThreadManager {
 		}).start();
 	}
 	
+	public HandlerResolver getHandlerResolver() {
+		return handlerResolver;
+	}
+	
 	private HttpServer getServer() {
 		return this;
-	} 
-	
+	}
 	
     @Override
     public HttpTaskQueue getRequestQueue() {
         return taskQueue;
     }
-    
 
     @Override
     public boolean isActive() {
         return appCount.intValue() != 0;
     }
 
+    // the following three methods are not used in my architecture, 
+    // thus no actually implemented
     @Override
     public void start(HttpWorker worker) {
         // TODO Auto-generated method stub
@@ -105,8 +113,22 @@ public class HttpServer implements ThreadManager {
         
     }
     
+    public void closeServer() {
+    	pool.closeAll();
+    	for (Context context : contexts) {
+    		context.setUnactive();
+    	}
+    }
+    
+    public void closerApp(Context context) {
+    	if (contexts.remove(context)) {
+    		context.setUnactive();
+    	} else {
+    		throw new IllegalArgumentException("context in not loaded into the server");
+    	}
+    }
+    
     public class HttpThreadPool implements ThreadPool{
-    	
     	
     	private List<HttpWorker> workers;
     	
@@ -151,12 +173,13 @@ public class HttpServer implements ThreadManager {
 			}
 			return n;
 		}
-		
+				
     	@Override
     	public void closeAll() {
     		for (HttpWorker w: workers) {
     			w.turnOffWorker();
     		}
+    		workers.clear();
     		logger.info("All the workers are turned off");
     	}
     }
@@ -173,8 +196,13 @@ public class HttpServer implements ThreadManager {
 				throw new IllegalArgumentException("Port already in use");
 			}
 			handlerMap.put(context.getPort(), new BasicRequestHandler(context, getServer()));
+			logger.info("new handler added for new application on port " + context.getPort());
 		}
 		
+		/**
+		 * return the request handle on the port if exists,
+		 * else return null
+		 */
 		public HttpRequestHandler getHandler(int port) {
 			return handlerMap.getOrDefault(port, null);
 		}

@@ -112,8 +112,7 @@ public class HttpIoHandler {
 					}
 				}
 			}
-			return request.protocol().equals("HTTP/1.1") 
-					&& ! request.headers("connection").toLowerCase().equals("close");
+			return request.persistentConnection();
     }
     
 

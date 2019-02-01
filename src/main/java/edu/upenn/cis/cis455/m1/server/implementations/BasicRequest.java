@@ -32,7 +32,6 @@ public class BasicRequest extends Request {
 
 	static {
 		initialRequest = new BasicRequest();
-
 	}
 
 	private BasicRequest() {
@@ -124,34 +123,122 @@ public class BasicRequest extends Request {
 
 		public static Request getBasicRequest(String uri, InputStream in, Map<String, String> headers,
 				Map<String, List<String>> parms) throws HaltException {
-			BasicRequest request = getBasicRequestExceptBody(headers.get("Method"), uri, headers.get("protocolVersion"),
-					headers, parms);
+			// get the request without body
+			// if error occurs, no response will be send and the request will be timed out
+			BasicRequest request = getBasicRequestExceptBody(uri, headers, parms);
 			try {
-				if (headers.containsKey("transfer-encoding")
-						&& "chunked".equals(headers.get("transfer-encoding").toLowerCase())) {
+				if (request.headers.containsKey("transfer-encoding")
+						&& "chunked".equals(request.headers.get("transfer-encoding").toLowerCase())) {
 					request.body = parseChunkedEncodingBdoy(in);
 				} else {
 					request.body = parsePlainBody(in);
 				}
 			} catch (Exception e) {
-				throw new HaltException("Server: bad body parsing");
+				throw new HaltException(400, "Server: bad body parsing: " + e.getCause());
 			}
 			return request;
+		}
+		
+		private static BasicRequest getBasicRequestExceptBody(String url, Map<String, String> headers, Map<String, List<String>> params) {
+			// check compulsory headers
+			for (String header : requiredHeaders) {
+				if (!headers.containsKey(header)) {
+					throw new IllegalArgumentException("Missing header: " + header);
+				}
+			}
+			// create request object
+			BasicRequest request = new BasicRequest();
+			// set request method
+			String method = headers.get("Method").split(";")[0];
+			request.method = HttpMethod.parse(method);
+			// get version of the request
+			String protocolVersion = headers.get("protocolVersion").split(";")[0];
+			if ("HTTP/1.1".equals(protocolVersion) || "HTTP/1.2".equals(protocolVersion)) {
+				request.protocol = protocolVersion;
+			} else {
+				throw new IllegalArgumentException("Unsupported Http protocol verison");
+			}
+			// get the URL of the request
+			if (!isValidURL(url)) {
+				throw new IllegalArgumentException("Illegal URL");
+			}
+			request.url = url;
+
+			request.headers = new HashMap<String, String>(headers.size());
+			// parse host header:
+			// get the port number
+			String port = "80";
+			String host = headers.get("host").split(";")[0];
+			int idx = host.lastIndexOf(':');
+			if (idx != -1) {
+				if (host.endsWith("/")) {
+					port = host.substring(idx + 1, host.length() - 1);
+				} else {
+					port = host.substring(idx + 1);
+				}
+				
+			}
+			request.headers.put("port", port);
+
+			//get the requested path from root
+			int start = url.lastIndexOf(host) + 1;
+			int end = url.indexOf('?');
+			if (end == -1)
+				end = url.length();
+			if (start >= end) {
+				throw new IllegalArgumentException("malformat url or host");
+			}
+			request.headers.put("pathinfo", url.substring(start, end));
+			// check if is persistent connection
+			if (request.protocol().equals("HTTP/1.1") 
+			&& ! (request.headers().contains("connection") 
+					&& request.headers("connection").toLowerCase().equals("close"))) {
+				request.persistentConnection(true);
+			}
+			// put the rest of headers in the requst's header
+			for (Map.Entry<String, String> ent : headers.entrySet()) {
+				if (! request.headers.containsKey(ent.getKey())) {
+					request.headers.put(ent.getKey(), ent.getValue().split(";")[0]);
+				}
+			}
+			return request;
+		}
+		
+		private static boolean isValidURL(String url) {
+			return true;
 		}
 
 		private static String parseChunkedEncodingBdoy(InputStream in) throws IOException {
 			StringBuilder sb = new StringBuilder();
-			String line;
+			String line = null;
 			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-			while (true) {
+			// skip the empty lines
+			do {
 				line = reader.readLine();
-				if (Integer.parseInt(line.split(";")[0]) == 0) {
-					while (!line.equals("\n") || line.equals("\r\n")) {
+			} while (line != null && (line.equals("\n") || line.equals("\r\n")));
+			// if the line is null, return empty body
+			if (line == null) return "";
+			
+			// read the body
+			char[] cbuf = new char[2048];
+			while (true) {
+				// get the length of the following chunk
+				int length = Integer.parseInt(line.split(";")[0]);
+				// finish reading if length is 0
+				if (length == 0) {
+					// skip all the footers
+					while (line != null && !(line.equals("\n") || line.equals("\r\n"))) {
 						line = reader.readLine();
 					}
 					return sb.toString();
 				}
-				sb.append(reader.readLine());
+				// append the chunk and read new line
+				if (length > cbuf.length) {
+					cbuf = new char[length];
+				}
+				reader.read(cbuf, 0, length);
+				sb.append(cbuf, 0, length);
+				line = reader.readLine();
 			}
 		}
 
@@ -163,50 +250,7 @@ public class BasicRequest extends Request {
 			}
 			return sb.toString();
 		}
-
-		private static BasicRequest getBasicRequestExceptBody(String method, String url, String protocolVersion,
-				Map<String, String> headers, Map<String, List<String>> params) {
-			BasicRequest request = new BasicRequest();
-			request.method = HttpMethod.parse(method);
-			if ("HTTP/1.1".equals(protocolVersion) || "HTTP/1.2".equals(protocolVersion)) {
-				request.protocol = protocolVersion;
-			} else {
-				throw new IllegalArgumentException("Unsupported Http protocol verison");
-			}
-			if (!isValidURL(url)) {
-				throw new IllegalArgumentException("Illegal URL");
-			}
-			request.url = url;
-			for (String header : requiredHeaders) {
-				if (!headers.containsKey(header)) {
-					throw new IllegalArgumentException("Missing header: " + header);
-				}
-			}
-			request.headers = new HashMap<String, String>(headers);
-			String port = "80";
-			String host = headers.get("host");
-			int idx = host.lastIndexOf(':');
-			if (idx != -1) {
-				port = host.substring(idx + 1);
-			}
-			request.headers.put("port", port);
-
-			int start = url.lastIndexOf(host) + 1;
-			int end = url.indexOf('?');
-			if (end == -1)
-				end = url.length();
-			if (start >= end) {
-				throw new IllegalArgumentException("malformat url or host");
-			}
-			String pathInfo = url.substring(start, end);
-			request.headers.put("pathinfo", pathInfo);
-			return request;
-		}
-
-		private static boolean isValidURL(String url) {
-			return false;
-		}
-
+		
 	}
 
 }

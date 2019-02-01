@@ -73,7 +73,7 @@ public class BasicRequestHandler implements HttpRequestHandler {
 		if (response.status() != 200) {
 			throw new HaltException(401, "Unauthorized");
 		}
-		// chexck special url here
+		// check special URL here
 		if (specialURlHandle(requestPath, request, response)) {
 			return;
 		}
@@ -89,6 +89,7 @@ public class BasicRequestHandler implements HttpRequestHandler {
 				break;
 			}
 		}
+		// try to return the file if exist, or raise an exception
 		fileFetchingHandle(request, response, requestPath);
 	}
 	

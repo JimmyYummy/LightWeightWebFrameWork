@@ -36,7 +36,6 @@ public class SingleAppWebService extends WebService {
 		}
 		context.isRunning = true;
 		context.isActive = true;
-		basicServer = null;
 		basicServer = new HttpServer();
 		basicServer.start(context);
 	}
@@ -47,6 +46,7 @@ public class SingleAppWebService extends WebService {
 	@Override
 	public void stop() {
 		context.isActive = false;
+		basicServer.closeServer();
 	}
 
 	/* (non-Javadoc)

@@ -3,8 +3,6 @@ package edu.upenn.cis.cis455;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -47,10 +45,9 @@ public class ServiceFactory {
                          Map<String, String> headers,
                          Map<String, List<String>> parms) {
         try {
-			return BasicRequest.BasicRequestFactory.getBasicRequest(uri, socket.getInputStream(), headers, parms);
-		} catch (HaltException e) {
-			logger.error(e);
-		} catch (IOException e) {
+			Request req =  BasicRequest.BasicRequestFactory.getBasicRequest(uri, socket.getInputStream(), headers, parms);
+			req.persistentConnection(keepAlive);
+        } catch (HaltException | IOException e) {
 			logger.error(e);
 		}
         return null;
