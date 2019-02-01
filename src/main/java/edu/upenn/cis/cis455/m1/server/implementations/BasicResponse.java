@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import edu.upenn.cis.cis455.m1.server.interfaces.Response;
-import edu.upenn.cis.cis455.util.HttpParsing;
 
 public class BasicResponse extends Response {
 	public Map<String, String> headers;

@@ -12,8 +12,8 @@ import org.apache.logging.log4j.Logger;
 import edu.upenn.cis.cis455.m1.server.interfaces.WebService;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicRequest;
-import edu.upenn.cis.cis455.m1.server.implementations.BasicRequestHandler;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicResponse;
+import edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler;
 import edu.upenn.cis.cis455.m1.server.implementations.SingleAppWebService;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
@@ -57,7 +57,7 @@ public class ServiceFactory {
      * Gets a request handler for files (i.e., static content) or dynamic content
      */
     public static HttpRequestHandler createRequestHandlerInstance(Path serverRoot) {
-        return new BasicRequestHandler(serverRoot);
+        return new GeneralRequestHandler(serverRoot);
     }
 
     /**

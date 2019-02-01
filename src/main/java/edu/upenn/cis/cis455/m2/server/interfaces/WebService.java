@@ -28,16 +28,11 @@
  */
 package edu.upenn.cis.cis455.m2.server.interfaces;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.handlers.Filter;
 import edu.upenn.cis.cis455.handlers.Route;
-import edu.upenn.cis.cis455.m1.server.HttpServer;
 
 public abstract class WebService extends edu.upenn.cis.cis455.m1.server.interfaces.WebService {
     final static Logger logger = LogManager.getLogger(WebService.class);
