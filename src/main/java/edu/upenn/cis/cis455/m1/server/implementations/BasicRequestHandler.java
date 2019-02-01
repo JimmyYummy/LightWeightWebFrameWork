@@ -28,7 +28,6 @@ import edu.upenn.cis.cis455.util.HttpParsing;
 public class BasicRequestHandler implements HttpRequestHandler {
 	final static Logger logger = LogManager.getLogger(BasicRequestHandler.class);
 		
-	@SuppressWarnings("unused")
 	private Path rootPath;
 	private Map<Path, Route> routes;
 	private List<Path> routePathRanking;
@@ -40,7 +39,7 @@ public class BasicRequestHandler implements HttpRequestHandler {
 	}
 	
 	public BasicRequestHandler(Context context) {
-		rootPath = Paths.get(context.getFileLocation());
+		rootPath = Paths.get(context.getFileLocation()).normalize();
 		routes = context.getRoutes();
 		filters = context.getFilters();
 		this.context = context;
@@ -50,7 +49,7 @@ public class BasicRequestHandler implements HttpRequestHandler {
 
 	@Override
 	public void handle(Request request, Response response) throws HaltException {
-		Path requestPath = Paths.get(request.pathInfo());
+		Path requestPath = Paths.get("./"+ request.pathInfo()).normalize();
 		// check filter here
 		for (Map.Entry<Path, Filter> filterPair : filters.entrySet()) {
 			if (requestPath.startsWith(filterPair.getKey())) {
@@ -81,17 +80,18 @@ public class BasicRequestHandler implements HttpRequestHandler {
 				break;
 			}
 		}
-		fileFetchingHandle(request, response, requestPath, rootPath);
+		fileFetchingHandle(request, response, requestPath);
 	}
 	
-	private void fileFetchingHandle(Request request, Response response, Path requsetPath, Path root) throws HaltException {
+	private void fileFetchingHandle(Request request, Response response, Path requsetPath) throws HaltException {
 		//TODO: update the str to Path
-		File requestedFile = new File(root + request.pathInfo());
+		Path filePath = rootPath.resolve(requsetPath);
+		File requestedFile = filePath.toFile();
 		if (! requestedFile.exists()) {
 			throw new HaltException(404, "Not Found");
 		}
 		try {
-			byte[] allBytes = Files.readAllBytes(Paths.get(root + request.pathInfo()));
+			byte[] allBytes = Files.readAllBytes(filePath);
 			response.bodyRaw(allBytes);
 			response.type(HttpParsing.getMimeType(request.pathInfo()));
 			response.status(200);
