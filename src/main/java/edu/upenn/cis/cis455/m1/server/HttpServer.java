@@ -71,7 +71,7 @@ public class HttpServer implements ThreadManager {
 		}).start();
 	}
 	
-	private HttpServer passInstance() {
+	private HttpServer getServer() {
 		return this;
 	} 
 	
@@ -119,7 +119,7 @@ public class HttpServer implements ThreadManager {
     	
 		@Override
 		public void addThread() {
-			HttpWorker t = new HttpWorker(passInstance());
+			HttpWorker t = new HttpWorker(getServer());
     		workers.add(t);
     		t.start();
     		logger.info("created new worker, current pool size: " + workers.size());
@@ -172,7 +172,7 @@ public class HttpServer implements ThreadManager {
 			if (handlerMap.containsKey(context.getPort())) {
 				throw new IllegalArgumentException("Port already in use");
 			}
-			handlerMap.put(context.getPort(), new BasicRequestHandler(context));
+			handlerMap.put(context.getPort(), new BasicRequestHandler(context, getServer()));
 		}
 		
 		public HttpRequestHandler getHandler(int port) {

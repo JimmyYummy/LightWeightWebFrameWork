@@ -28,6 +28,7 @@ import edu.upenn.cis.cis455.ServiceFactory;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
 import edu.upenn.cis.cis455.m1.server.interfaces.Response;
+import edu.upenn.cis.cis455.util.DateTimeUtil;
 import edu.upenn.cis.cis455.util.HttpParsing;
 
 /**
@@ -44,14 +45,17 @@ public class HttpIoHandler {
     	BufferedWriter writer = null;
     	boolean keepOpen = false;
 			try {
+				//get writer
 				writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+				// write initial line
 				String firstLine = String.format("%d %s %s\r\n\r\n", 
 						except.statusCode(), HttpParsing.explainStatus(except.statusCode()), request.protocol());
 				writer.append(firstLine);
+				// append headers
 				writer.append("Server: CIS-550/JingWang\r\n");
-				writer.append(String.format("Last-Modified: %s", getDate()));
+				writer.append(String.format("Last-Modified: %s", DateTimeUtil.getDate()));
 				if (request.protocol().equals("HTTP/1.1")) {
-					writer.append(String.format("Date: %s\r\n", getDate()));
+					writer.append(String.format("Date: %s\r\n", DateTimeUtil.getDate()));
 					keepOpen = true;
 				}
 				if (request.headers("connection").toLowerCase().equals("close")) {
@@ -59,6 +63,7 @@ public class HttpIoHandler {
 					keepOpen = false;
 				}
 				writer.append("\r\n");
+				// write body
 				writer.append(except.body());
 				writer.append("\r\n");
 				
@@ -75,15 +80,7 @@ public class HttpIoHandler {
 			}
 			return keepOpen;
 
-		}
-
-	
-	
-	private static String getDate() {
-    	ZoneId zone = ZoneId.of("GMT");
-    	ZonedDateTime zonedDT = ZonedDateTime.of(LocalDateTime.now(), zone);
-    	return zonedDT.format(DateTimeFormatter.RFC_1123_DATE_TIME);
-	}
+    }
 
 	/**
      * Sends data back.   Returns true if we are supposed to keep the connection open (for 
@@ -92,14 +89,16 @@ public class HttpIoHandler {
     public static boolean sendResponse(Socket socket, Request request, Response response) {
     	BufferedWriter writer = null;
 			try {
+				// get the writer
 				writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+				// write the initial line
 				String firstLine = String.format("%d %s %s\r\n\r\n", 
 						response.status(), HttpParsing.explainStatus(response.status()), request.protocol());
 				writer.append(firstLine);
-				
+				// write the headers
 				writer.append(response.getHeaders());
 				writer.append("\r\n");
-				
+				// write the body
 				writer.append(response.body());
 				writer.append("\r\n");
 			} catch (IOException e) {
@@ -116,4 +115,6 @@ public class HttpIoHandler {
 			return request.protocol().equals("HTTP/1.1") 
 					&& ! request.headers("connection").toLowerCase().equals("close");
     }
+    
+
 }
