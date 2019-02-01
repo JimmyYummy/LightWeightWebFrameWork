@@ -14,7 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.core.selector.ContextSelector;
 
-import edu.upenn.cis.cis455.m1.server.implementations.BasicRequestHandler;
+import edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.ThreadPool;
@@ -116,13 +116,14 @@ public class HttpServer implements ThreadManager {
     public void closeServer() {
     	pool.closeAll();
     	for (Context context : contexts) {
-    		context.setUnactive();
+    		closeApp(context);
     	}
     }
     
-    public void closerApp(Context context) {
+    public void closeApp(Context context) {
     	if (contexts.remove(context)) {
     		context.setUnactive();
+    		appCount.decrementAndGet();
     	} else {
     		throw new IllegalArgumentException("context in not loaded into the server");
     	}
@@ -195,7 +196,7 @@ public class HttpServer implements ThreadManager {
 			if (handlerMap.containsKey(context.getPort())) {
 				throw new IllegalArgumentException("Port already in use");
 			}
-			handlerMap.put(context.getPort(), new BasicRequestHandler(context, getServer()));
+			handlerMap.put(context.getPort(), new GeneralRequestHandler(context, getServer()));
 			logger.info("new handler added for new application on port " + context.getPort());
 		}
 		

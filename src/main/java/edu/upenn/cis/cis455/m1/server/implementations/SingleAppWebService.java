@@ -1,6 +1,7 @@
 package edu.upenn.cis.cis455.m1.server.implementations;
 import edu.upenn.cis.cis455.handlers.Filter;
 import edu.upenn.cis.cis455.handlers.Route;
+import edu.upenn.cis.cis455.m1.server.HttpMethod;
 import edu.upenn.cis.cis455.m1.server.HttpServer;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m1.server.interfaces.WebService;
@@ -68,7 +69,7 @@ public class SingleAppWebService extends WebService {
 		if (! context.isRunning) {
 			this.awaitInitialization();
 		}
-		this.context.routeResolver.put(Paths.get(path), route);
+		this.context.routes.get(HttpMethod.GET).put(Paths.get(path).normalize(), route);
 	}
 
 	/* (non-Javadoc)
@@ -106,7 +107,7 @@ public class SingleAppWebService extends WebService {
 	
 	public class SingleAppContext implements Context {
 		
-		private Map<Path, Route> routeResolver;
+		private Map<HttpMethod, Map<Path, Route>> routes;
 		private Map<Path, Filter> filterResolver;
 		private int port;
 		private String ipaddr;
@@ -116,7 +117,10 @@ public class SingleAppWebService extends WebService {
 		private boolean isRunning;
 		
 		private SingleAppContext() {
-			routeResolver = new HashMap<>();
+			routes = new HashMap<>();
+			for (HttpMethod method : HttpMethod.values()) {
+				routes.put(method, new HashMap<>());
+			}
 			filterResolver = new HashMap<>(0);
 			port = 8080;
 			ipaddr = "0.0.0.0";
@@ -165,8 +169,8 @@ public class SingleAppWebService extends WebService {
 			this.isActive = false;
 		}
 		
-		public Map<Path, Route> getRoutes() {
-			return routeResolver;
+		public Map<HttpMethod, Map<Path, Route>> getRoutes() {
+			return routes;
 		}
 		
 		public Map<Path, Filter> getFilters() {
