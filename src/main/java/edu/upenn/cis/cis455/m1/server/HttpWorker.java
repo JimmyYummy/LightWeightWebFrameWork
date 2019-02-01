@@ -57,19 +57,19 @@ public class HttpWorker extends Thread {
 			try {
 
 				// generate the request
-				try {
-					Map<String, String> headers = new HashMap<>();
-					Map<String, List<String>> parms = new HashMap<>();
-					String clientAddr = sc.getInetAddress().toString();
-					String uri = HttpParsing.parseRequest(clientAddr, in, headers, parms);
-					logger.info("Accepting request for " + uri + " from " + clientAddr + "with header" + headers);
-					// generate the request object, take care of chucked request
-					req = BasicRequest.BasicRequestFactory.getBasicRequest(uri, in, headers, parms);
-				} catch (Exception e) {
-					throw new HaltException(400, "failed to parse the request");
+				Map<String, String> headers = new HashMap<>();
+				Map<String, List<String>> parms = new HashMap<>();
+				String clientAddr = sc.getInetAddress().toString();
+				String uri = HttpParsing.parseRequest(clientAddr, in, headers, parms);
+				if (headers.containsKey("user-agent")) {
+					headers.put("useragent", headers.get("user-agent"));
 				}
+				logger.info("Accepting request for " + uri + " from " + clientAddr + "\nwith header: " + headers);
+				// generate the request object, take care of chucked request
+				req = BasicRequest.BasicRequestFactory.getBasicRequest(uri, in, headers, parms);
 				// send an 100 response
 				if (req.headers("protocolVersion").equals("HTTP/1.1")) {
+					logger.info("sending 100 response");
 					HttpIoHandler.sendResponse(sc, req, BasicResponse.get100Response());
 				}
 				// find the proper router
@@ -83,16 +83,19 @@ public class HttpWorker extends Thread {
 				// persistent? (based on the handler's response)
 				if (!HttpIoHandler.sendResponse(sc, req, res))
 					return;
-			} catch (HaltException e) {
+			} //catch (HaltException e) {
+//				logger.error("" + e + e.statusCode() + e.body());
+//				// return error response if error occurs
+//				// persistent? (based on the handler's response)
+//				if (req == null ) req = BasicRequest.initialRequest;
+//				if (!HttpIoHandler.sendException(sc, req, e))
+//					return;
+//			} 
+		catch (Exception e) {
 				logger.error(e);
-				// return error response if error occurs
-				// persistent? (based on the handler's response)
-				if (!HttpIoHandler.sendException(sc, req, e))
-					return;
-			} catch (Exception e) {
-				logger.error(e);
-				throw e;
+				e.printStackTrace();
 			}
+			return;
 		}
 	}
 }

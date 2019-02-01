@@ -60,74 +60,75 @@ public class WebServiceController {
     /**
      * Handle an HTTP POST request to the path
      */
-    public static void post(String path, Route route) {
-        getInstance().post(path, route);
-    }
-
-    /**
-     * Handle an HTTP PUT request to the path
-     */
-    public static void put(String path, Route route) {
-        getInstance().put(path, route);
-    }
-
-    /**
-     * Handle an HTTP DELETE request to the path
-     */
-    public static void delete(String path, Route route) {
-        getInstance().delete(path, route);
-    }
-
-    /**
-     * Handle an HTTP HEAD request to the path
-     */
-    public static void head(String path, Route route) {
-        getInstance().head(path, route);
-    }
-
-    /**
-     * Handle an HTTP OPTIONS request to the path
-     */
-    public static void options(String path, Route route) {
-        getInstance().options(path, route);
-    }
-    
-    ///////////////////////////////////////////////////
-    // HTTP request filtering
-    ///////////////////////////////////////////////////
-    
-    /**
-     * Add filters that get called before a request
-     */
-    public static void before(Filter... filters) {
-        for (Filter filter: filters)
-            getInstance().before(filter);
-    }
-
-    /**
-     * Add filters that get called after a request
-     */
-    public static void after(Filter... filters) {
-        for (Filter filter: filters)
-            getInstance().after(filter);
-    }
-
-    /**
-     * Add filters that get called before a request
-     */
-    public static void before(String path, String acceptType, Filter... filters) {
-        for (Filter filter: filters)
-            getInstance().before(path, acceptType, filter);
-    }
-
-    /**
-     * Add filters that get called after a request
-     */
-    public static void after(String path, String acceptType, Filter... filters) {
-        for (Filter filter: filters)
-            getInstance().after(path, acceptType, filter);
-    }
-    
+//    public static void post(String path, Route route) {
+//        getInstance().post(path, route);
+//    }
+//
+//    /**
+//     * Handle an HTTP PUT request to the path
+//     */
+//    public static void put(String path, Route route) {
+//        getInstance().put(path, route);
+//    }
+//
+//    /**
+//     * Handle an HTTP DELETE request to the path
+//     */
+//    public static void delete(String path, Route route) {
+//        getInstance().delete(path, route);
+//    }
+//
+//    /**
+//     * Handle an HTTP HEAD request to the path
+//     */
+//    public static void head(String path, Route route) {
+//        getInstance().head(path, route);
+//    }
+//
+//    /**
+//     * Handle an HTTP OPTIONS request to the path
+//     */
+//    public static void options(String path, Route route) {
+//        getInstance().options(path, route);
+//    }
+//    
+//    ///////////////////////////////////////////////////
+//    // HTTP request filtering
+//    ///////////////////////////////////////////////////
+//    
+//    /**
+//     * Add filters that get called before a request
+//     */
+//    public static void before(Filter... filters) {
+//        for (Filter filter: filters)
+//            getInstance().before(filter);
+//    }
+//
+//    /**
+//     * Add filters that get called after a request
+//     */
+//    public static void after(Filter... filters) {
+//        for (Filter filter: filters)
+//            getInstance().after(filter);
+//    }
+//
+//    /**
+//     * Add filters that get called before a request
+//     * @param acceptType: the content-type of the request
+//     */
+//    public static void before(String path, String acceptType, Filter... filters) {
+//        for (Filter filter: filters)
+//            getInstance().before(path, acceptType, filter);
+//    }
+//
+//    /**
+//     * Add filters that get called after a request
+//     */
+//    public static void after(String path, String acceptType, Filter... filters) {
+//        for (Filter filter: filters)
+//            getInstance().after(path, acceptType, filter);
+//    }
+//    
     /**
      * Triggers a HaltException that terminates the request
      */

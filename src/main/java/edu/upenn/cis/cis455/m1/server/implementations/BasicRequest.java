@@ -30,8 +30,17 @@ public class BasicRequest extends Request {
 	private Map<String, String> headers;
 	private String body;
 
+	@Override
+	public String toString() {
+		return "" + method + " " + url + protocol + "\n" + headers + "\n" + body;
+	}
+
 	static {
-		initialRequest = new BasicRequest();
+		BasicRequest r = new BasicRequest();
+		r.protocol = "HTTP/ 1.1";
+		r.headers = new HashMap<>();
+		r.headers.put("connection", "close");
+		initialRequest = r;
 	}
 
 	private BasicRequest() {
@@ -115,31 +124,32 @@ public class BasicRequest extends Request {
 		static {
 			requiredHeaders = new ArrayList<>();
 			requiredHeaders.add("host");
-			requiredHeaders.add("useragent");
-			requiredHeaders.add("content-type");
-			requiredHeaders.add("content-length");
 			requiredHeaders.add("remote-addr");
 		}
 
 		public static Request getBasicRequest(String uri, InputStream in, Map<String, String> headers,
-				Map<String, List<String>> parms) throws HaltException {
+				Map<String, List<String>> parms) throws IOException {
 			// get the request without body
 			// if error occurs, no response will be send and the request will be timed out
+			logger.info("creating request instance");
 			BasicRequest request = getBasicRequestExceptBody(uri, headers, parms);
-			try {
-				if (request.headers.containsKey("transfer-encoding")
-						&& "chunked".equals(request.headers.get("transfer-encoding").toLowerCase())) {
-					request.body = parseChunkedEncodingBdoy(in);
-				} else {
-					request.body = parsePlainBody(in);
-				}
-			} catch (Exception e) {
-				throw new HaltException(400, "Server: bad body parsing: " + e.getCause());
+			logger.info("the request without body is:\n" + request);
+			if (request.headers.containsKey("transfer-encoding")
+					&& "chunked".equals(request.headers.get("transfer-encoding").toLowerCase())) {
+				logger.info("parsing chunked req: " + request);
+				request.body = parseChunkedEncodingBdoy(in);
+			} else {
+				logger.info("parsing normal req: " + request);
+				String b = parsePlainBody(in);
+				System.out.println(b);
+				request.body = b;
 			}
+			logger.info("finished request parsing: " + request);
 			return request;
 		}
-		
-		private static BasicRequest getBasicRequestExceptBody(String url, Map<String, String> headers, Map<String, List<String>> params) {
+
+		private static BasicRequest getBasicRequestExceptBody(String url, Map<String, String> headers,
+				Map<String, List<String>> params) {
 			// check compulsory headers
 			for (String header : requiredHeaders) {
 				if (!headers.containsKey(header)) {
@@ -176,11 +186,11 @@ public class BasicRequest extends Request {
 				} else {
 					port = host.substring(idx + 1);
 				}
-				
+
 			}
 			request.headers.put("port", port);
 
-			//get the requested path from root
+			// get the requested path from root
 			int start = url.lastIndexOf(host) + 1;
 			int end = url.indexOf('?');
 			if (end == -1)
@@ -190,20 +200,21 @@ public class BasicRequest extends Request {
 			}
 			request.headers.put("pathinfo", url.substring(start, end));
 			// check if is persistent connection
-			if (request.protocol().equals("HTTP/1.1") 
-			&& ! (request.headers().contains("connection") 
+			if (request.protocol().equals("HTTP/1.1") && !(request.headers().contains("connection")
 					&& request.headers("connection").toLowerCase().equals("close"))) {
 				request.persistentConnection(true);
 			}
 			// put the rest of headers in the requst's header
 			for (Map.Entry<String, String> ent : headers.entrySet()) {
-				if (! request.headers.containsKey(ent.getKey())) {
+				if (!request.headers.containsKey(ent.getKey())) {
 					request.headers.put(ent.getKey(), ent.getValue().split(";")[0]);
 				}
 			}
+			headers.putIfAbsent("content-type", "text/plain");
+			headers.putIfAbsent("content-length", "0");
 			return request;
 		}
-		
+
 		private static boolean isValidURL(String url) {
 			return true;
 		}
@@ -217,8 +228,9 @@ public class BasicRequest extends Request {
 				line = reader.readLine();
 			} while (line != null && (line.equals("\n") || line.equals("\r\n")));
 			// if the line is null, return empty body
-			if (line == null) return "";
-			
+			if (line == null)
+				return "";
+
 			// read the body
 			char[] cbuf = new char[2048];
 			while (true) {
@@ -243,14 +255,17 @@ public class BasicRequest extends Request {
 		}
 
 		private static String parsePlainBody(InputStream in) throws IOException {
-			StringBuilder sb = new StringBuilder();
+			StringBuilder stringBuilder = new StringBuilder();
 			String line = null;
-			while ((line = new BufferedReader(new InputStreamReader(in)).readLine()) != null) {
-				sb.append(line);
+
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
+			while ((line = bufferedReader.readLine()) != null) {
+				stringBuilder.append(line);
+				stringBuilder.append('\n');
 			}
-			return sb.toString();
+			return stringBuilder.toString();
 		}
-		
+
 	}
 
 }

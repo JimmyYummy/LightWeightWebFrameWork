@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -36,8 +37,8 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 	private Map<Path, Filter> filters;
 	private Context context;
 	private HttpServer server;
-	private static Path shutdown = Paths.get("shutdown").normalize();
-	private static Path control = Paths.get("control").normalize();
+	private static Path shutdown = Paths.get("/shutdown").normalize();
+	private static Path control = Paths.get("/control").normalize();
 
 	public GeneralRequestHandler(Path rootPath) {
 		this.rootPath = rootPath;
@@ -86,8 +87,10 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 	@Override
 	public void handle(Request request, Response response) throws HaltException {
 		// get the path of the request
-		Path requestPath = Paths.get("./" + request.pathInfo()).normalize();
+		Path requestPath = Paths.get(request.pathInfo()).normalize();
+		logger.info("handling request path: " + requestPath);
 		// check before filter here
+		logger.info("checking filter");
 		for (Map.Entry<Path, Filter> filterPair : filters.entrySet()) {
 			if (requestPath.startsWith(filterPair.getKey())) {
 				try {
@@ -101,6 +104,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		if (response.status() != 200) {
 			throw new HaltException(401, "Unauthorized");
 		}
+		logger.info("dispatch to handelr: " + request.requestMethod());
 		// dispatch the request to corresponding handlers
 		HttpMethod method = Enum.valueOf(HttpMethod.class, request.requestMethod());
 		boolean handled = methodHandlerMap.get(method).handle(request, response);
@@ -112,18 +116,14 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 
 	private class BasicRequestHandler {
 		private Map<Path, Route> routes;
-		protected List<Path> routePathRanking;
 
 		// create a dummy handler
 		private BasicRequestHandler() {
 			routes = new HashMap<>(0);
-			routePathRanking = new ArrayList<>(0);
 		}
 
 		private void addRoutes(Map<Path, Route> routeMap) {
 			routes = routeMap;
-			routePathRanking = new ArrayList<>(routes.keySet());
-			Collections.sort(routePathRanking, Comparator.reverseOrder());
 		}
 
 		protected boolean handle(Request request, Response response) throws HaltException {
@@ -132,9 +132,11 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 
 		protected final boolean routerHandle(Request request, Response response) throws HaltException {
 			// get the path of the request
-			Path requestPath = Paths.get("./" + request.pathInfo()).normalize();
+			Path requestPath = Paths.get(request.pathInfo()).normalize();
 			// find the route here
-			for (Path routePath : routePathRanking) {
+			Path[] paths = routes.keySet().toArray(new Path[0]);
+			Arrays.sort(paths, Comparator.reverseOrder());
+			for (Path routePath : paths) {
 				if (requestPath.startsWith(routePath)) {
 					try {
 						routes.get(routePath).handle(request, response);
@@ -156,7 +158,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		@Override
 		protected boolean handle(Request request, Response response) throws HaltException {
 			// get the path of the request
-			Path requestPath = Paths.get("./" + request.pathInfo()).normalize();
+			Path requestPath = Paths.get(request.pathInfo()).normalize();
 			// check special URL here
 			if (specialURlHandle(requestPath, request, response)) {
 				return true;
@@ -193,7 +195,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			Path filePath = rootPath.resolve(requsetPath);
 			File requestedFile = filePath.toFile();
 			// Check whether the file exists
-			if (!requestedFile.exists()) {
+			if (!requestedFile.exists() || ! requestedFile.isFile()) {
 				throw new HaltException(404, "Not Found");
 			}
 			// Check special conditions

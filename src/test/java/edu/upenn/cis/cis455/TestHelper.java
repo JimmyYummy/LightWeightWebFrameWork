@@ -19,6 +19,7 @@ public class TestHelper {
         when(s.getInputStream()).thenReturn(bis);
         when(s.getOutputStream()).thenReturn(output);
         when(s.getLocalAddress()).thenReturn(InetAddress.getLocalHost());
+        when(s.getInetAddress()).thenReturn(InetAddress.getLocalHost());
         when(s.getRemoteSocketAddress()).thenReturn(InetSocketAddress.createUnresolved("host", 8080));
         
         return s;

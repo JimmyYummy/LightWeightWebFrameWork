@@ -20,6 +20,7 @@ public class HttpTaskQueue {
 	}
 	
 	public synchronized void offer(HttpTask t) {
+		logger.info("offered new task: " + t.getSocket());
 		q.offer(t);
 		if (q.size() == 1) {
 			this.notify();
@@ -35,6 +36,7 @@ public class HttpTaskQueue {
 			}
 		}
 		HttpTask t = q.poll();
+		logger.info("task polled: " + t.getSocket());
 		return t;
 	}
 }

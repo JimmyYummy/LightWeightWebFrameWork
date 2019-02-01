@@ -31,6 +31,7 @@ public class HttpIoHandler {
 				//get writer
 				writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 				// write initial line
+				logger.debug(request);
 				String firstLine = String.format("%d %s %s\r\n\r\n", 
 						except.statusCode(), HttpParsing.explainStatus(except.statusCode()), request.protocol());
 				writer.append(firstLine);
@@ -79,6 +80,10 @@ public class HttpIoHandler {
 						response.status(), HttpParsing.explainStatus(response.status()), request.protocol());
 				writer.append(firstLine);
 				// write the headers
+				writer.append("Server: CIS-550/JingWang\r\n");
+				if (request.protocol().equals("HTTP/1.1")) {
+					writer.append(String.format("Date: %s\r\n", DateTimeUtil.getDate()));
+				}
 				writer.append(response.getHeaders());
 				writer.append("\r\n");
 				// write the body
