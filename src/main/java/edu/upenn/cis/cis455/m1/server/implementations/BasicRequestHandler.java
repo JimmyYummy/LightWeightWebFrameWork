@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,10 +22,12 @@ import org.apache.logging.log4j.Logger;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.handlers.Filter;
 import edu.upenn.cis.cis455.handlers.Route;
+import edu.upenn.cis.cis455.m1.server.HttpServer;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
 import edu.upenn.cis.cis455.m1.server.interfaces.Response;
+import edu.upenn.cis.cis455.util.DateTimeUtil;
 import edu.upenn.cis.cis455.util.HttpParsing;
 
 public class BasicRequestHandler implements HttpRequestHandler {
@@ -33,16 +38,20 @@ public class BasicRequestHandler implements HttpRequestHandler {
 	private List<Path> routePathRanking;
 	private Map<Path, Filter> filters;
 	private Context context;
+	private HttpServer server;
+	private static Path shutdown = Paths.get("shutdown");
+	private static Path control = Paths.get("control");
 	
 	public BasicRequestHandler(Path rootPath) {
 		this.rootPath = rootPath;
 	}
 	
-	public BasicRequestHandler(Context context) {
+	public BasicRequestHandler(Context context, HttpServer server) {
 		rootPath = Paths.get(context.getFileLocation()).normalize();
 		routes = context.getRoutes();
 		filters = context.getFilters();
 		this.context = context;
+		this.server = server;
 		List<Path> routePathRanking = new ArrayList<>(routes.keySet());
 		Collections.sort(routePathRanking, Comparator.reverseOrder());
 	}
@@ -84,12 +93,29 @@ public class BasicRequestHandler implements HttpRequestHandler {
 	}
 	
 	private void fileFetchingHandle(Request request, Response response, Path requsetPath) throws HaltException {
-		//TODO: update the str to Path
 		Path filePath = rootPath.resolve(requsetPath);
 		File requestedFile = filePath.toFile();
+		// Check whether the file exists
 		if (! requestedFile.exists()) {
 			throw new HaltException(404, "Not Found");
 		}
+		// Check special conditions
+		if (request.headers().contains("if-modified-since")) {
+			
+			ZonedDateTime reqDate = DateTimeUtil.parseDate(request.headers("if-modified-since"));
+			if (reqDate != null && reqDate.toInstant().toEpochMilli() < requestedFile.lastModified()) {
+				throw new HaltException(304, "Not Modified");
+			}
+		}
+		
+		if (request.headers().contains("if-modified-since")) {
+			
+			ZonedDateTime reqDate = DateTimeUtil.parseDate(request.headers("if-unmodified-since"));
+			if (reqDate != null && reqDate.toInstant().toEpochMilli() > requestedFile.lastModified()) {
+				throw new HaltException(412, "Precondition Failed");
+			}
+		}
+		// try return the file
 		try {
 			byte[] allBytes = Files.readAllBytes(filePath);
 			response.bodyRaw(allBytes);
@@ -102,16 +128,21 @@ public class BasicRequestHandler implements HttpRequestHandler {
 	}
 	
 	
-	private boolean specialURlHandle(Path path, Request req, Response res) {
-		boolean handled = false;
-		//TODO: chagne strign to path
-		if ("/shutdown".equals(path)) {
-			handled = true;
-			context.setUnactive();
-		} else if ("/control".equals(path)) {
-			handled = true;
-			//TODO: implement /control response
+	private boolean specialURlHandle(Path reqPath, Request req, Response res) {
+		if (shutdown.equals(reqPath)) {
+			this.context.setUnactive();
+			return true;
 		}
-		return handled;
+		if (control.equals(reqPath)) {
+			handleControlRequest(req, res);
+			return true;
+		}
+		return false;
 	}
+	
+	private void handleControlRequest(Request req, Response res) {
+		return;
+	}
+	
+	
 }
