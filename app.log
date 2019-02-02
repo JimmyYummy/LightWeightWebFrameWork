@@ -1220,3 +1220,13 @@ null
 2019-Feb-01 16:40:55 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
 {accept-language=zh-CN,zh, cookie=Webstorm-96d5b19f=3ac0a4ca-833c-4d01-ab54-d4be9d6ddfc7, useragent=Mozilla/5.0 (Macintosh, Method=GET, pathinfo=/, accept=text/html,application/xhtml+xml,application/xml, remote-addr=/0:0:0:0:0:0:0:1, http-client-ip=/0:0:0:0:0:0:0:1, port=8080, host=localhost:8080, upgrade-insecure-requests=1, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=max-age=0, accept-encoding=gzip, deflate, br, user-agent=Mozilla/5.0 (Macintosh}
 null
+2019-Feb-01 17:02:51 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - finished request parsing: GET /HTTP/1.1
+{accept-language=zh-CN,zh, cookie=Webstorm-96d5b19f=3ac0a4ca-833c-4d01-ab54-d4be9d6ddfc7, useragent=Mozilla/5.0 (Macintosh, Method=GET, pathinfo=/, accept=text/html,application/xhtml+xml,application/xml, remote-addr=/0:0:0:0:0:0:0:1, http-client-ip=/0:0:0:0:0:0:0:1, port=8080, host=localhost:8080, upgrade-insecure-requests=1, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=max-age=0, accept-encoding=gzip, deflate, br, user-agent=Mozilla/5.0 (Macintosh}
+
+2019-Feb-01 17:02:51 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 17:02:51 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 17:02:51 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 17:02:51 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 17:02:51 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - java.net.SocketException: Socket is closed
+2019-Feb-01 17:02:51 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/0:0:0:0:0:0:0:1,port=56902,localport=8080]
+2019-Feb-01 17:02:51 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - edu.upenn.cis.cis455.exceptions.HaltException
