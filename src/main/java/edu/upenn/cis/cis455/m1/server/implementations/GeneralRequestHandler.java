@@ -143,7 +143,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			Path[] paths = routes.keySet().toArray(new Path[0]);
 			Arrays.sort(paths, Comparator.reverseOrder());
 			for (Path routePath : paths) {
-				if (requestPath.startsWith(routePath)) {
+				if (requestPath.equals(routePath)) {
 					try {
 						logger.info("reqeust " + request + " caught on path: " + routePath);
 						routes.get(routePath).handle(request, response);
@@ -177,7 +177,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 				return true;
 			}
 			// try to return the file if exist, or raise an exception
-			if (fileFetchingHandle(request, response, requestPath)) {
+			if (fileFetchingHandle(request, response)) {
 				logger.info("reqeust " + request + " caught on file Path");
 				return true;
 			}
@@ -202,8 +202,10 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			return;
 		}
 
-		private boolean fileFetchingHandle(Request request, Response response, Path requsetPath) throws HaltException {
-			Path filePath = rootPath.resolve(requsetPath);
+		private boolean fileFetchingHandle(Request request, Response response) throws HaltException {
+			Path requestPath = Paths.get("./" + request.pathInfo()).normalize();
+			Path filePath = rootPath.resolve(requestPath);
+			logger.info("requesting file on paht: " + filePath);
 			File requestedFile = filePath.toFile();
 			// Check whether the file exists
 			if (!requestedFile.exists() || ! requestedFile.isFile()) {

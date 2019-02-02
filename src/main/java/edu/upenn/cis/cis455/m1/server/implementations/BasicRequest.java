@@ -31,13 +31,9 @@ public class BasicRequest extends Request {
 	private byte[] body;
 	private String bodyStr;
 	
-    private static Collection<String> requiredHeaders;
-    private static BasicRequest exceptionRequest;
+	private static BasicRequest exceptionRequest;
 
     static {
-        requiredHeaders = new ArrayList<>();
-        requiredHeaders.add("host");
-        requiredHeaders.add("remote-addr");
 		BasicRequest r = new BasicRequest();
 		r.protocol = "HTTP/ 1.1";
 		r.headers = new HashMap<>();
@@ -49,12 +45,6 @@ public class BasicRequest extends Request {
 	
     public static BasicRequest getBasicRequestExceptBody(String url, Map<String, String> headers,
             Map<String, List<String>> params) {
-        // check compulsory headers
-        for (String header : requiredHeaders) {
-            if (!headers.containsKey(header)) {
-                throw new IllegalArgumentException("Missing header: " + header);
-            }
-        }
         // create request object
         BasicRequest request = new BasicRequest();
         // set request method
@@ -62,11 +52,21 @@ public class BasicRequest extends Request {
         request.method = HttpMethod.parse(method);
         // get version of the request
         String protocolVersion = headers.get("protocolVersion").split(";")[0];
-        if ("HTTP/1.1".equals(protocolVersion) || "HTTP/1.2".equals(protocolVersion)) {
+        if ("HTTP/1.0".equals(protocolVersion) || "HTTP/1.1".equals(protocolVersion)) {
             request.protocol = protocolVersion;
         } else {
             throw new IllegalArgumentException("Unsupported Http protocol verison");
         }
+        // check host header for http/1.1
+        if (! headers.containsKey("host")) {
+        	if (request.protocol.endsWith("1")) {
+        		throw new HaltException(400, "the HTTP/1.1 request miss the host header");
+        	} else {
+        		headers.put("host", "~~");
+        	}
+        	
+        }
+        
         // get the URL of the request
         if (!isValidURL(url)) {
             throw new IllegalArgumentException("Illegal URL");
@@ -90,7 +90,12 @@ public class BasicRequest extends Request {
         }
         
         // get the requested path from root
-        int start = url.lastIndexOf(host) + 1;
+        int start = url.indexOf(host);
+        if (start != -1) {
+        	start += host.length();
+        } else {
+        	start = 0;
+        }
         int end = url.indexOf('?');
         if (end == -1)
             end = url.length();
@@ -178,16 +183,21 @@ public class BasicRequest extends Request {
 
     private void parsePlainBody(InputStream in) throws IOException {
     	body = new byte[contentLength];
+//    	if (contentLength != 0) {
+//        	in.mark(200);
+//        	int skipBytes = 0;
+//        	while (true) {
+//        		int b = in.read();
+//        		if (b == 10 || b == 13) {
+//        			skipBytes++;
+//        		} else {
+//        			break;
+//        		}
+//        	}
+//        	in.reset();
+//        	in.skip(skipBytes);
+//    	}
     	in.read(body);
-//        StringBuilder stringBuilder = new StringBuilder();
-//        String line = null;
-//
-//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
-//        while ((line = bufferedReader.readLine()) != null) {
-//            stringBuilder.append(line);
-//            stringBuilder.append('\n');
-//        }
-//        return stringBuilder.toString();
     }
 
 	@Override
@@ -243,6 +253,9 @@ public class BasicRequest extends Request {
 	@Override
 	public String body() {
 		if (bodyStr == null) {
+			if (body == null) {
+				return null;
+			}
 			bodyStr = new String(body);
 		}
 		 return bodyStr;
@@ -265,7 +278,7 @@ public class BasicRequest extends Request {
 
 	@Override
 	public String toString() {
-		return "" + method + " " + url + protocol + "\n" + headers + "\n" + body;
+		return "" + method + " " + url + protocol + "\n" + headers + "\n" + body();
 	}
 
 }

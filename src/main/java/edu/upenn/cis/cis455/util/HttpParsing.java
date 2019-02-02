@@ -33,6 +33,7 @@
 
 package edu.upenn.cis.cis455.util;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -80,6 +81,7 @@ public class HttpParsing {
         try {
             // Read the request line
             String inLine = in.readLine();
+            logger.debug("REQUEST INITIAL LINE: " + inLine);
             if (inLine == null) {
                 return;
             }
@@ -221,6 +223,7 @@ public class HttpParsing {
             rlen = 0;
 
             int read = -1;
+            inputStream = new BufferedInputStream(inputStream);
             inputStream.mark(BUFSIZE);
             try {
                 read = inputStream.read(buf, 0, BUFSIZE);

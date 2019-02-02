@@ -71,7 +71,7 @@ public class HttpIoHandler {
 				writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 //				writer = new StringBuilder();
 				// write the initial line
-				String firstLine = String.format("%s %d %s\r\n\r\n", 
+				String firstLine = String.format("%s %d %s\r\n", 
 						request.protocol(), response.status(), HttpParsing.explainStatus(response.status()));
 				writer.append(firstLine);
 				// write the headers
@@ -85,7 +85,6 @@ public class HttpIoHandler {
 				writer.append(String.format("Content-Length: %d\r\n", response.body().length()));
 				writer.append(String.format("Content-Type: %s\r\n", response.type()));
 				writer.append(response.getHeaders());
-				writer.append("\r\n");
 				writer.append("\r\n");
 				// write the body
 				writer.append(response.body());
@@ -103,6 +102,21 @@ public class HttpIoHandler {
 				return request.persistentConnection();
 			}
 			
+    }
+    
+    public static boolean sendContinueResponse(Socket socket) {
+    	BufferedWriter writer = null;
+		try {
+			// get the writer
+			writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+//			writer = new StringBuilder();
+			// write the initial line
+			writer.append("HTTP/1.1 100 Continue\r\n\r\n");
+			writer.flush();
+		} catch (IOException e) {
+			logger.error(e);
+		}
+		return true;
     }
     
 

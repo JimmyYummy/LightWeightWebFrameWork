@@ -57,6 +57,7 @@ public class HttpWorker extends Thread {
 			try {
 
 				// generate the request
+				logger.info("parsing the inital line and headers one socket: " + sc);
 				Map<String, String> headers = new HashMap<>();
 				Map<String, List<String>> parms = new HashMap<>();
 				String clientAddr = sc.getInetAddress().toString();
@@ -73,7 +74,7 @@ public class HttpWorker extends Thread {
 				// send an 100 response
 				if (req.headers("protocolVersion").equals("HTTP/1.1")) {
 					logger.info("sending 100 response");
-					HttpIoHandler.sendResponse(sc, req, BasicResponse.get100Response());
+					HttpIoHandler.sendContinueResponse(sc);
 				}
 				// find the proper router
 				HttpRequestHandler handler = null;
@@ -86,6 +87,7 @@ public class HttpWorker extends Thread {
 				// use IO handler to send response
 				// persistent? (based on the handler's response)
 				if (!HttpIoHandler.sendResponse(sc, req, res))
+					logger.info("closed connection: " + sc);
 					return;
 			} 
 //			catch (HaltException e) {
@@ -94,12 +96,14 @@ public class HttpWorker extends Thread {
 //				// persistent? (based on the handler's response)
 //				if (req == null ) req = BasicRequest.getRequestForException();
 //				if (!HttpIoHandler.sendException(sc, req, e))
+//					logger.info("closed connection: " + sc);
 //					return;
 //			} 
 		catch (Exception e) {
 				logger.error(e);
 				e.printStackTrace();
 			}
+			logger.info("closed connection: " + sc);
 			return;
 		}
 	}
