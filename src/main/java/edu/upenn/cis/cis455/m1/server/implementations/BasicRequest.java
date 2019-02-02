@@ -28,7 +28,8 @@ public class BasicRequest extends Request {
 	private int port;
 	private int contentLength;
 	private Map<String, String> headers;
-	private String body;
+	private byte[] body;
+	private String bodyStr;
 	
     private static Collection<String> requiredHeaders;
     private static BasicRequest exceptionRequest;
@@ -131,16 +132,15 @@ public class BasicRequest extends Request {
     	if (this.headers.containsKey("transfer-encoding")
                 && "chunked".equals(this.headers.get("transfer-encoding").toLowerCase())) {
             logger.info("parsing chunked req: " + this);
-            this.body = parseChunkedEncodingBdoy(in);
+            parseChunkedEncodingBdoy(in);
         } else {
             logger.info("parsing normal req: " + this);
-            String b = parsePlainBody(in);
-            System.out.println(b);
-            this.body = b;
+            parsePlainBody(in);
         }
     }
     
-    private static String parseChunkedEncodingBdoy(InputStream in) throws IOException {
+    //TODO enhance it
+    private void parseChunkedEncodingBdoy(InputStream in) throws IOException {
         StringBuilder sb = new StringBuilder();
         String line = null;
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
@@ -150,7 +150,7 @@ public class BasicRequest extends Request {
         } while (line != null && (line.equals("\n") || line.equals("\r\n")));
         // if the line is null, return empty body
         if (line == null)
-            return "";
+            this.body = new byte[0];
 
         // read the body
         char[] cbuf = new char[2048];
@@ -163,7 +163,8 @@ public class BasicRequest extends Request {
                 while (line != null && !(line.equals("\n") || line.equals("\r\n"))) {
                     line = reader.readLine();
                 }
-                return sb.toString();
+                this.body = sb.toString().getBytes();
+                return;
             }
             // append the chunk and read new line
             if (length > cbuf.length) {
@@ -175,16 +176,18 @@ public class BasicRequest extends Request {
         }
     }
 
-    private static String parsePlainBody(InputStream in) throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        String line = null;
-
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
-        while ((line = bufferedReader.readLine()) != null) {
-            stringBuilder.append(line);
-            stringBuilder.append('\n');
-        }
-        return stringBuilder.toString();
+    private void parsePlainBody(InputStream in) throws IOException {
+    	body = new byte[contentLength];
+    	in.read(body);
+//        StringBuilder stringBuilder = new StringBuilder();
+//        String line = null;
+//
+//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in));
+//        while ((line = bufferedReader.readLine()) != null) {
+//            stringBuilder.append(line);
+//            stringBuilder.append('\n');
+//        }
+//        return stringBuilder.toString();
     }
 
 	@Override
@@ -239,7 +242,10 @@ public class BasicRequest extends Request {
 
 	@Override
 	public String body() {
-		return body;
+		if (bodyStr == null) {
+			bodyStr = new String(body);
+		}
+		 return bodyStr;
 	}
 
 	@Override
