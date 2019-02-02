@@ -44,13 +44,14 @@ public class ServiceFactory {
                          boolean keepAlive,
                          Map<String, String> headers,
                          Map<String, List<String>> parms) {
+    	BasicRequest req = BasicRequest.getBasicRequestExceptBody(uri, headers, parms);
         try {
-			Request req =  BasicRequest.BasicRequestFactory.getBasicRequest(uri, socket.getInputStream(), headers, parms);
+        	req.addBody(socket.getInputStream());
 			req.persistentConnection(keepAlive);
         } catch (HaltException | IOException e) {
 			logger.error(e);
 		}
-        return null;
+        return req;
     }
     
     /**

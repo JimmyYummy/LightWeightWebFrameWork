@@ -52,7 +52,7 @@ public class HttpWorker extends Thread {
 		}
 		// do the loop processing, assuming persistent connections
 		while (true) {
-			Request req = null;
+			BasicRequest req = null;
 			Response res = null;
 			try {
 
@@ -66,7 +66,9 @@ public class HttpWorker extends Thread {
 				}
 				logger.info("Accepting request for " + uri + " from " + clientAddr + "\nwith header: " + headers);
 				// generate the request object, take care of chucked request
-				req = BasicRequest.BasicRequestFactory.getBasicRequest(uri, in, headers, parms);
+				req = BasicRequest.getBasicRequestExceptBody(uri, headers, parms);
+				logger.info("Get request without body from: " + clientAddr);
+				req.addBody(in);
 				// send an 100 response
 				if (req.headers("protocolVersion").equals("HTTP/1.1")) {
 					logger.info("sending 100 response");
@@ -83,11 +85,12 @@ public class HttpWorker extends Thread {
 				// persistent? (based on the handler's response)
 				if (!HttpIoHandler.sendResponse(sc, req, res))
 					return;
-			} //catch (HaltException e) {
+			} 
+//			catch (HaltException e) {
 //				logger.error("" + e + e.statusCode() + e.body());
 //				// return error response if error occurs
 //				// persistent? (based on the handler's response)
-//				if (req == null ) req = BasicRequest.initialRequest;
+//				if (req == null ) req = BasicRequest.getRequestForException();
 //				if (!HttpIoHandler.sendException(sc, req, e))
 //					return;
 //			} 

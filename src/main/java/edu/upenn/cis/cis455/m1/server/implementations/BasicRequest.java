@@ -31,7 +31,7 @@ public class BasicRequest extends Request {
 	private String body;
 	
     private static Collection<String> requiredHeaders;
-    private static Request exceptionRequest;
+    private static BasicRequest exceptionRequest;
 
     static {
         requiredHeaders = new ArrayList<>();
@@ -46,7 +46,7 @@ public class BasicRequest extends Request {
     
     private BasicRequest() {};
 	
-    private static BasicRequest getBasicRequestExceptBody(String url, Map<String, String> headers,
+    public static BasicRequest getBasicRequestExceptBody(String url, Map<String, String> headers,
             Map<String, List<String>> params) {
         // check compulsory headers
         for (String header : requiredHeaders) {
@@ -119,7 +119,7 @@ public class BasicRequest extends Request {
         return request;
     }
     
-    public static Request getRequestForException() {
+    public static BasicRequest getRequestForException() {
     	return exceptionRequest;
     }
 
