@@ -47,6 +47,8 @@ public class HttpServer implements ThreadManager {
 			pool = new HttpThreadPool(context.getThreadNum());
 		}
 		
+		contexts.add(context);
+		
 		handlerResolver.addHandler(context);
 		
 		// create new listener thread
@@ -56,14 +58,17 @@ public class HttpServer implements ThreadManager {
 				socket = new ServerSocket(context.getPort());
 				appCount.incrementAndGet();
 				logger.info("Listening on port: " + context.getPort());
-				while (true) {
+				while (context.isActive()) {
 					Socket sc = socket.accept();
 					taskQueue.offer(new HttpTask(sc));
 				}
 			} catch (IOException e) {
 				logger.error(e);
 			} finally {
-				appCount.decrementAndGet();
+				if (appCount.decrementAndGet() == 0) {
+					pool.closeAll();
+				}
+				logger.info("app " + context + " is shut down");
 				if (socket != null) {
 					try {
 						socket.close();
@@ -73,7 +78,7 @@ public class HttpServer implements ThreadManager {
 				}
 			}
 		});
-		daemonThread.setName("Daemon Thread");
+		daemonThread.setName("Daemon Thread-Port:" + context.getPort());
 		daemonThread.start();
 	}
 	
@@ -116,7 +121,6 @@ public class HttpServer implements ThreadManager {
     }
     
     public void closeServer() {
-    	pool.closeAll();
     	for (Context context : contexts) {
     		closeApp(context);
     	}
@@ -125,9 +129,10 @@ public class HttpServer implements ThreadManager {
     public void closeApp(Context context) {
     	if (contexts.remove(context)) {
     		context.setUnactive();
-    		appCount.decrementAndGet();
+    		logger.info("app is shutdonwn.");
     	} else {
-    		throw new IllegalArgumentException("context in not loaded into the server");
+    		logger.info("app already shutdown.");
+//    		throw new IllegalArgumentException("context in not loaded into the server");
     	}
     }
     
@@ -152,8 +157,9 @@ public class HttpServer implements ThreadManager {
 
     	@Override
     	public void addThreads(int num) {
-    		for (int i = 0; i < num; i++);
-    		addThread();
+    		for (int i = 0; i < num; i++) {
+    			addThread();
+    		}
     	}
     	
 

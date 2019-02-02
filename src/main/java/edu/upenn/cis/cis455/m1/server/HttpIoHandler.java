@@ -38,7 +38,8 @@ public class HttpIoHandler {
 				// append headers
 				writer.append("Server: CIS-550/JingWang\r\n");
 				writer.append(String.format("Last-Modified: %s", DateTimeUtil.getDate()));
-				writer.append(String.format("Content-Length: ", except.body().length()));
+				int bodyLength = except.body() == null ? 0 : except.body().length();
+				writer.append(String.format("Content-Length: ", bodyLength));
 				if (request.protocol().equals("HTTP/1.1")) {
 					writer.append(String.format("Date: %s\r\n", DateTimeUtil.getDate()));
 					keepOpen = true;
@@ -96,7 +97,7 @@ public class HttpIoHandler {
 			} 
 			if (response.status() == 100) {
 				logger.info("socket: " + socket + " keeps open? true (100 response)");
-				return false;
+				return true;
 			} else {
 				logger.info("socket: " + socket + " keeps open? " + request.persistentConnection());
 				return request.persistentConnection();

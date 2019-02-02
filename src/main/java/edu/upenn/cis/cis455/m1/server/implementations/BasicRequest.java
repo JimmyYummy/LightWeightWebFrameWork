@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m1.server.HttpMethod;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
+import edu.upenn.cis.cis455.util.BlankLineSkipper;
 
 public class BasicRequest extends Request {
 
@@ -103,15 +104,11 @@ public class BasicRequest extends Request {
             throw new IllegalArgumentException("malformat url or host");
         }
         request.headers.put("pathinfo", url.substring(start, end));
-        // check if is persistent connection
-        if (request.protocol().equals("HTTP/1.1") && !(request.headers().contains("connection")
-                && request.headers("connection").toLowerCase().equals("close"))) {
-            request.persistentConnection(true);
-        }
+        
         // put the rest of headers in the requst's header
         for (Map.Entry<String, String> ent : headers.entrySet()) {
             if (!request.headers.containsKey(ent.getKey())) {
-                request.headers.put(ent.getKey(), ent.getValue().split(";")[0]);
+                request.headers.put(ent.getKey(), ent.getValue().split(";")[0].trim());
             }
         }
         
@@ -120,6 +117,16 @@ public class BasicRequest extends Request {
             request.contentLength = Integer.parseInt(headers.get("content-length"));
         } else {
         	request.contentLength = 0;
+        }
+        
+        // check if is persistent connection
+        if (request.protocol().equals("HTTP/1.0")) {
+        	request.persistentConnection(false);
+        } else if (request.headers.containsKey("connection")
+    			&& request.headers.get("connection").toLowerCase().equals("close")) {
+        	request.persistentConnection(false);
+    	} else {
+    		request.persistentConnection(true);
         }
         
         return request;
@@ -184,18 +191,7 @@ public class BasicRequest extends Request {
     private void parsePlainBody(InputStream in) throws IOException {
     	body = new byte[contentLength];
 //    	if (contentLength != 0) {
-//        	in.mark(200);
-//        	int skipBytes = 0;
-//        	while (true) {
-//        		int b = in.read();
-//        		if (b == 10 || b == 13) {
-//        			skipBytes++;
-//        		} else {
-//        			break;
-//        		}
-//        	}
-//        	in.reset();
-//        	in.skip(skipBytes);
+//    		BlankLineSkipper.apply(in);
 //    	}
     	in.read(body);
     }
@@ -278,7 +274,7 @@ public class BasicRequest extends Request {
 
 	@Override
 	public String toString() {
-		return "" + method + " " + url + protocol + "\n" + headers + "\n" + body();
+		return "" + method + " " + url + " " + protocol + " persisit: " + persistentConnection() + "\n" + headers + "\n" + body();
 	}
 
 }

@@ -188,6 +188,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		private boolean specialURlHandle(Path reqPath, Request req, Response res) {
 			if (shutdown.equals(reqPath)) {
 				server.closeApp(context);
+				res.body("The server is shut down.");
 				return true;
 			}
 			if (control.equals(reqPath)) {
