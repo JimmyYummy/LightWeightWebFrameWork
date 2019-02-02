@@ -80,7 +80,7 @@ public class HttpWorker extends Thread {
 				}
 				logger.info("Accepting request for " + uri + " from " + clientAddr + "\nwith header: " + headers);
 				// generate the request object, take care of chucked request
-				req = BasicRequest.getBasicRequestExceptBody(uri, headers, parms);
+				req = BasicRequest.getBasicRequestExceptBody(server.getPrimaryPortNumber(), uri, headers, parms);
 				logger.info("Get request without body from: " + clientAddr);
 				req.addBody(in);
 				logger.info("Get reqesut with body: " + req);

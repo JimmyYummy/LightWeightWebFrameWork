@@ -31,7 +31,7 @@ public class HttpServer implements ThreadManager {
 	private HttpTaskQueue taskQueue;
 	private ThreadPool pool;
 	private HandlerResolver handlerResolver;
-	private Collection<Context> contexts;
+	private List<Context> contexts;
 	
 	public HttpServer() {
 		logger.info("Creating the HttpServer");
@@ -90,6 +90,11 @@ public class HttpServer implements ThreadManager {
 	
 	public HandlerResolver getHandlerResolver() {
 		return handlerResolver;
+	}
+	
+	
+	public int getPrimaryPortNumber() {
+		return contexts.get(0).getPort();
 	}
 	
 	private HttpServer getServer() {

@@ -44,6 +44,7 @@ public class ServiceFactory {
                          boolean keepAlive,
                          Map<String, String> headers,
                          Map<String, List<String>> parms) {
+    	if 
     	BasicRequest req = BasicRequest.getBasicRequestExceptBody(uri, headers, parms);
         try {
         	req.addBody(socket.getInputStream());

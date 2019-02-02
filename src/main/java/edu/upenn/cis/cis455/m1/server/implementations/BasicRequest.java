@@ -44,6 +44,13 @@ public class BasicRequest extends Request {
     }
     
     private BasicRequest() {};
+    
+    public static BasicRequest getBasicRequestExceptBody (int port, String url, Map<String, String> headers,
+            Map<String, List<String>> params) {
+    	BasicRequest request = getBasicRequestExceptBody(url, headers, params);
+    	request.port = port;
+    	return request;
+    }
 	
     public static BasicRequest getBasicRequestExceptBody(String url, Map<String, String> headers,
             Map<String, List<String>> params) {
