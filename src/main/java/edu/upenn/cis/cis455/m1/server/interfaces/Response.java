@@ -33,8 +33,6 @@ import java.io.UnsupportedEncodingException;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicResponse;
 
 public abstract class Response {
-	private static BasicResponse commonResponse;
-
 	
     protected int statusCode = 200;
     protected byte[] body;
@@ -79,12 +77,4 @@ public abstract class Response {
     }
     
     public abstract String getHeaders();
-    
-    public static Response get100Response() {
-    	if (commonResponse == null) {
-    		commonResponse = new BasicResponse();
-    		commonResponse.status(100);
-    	}
-    	return commonResponse;
-    }
 }

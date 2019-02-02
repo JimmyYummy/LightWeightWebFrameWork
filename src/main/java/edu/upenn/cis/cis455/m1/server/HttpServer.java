@@ -34,7 +34,7 @@ public class HttpServer implements ThreadManager {
 	private Collection<Context> contexts;
 	
 	public HttpServer() {
-		logger.info("Creatign the HttpServer");
+		logger.info("Creating the HttpServer");
 		taskQueue = new HttpTaskQueue();
 		appCount = new AtomicInteger(0);
 		pool = null;
@@ -50,7 +50,7 @@ public class HttpServer implements ThreadManager {
 		handlerResolver.addHandler(context);
 		
 		// create new listener thread
-		new Thread(()-> {
+		Thread daemonThread = new Thread(()-> {
 			ServerSocket socket = null;
 			try {
 				socket = new ServerSocket(context.getPort());
@@ -72,7 +72,9 @@ public class HttpServer implements ThreadManager {
 					}
 				}
 			}
-		}).start();
+		});
+		daemonThread.setName("Daemon Thread");
+		daemonThread.start();
 	}
 	
 	public HandlerResolver getHandlerResolver() {

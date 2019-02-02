@@ -45,13 +45,7 @@ public class BasicRequestTest {
 
 	@Test
 	public void test() {
-		Request r = null;
-		try {
-			r = BasicRequest.BasicRequestFactory.getBasicRequest(url, sc.getInputStream(), headers, parms);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 
 }

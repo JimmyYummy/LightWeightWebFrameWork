@@ -104,7 +104,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		if (response.status() != 200) {
 			throw new HaltException(401, "Unauthorized");
 		}
-		logger.info("dispatch to handelr: " + request.requestMethod());
+		logger.info("dispatch to handler: " + request.requestMethod());
 		// dispatch the request to corresponding handlers
 		HttpMethod method = Enum.valueOf(HttpMethod.class, request.requestMethod());
 		boolean handled = methodHandlerMap.get(method).handle(request, response);
@@ -112,6 +112,11 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			throw new HaltException(404, "Not Found");
 		}
 		// TODO: check after filter here
+		
+		// 
+		if (response.type() == null && response.body().length() != 0) {
+			response.type("text/plain");
+		}
 	}
 
 	private class BasicRequestHandler {
@@ -133,12 +138,14 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		protected final boolean routerHandle(Request request, Response response) throws HaltException {
 			// get the path of the request
 			Path requestPath = Paths.get(request.pathInfo()).normalize();
+			logger.info(request.requestMethod() + " checking routes: " + requestPath);
 			// find the route here
 			Path[] paths = routes.keySet().toArray(new Path[0]);
 			Arrays.sort(paths, Comparator.reverseOrder());
 			for (Path routePath : paths) {
 				if (requestPath.startsWith(routePath)) {
 					try {
+						logger.info("reqeust " + request + " caught on path: " + routePath);
 						routes.get(routePath).handle(request, response);
 
 					} catch (Exception e) {
@@ -161,16 +168,20 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			Path requestPath = Paths.get(request.pathInfo()).normalize();
 			// check special URL here
 			if (specialURlHandle(requestPath, request, response)) {
+				logger.info("reqeust " + request + " caught on special URL");
 				return true;
 			}
 			// check the routes here
 			if (routerHandle(request, response)) {
+				logger.info("reqeust " + request + " caught on route");
 				return true;
 			}
 			// try to return the file if exist, or raise an exception
 			if (fileFetchingHandle(request, response, requestPath)) {
+				logger.info("reqeust " + request + " caught on file Path");
 				return true;
 			}
+			logger.info("reqeust " + request + " uncaught");
 			return false;
 		}
 

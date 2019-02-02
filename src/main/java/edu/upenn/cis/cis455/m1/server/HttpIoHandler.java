@@ -38,6 +38,7 @@ public class HttpIoHandler {
 				// append headers
 				writer.append("Server: CIS-550/JingWang\r\n");
 				writer.append(String.format("Last-Modified: %s", DateTimeUtil.getDate()));
+				writer.append(String.format("Content-Length: ", except.body().length()));
 				if (request.protocol().equals("HTTP/1.1")) {
 					writer.append(String.format("Date: %s\r\n", DateTimeUtil.getDate()));
 					keepOpen = true;
@@ -50,18 +51,11 @@ public class HttpIoHandler {
 				// write body
 				writer.append(except.body());
 				writer.append("\r\n");
-				
+				writer.flush();
 			} catch (IOException e) {
 				logger.error(e);
-			} finally {
-				if (writer != null) {
-					try {
-						writer.close();
-					} catch (IOException e) {
-						logger.error(e);
-					}
-				}
-			}
+			} 
+			logger.info("socekt: " + socket + " keeps open? " + keepOpen);
 			return keepOpen;
 
     }
@@ -75,32 +69,40 @@ public class HttpIoHandler {
 			try {
 				// get the writer
 				writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+//				writer = new StringBuilder();
 				// write the initial line
-				String firstLine = String.format("%d %s %s\r\n\r\n", 
-						response.status(), HttpParsing.explainStatus(response.status()), request.protocol());
+				String firstLine = String.format("%s %d %s\r\n\r\n", 
+						request.protocol(), response.status(), HttpParsing.explainStatus(response.status()));
 				writer.append(firstLine);
 				// write the headers
 				writer.append("Server: CIS-550/JingWang\r\n");
 				if (request.protocol().equals("HTTP/1.1")) {
 					writer.append(String.format("Date: %s\r\n", DateTimeUtil.getDate()));
 				}
+				if (response.status() != 100 && ! request.persistentConnection()) {
+					writer.append("Connection: close\r\n");
+				}
+				writer.append(String.format("Content-Length: %d\r\n", response.body().length()));
+				writer.append(String.format("Content-Type: %s\r\n", response.type()));
 				writer.append(response.getHeaders());
+				writer.append("\r\n");
 				writer.append("\r\n");
 				// write the body
 				writer.append(response.body());
 				writer.append("\r\n");
-			} catch (IOException e) {
-				logger.error(e);
-			} finally {
-				if (writer != null) {
-					try {
-						writer.close();
-					} catch (IOException e) {
-						logger.error(e);
-					}
-				}
+				writer.flush();
 			}
-			return request.persistentConnection();
+			catch (IOException e) {
+				logger.error(e);
+			} 
+			if (response.status() == 100) {
+				logger.info("socket: " + socket + " keeps open? true (100 response)");
+				return false;
+			} else {
+				logger.info("socket: " + socket + " keeps open? " + request.persistentConnection());
+				return request.persistentConnection();
+			}
+			
     }
     
 

@@ -1230,3 +1230,684 @@ null
 2019-Feb-01 17:02:51 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - java.net.SocketException: Socket is closed
 2019-Feb-01 17:02:51 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/0:0:0:0:0:0:0:1,port=56902,localport=8080]
 2019-Feb-01 17:02:51 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - edu.upenn.cis.cis455.exceptions.HaltException
+2019-Feb-01 20:46:53 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 20:46:53 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 20:46:53 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 20:46:53 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 20:46:53 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 20:46:53 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 20:46:53 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 20:46:57 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/0:0:0:0:0:0:0:1,port=57733,localport=8080]
+2019-Feb-01 20:46:57 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/0:0:0:0:0:0:0:1,port=57733,localport=8080]
+2019-Feb-01 20:46:57 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/0:0:0:0:0:0:0:1,port=57734,localport=8080]
+2019-Feb-01 20:46:57 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /0:0:0:0:0:0:0:1
+with header: {accept-language=zh-CN,zh;q=0.9,en-GB;q=0.8,en;q=0.7, cookie=Webstorm-96d5b19f=3ac0a4ca-833c-4d01-ab54-d4be9d6ddfc7; _xsrf=2|b85d33df|71b04cef5bba8ce88d3f4727ff19a24c|1548545324; username-localhost-8888="2|1:0|10:1548971960|23:username-localhost-8888|44:ZDMwNTgxY2ZhMjg5NDBhYjhhZTE1YmJiNzc1NWNhNzU=|6235d8e3186d222eb8a43e67c325402df6502c7f7adf1dc45bcd145da2f23c9c", useragent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36, Method=GET, accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8, remote-addr=/0:0:0:0:0:0:0:1, http-client-ip=/0:0:0:0:0:0:0:1, host=localhost:8080, upgrade-insecure-requests=1, connection=keep-alive, protocolVersion=HTTP/1.1, accept-encoding=gzip, deflate, br, user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36}
+2019-Feb-01 20:46:57 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /0:0:0:0:0:0:0:1
+2019-Feb-01 20:46:57 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{accept-language=zh-CN,zh, cookie=Webstorm-96d5b19f=3ac0a4ca-833c-4d01-ab54-d4be9d6ddfc7, useragent=Mozilla/5.0 (Macintosh, Method=GET, pathinfo=/, accept=text/html,application/xhtml+xml,application/xml, remote-addr=/0:0:0:0:0:0:0:1, http-client-ip=/0:0:0:0:0:0:0:1, host=localhost:8080, upgrade-insecure-requests=1, connection=keep-alive, protocolVersion=HTTP/1.1, accept-encoding=gzip, deflate, br, user-agent=Mozilla/5.0 (Macintosh}
+null
+2019-Feb-01 20:46:57 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 20:46:57 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 20:46:57 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 20:46:57 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 20:46:57 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - java.net.SocketException: Socket is closed
+2019-Feb-01 20:46:57 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/0:0:0:0:0:0:0:1,port=57734,localport=8080]
+2019-Feb-01 20:46:58 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /0:0:0:0:0:0:0:1
+with header: {accept-language=zh-CN,zh;q=0.9,en-GB;q=0.8,en;q=0.7, cookie=_xsrf=2|b85d33df|71b04cef5bba8ce88d3f4727ff19a24c|1548545324; username-localhost-8888="2|1:0|10:1548971960|23:username-localhost-8888|44:ZDMwNTgxY2ZhMjg5NDBhYjhhZTE1YmJiNzc1NWNhNzU=|6235d8e3186d222eb8a43e67c325402df6502c7f7adf1dc45bcd145da2f23c9c", useragent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36, Method=GET, accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8, remote-addr=/0:0:0:0:0:0:0:1, http-client-ip=/0:0:0:0:0:0:0:1, host=localhost:8080, upgrade-insecure-requests=1, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=max-age=0, accept-encoding=gzip, deflate, br, user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36}
+2019-Feb-01 20:46:58 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /0:0:0:0:0:0:0:1
+2019-Feb-01 20:46:58 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{accept-language=zh-CN,zh, cookie=_xsrf=2|b85d33df|71b04cef5bba8ce88d3f4727ff19a24c|1548545324, useragent=Mozilla/5.0 (Macintosh, Method=GET, pathinfo=/, accept=text/html,application/xhtml+xml,application/xml, remote-addr=/0:0:0:0:0:0:0:1, http-client-ip=/0:0:0:0:0:0:0:1, host=localhost:8080, upgrade-insecure-requests=1, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=max-age=0, accept-encoding=gzip, deflate, br, user-agent=Mozilla/5.0 (Macintosh}
+null
+2019-Feb-01 20:46:58 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 20:46:58 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 20:46:58 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/0:0:0:0:0:0:0:1,port=57735,localport=8080]
+2019-Feb-01 20:46:58 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 20:46:58 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 20:46:58 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - java.net.SocketException: Socket is closed
+2019-Feb-01 20:46:58 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/0:0:0:0:0:0:0:1,port=57735,localport=8080]
+2019-Feb-01 20:47:03 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /0:0:0:0:0:0:0:1
+with header: {accept-language=zh-CN,zh;q=0.9,en-GB;q=0.8,en;q=0.7, cookie=_xsrf=2|b85d33df|71b04cef5bba8ce88d3f4727ff19a24c|1548545324; username-localhost-8888="2|1:0|10:1548971960|23:username-localhost-8888|44:ZDMwNTgxY2ZhMjg5NDBhYjhhZTE1YmJiNzc1NWNhNzU=|6235d8e3186d222eb8a43e67c325402df6502c7f7adf1dc45bcd145da2f23c9c", useragent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36, Method=GET, accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8, remote-addr=/0:0:0:0:0:0:0:1, http-client-ip=/0:0:0:0:0:0:0:1, host=localhost:8080, upgrade-insecure-requests=1, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=max-age=0, accept-encoding=gzip, deflate, br, user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36}
+2019-Feb-01 20:47:03 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /0:0:0:0:0:0:0:1
+2019-Feb-01 20:47:03 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{accept-language=zh-CN,zh, cookie=_xsrf=2|b85d33df|71b04cef5bba8ce88d3f4727ff19a24c|1548545324, useragent=Mozilla/5.0 (Macintosh, Method=GET, pathinfo=/, accept=text/html,application/xhtml+xml,application/xml, remote-addr=/0:0:0:0:0:0:0:1, http-client-ip=/0:0:0:0:0:0:0:1, host=localhost:8080, upgrade-insecure-requests=1, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=max-age=0, accept-encoding=gzip, deflate, br, user-agent=Mozilla/5.0 (Macintosh}
+null
+2019-Feb-01 20:47:03 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 20:47:03 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 20:47:03 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 20:47:03 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 20:47:03 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - java.net.SocketException: Socket is closed
+2019-Feb-01 20:47:03 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/0:0:0:0:0:0:0:1,port=57736,localport=8080]
+2019-Feb-01 20:47:03 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/0:0:0:0:0:0:0:1,port=57736,localport=8080]
+2019-Feb-01 20:47:03 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/0:0:0:0:0:0:0:1,port=57737,localport=8080]
+2019-Feb-01 20:47:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /0:0:0:0:0:0:0:1
+with header: {accept-language=zh-CN,zh;q=0.9,en-GB;q=0.8,en;q=0.7, cookie=Webstorm-96d5b19f=3ac0a4ca-833c-4d01-ab54-d4be9d6ddfc7; _xsrf=2|b85d33df|71b04cef5bba8ce88d3f4727ff19a24c|1548545324; username-localhost-8888="2|1:0|10:1548971960|23:username-localhost-8888|44:ZDMwNTgxY2ZhMjg5NDBhYjhhZTE1YmJiNzc1NWNhNzU=|6235d8e3186d222eb8a43e67c325402df6502c7f7adf1dc45bcd145da2f23c9c", useragent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36, Method=GET, accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8, remote-addr=/0:0:0:0:0:0:0:1, http-client-ip=/0:0:0:0:0:0:0:1, host=localhost:8080, upgrade-insecure-requests=1, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=max-age=0, accept-encoding=gzip, deflate, br, user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36}
+2019-Feb-01 20:47:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /0:0:0:0:0:0:0:1
+2019-Feb-01 20:47:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{accept-language=zh-CN,zh, cookie=Webstorm-96d5b19f=3ac0a4ca-833c-4d01-ab54-d4be9d6ddfc7, useragent=Mozilla/5.0 (Macintosh, Method=GET, pathinfo=/, accept=text/html,application/xhtml+xml,application/xml, remote-addr=/0:0:0:0:0:0:0:1, http-client-ip=/0:0:0:0:0:0:0:1, host=localhost:8080, upgrade-insecure-requests=1, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=max-age=0, accept-encoding=gzip, deflate, br, user-agent=Mozilla/5.0 (Macintosh}
+null
+2019-Feb-01 20:47:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 20:47:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 20:47:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 20:47:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 20:47:09 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - java.net.SocketException: Socket is closed
+2019-Feb-01 20:47:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/0:0:0:0:0:0:0:1,port=57737,localport=8080]
+2019-Feb-01 20:47:13 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/0:0:0:0:0:0:0:1,port=57738,localport=8080]
+2019-Feb-01 20:47:13 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - edu.upenn.cis.cis455.exceptions.HaltException
+2019-Feb-01 20:47:13 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/0:0:0:0:0:0:0:1,port=57739,localport=8080]
+2019-Feb-01 20:47:13 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/0:0:0:0:0:0:0:1,port=57738,localport=8080]
+2019-Feb-01 20:47:13 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /0:0:0:0:0:0:0:1
+with header: {accept-language=zh-CN,zh;q=0.9,en-GB;q=0.8,en;q=0.7, cookie=Webstorm-96d5b19f=3ac0a4ca-833c-4d01-ab54-d4be9d6ddfc7; _xsrf=2|b85d33df|71b04cef5bba8ce88d3f4727ff19a24c|1548545324; username-localhost-8888="2|1:0|10:1548971960|23:username-localhost-8888|44:ZDMwNTgxY2ZhMjg5NDBhYjhhZTE1YmJiNzc1NWNhNzU=|6235d8e3186d222eb8a43e67c325402df6502c7f7adf1dc45bcd145da2f23c9c", useragent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36, Method=GET, accept=text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8, remote-addr=/0:0:0:0:0:0:0:1, http-client-ip=/0:0:0:0:0:0:0:1, host=localhost:8080, upgrade-insecure-requests=1, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=max-age=0, accept-encoding=gzip, deflate, br, user-agent=Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36}
+2019-Feb-01 20:47:13 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /0:0:0:0:0:0:0:1
+2019-Feb-01 20:47:13 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{accept-language=zh-CN,zh, cookie=Webstorm-96d5b19f=3ac0a4ca-833c-4d01-ab54-d4be9d6ddfc7, useragent=Mozilla/5.0 (Macintosh, Method=GET, pathinfo=/, accept=text/html,application/xhtml+xml,application/xml, remote-addr=/0:0:0:0:0:0:0:1, http-client-ip=/0:0:0:0:0:0:0:1, host=localhost:8080, upgrade-insecure-requests=1, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=max-age=0, accept-encoding=gzip, deflate, br, user-agent=Mozilla/5.0 (Macintosh}
+null
+2019-Feb-01 20:47:13 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 20:47:13 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 20:47:13 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 20:47:13 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 20:47:13 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - java.net.SocketException: Socket is closed
+2019-Feb-01 20:47:13 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/0:0:0:0:0:0:0:1,port=57739,localport=8080]
+2019-Feb-01 20:48:21 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57775,localport=8080]
+2019-Feb-01 20:48:34 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 20:48:34 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 20:48:34 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 20:48:34 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 20:48:34 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 20:48:34 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 20:48:34 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 20:48:37 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57779,localport=8080]
+2019-Feb-01 20:48:37 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57779,localport=8080]
+2019-Feb-01 20:48:37 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=434e24a3-816c-40e7-8e75-1b283bcc6f7c, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 20:48:37 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 20:48:37 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=434e24a3-816c-40e7-8e75-1b283bcc6f7c, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 20:48:37 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 20:48:37 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 20:48:37 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 20:48:37 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 20:48:37 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - java.net.SocketException: Socket is closed
+2019-Feb-01 21:03:03 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 21:03:03 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 21:03:03 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 21:03:03 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 21:03:03 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 21:03:03 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 21:03:03 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 21:03:06 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57807,localport=8080]
+2019-Feb-01 21:03:06 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57807,localport=8080]
+2019-Feb-01 21:03:06 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=2bebc03d-b806-400f-8ff0-799c3a68b8af, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:03:06 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:03:06 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=2bebc03d-b806-400f-8ff0-799c3a68b8af, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:03:06 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=2bebc03d-b806-400f-8ff0-799c3a68b8af, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@33f9de2a
+2019-Feb-01 21:03:06 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:03:06 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57807,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:03:06 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:03:06 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:03:06 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 21:03:06 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:03:06 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=2bebc03d-b806-400f-8ff0-799c3a68b8af, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@33f9de2a caught on path/
+2019-Feb-01 21:03:06 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=2bebc03d-b806-400f-8ff0-799c3a68b8af, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@33f9de2a caught on route
+2019-Feb-01 21:03:06 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - java.net.SocketException: Socket is closed
+2019-Feb-01 21:03:06 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - java.lang.NullPointerException
+2019-Feb-01 21:05:01 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 21:05:01 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 21:05:01 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 21:05:01 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 21:05:01 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 21:05:01 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 21:05:01 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 21:05:04 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57815,localport=8080]
+2019-Feb-01 21:05:04 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57815,localport=8080]
+2019-Feb-01 21:05:04 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=869aea81-906b-4e41-9f60-f84a42c774d9, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:05:04 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:05:04 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=869aea81-906b-4e41-9f60-f84a42c774d9, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:05:04 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=869aea81-906b-4e41-9f60-f84a42c774d9, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@e1c48ef
+2019-Feb-01 21:05:04 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:05:04 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57815,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:05:04 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:05:04 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:05:04 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 21:05:04 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:05:04 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=869aea81-906b-4e41-9f60-f84a42c774d9, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@e1c48ef caught on path: /
+2019-Feb-01 21:05:04 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=869aea81-906b-4e41-9f60-f84a42c774d9, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@e1c48ef caught on route
+2019-Feb-01 21:05:04 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - java.lang.NullPointerException
+2019-Feb-01 21:06:32 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 21:06:32 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 21:06:32 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 21:06:32 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 21:06:32 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 21:06:32 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 21:06:32 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 21:06:34 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57819,localport=8080]
+2019-Feb-01 21:06:34 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57819,localport=8080]
+2019-Feb-01 21:06:34 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=77b8f24d-6cb5-4f2b-9443-65135147d562, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:06:34 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:06:34 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=77b8f24d-6cb5-4f2b-9443-65135147d562, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:06:34 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=77b8f24d-6cb5-4f2b-9443-65135147d562, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@3486ac59
+2019-Feb-01 21:06:34 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:06:34 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57819,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:06:34 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:06:34 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:06:34 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 21:06:34 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:06:34 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=77b8f24d-6cb5-4f2b-9443-65135147d562, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@3486ac59 caught on path: /
+2019-Feb-01 21:06:34 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=77b8f24d-6cb5-4f2b-9443-65135147d562, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@3486ac59 caught on route
+2019-Feb-01 21:06:34 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57819,localport=8080] keeps open? true
+2019-Feb-01 21:06:53 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57820,localport=8080]
+2019-Feb-01 21:06:53 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57820,localport=8080]
+2019-Feb-01 21:06:53 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=973786e0-dc13-4e86-9fc3-7b8e637d3b27, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:06:53 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:06:53 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=973786e0-dc13-4e86-9fc3-7b8e637d3b27, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:06:53 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=973786e0-dc13-4e86-9fc3-7b8e637d3b27, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@41872754
+2019-Feb-01 21:06:53 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:06:53 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57820,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:06:53 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:06:53 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:06:53 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 21:06:53 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:06:53 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=973786e0-dc13-4e86-9fc3-7b8e637d3b27, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@41872754 caught on path: /
+2019-Feb-01 21:06:53 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=973786e0-dc13-4e86-9fc3-7b8e637d3b27, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@41872754 caught on route
+2019-Feb-01 21:06:53 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57820,localport=8080] keeps open? true
+2019-Feb-01 21:08:13 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 21:08:13 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 21:08:13 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 21:08:13 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 21:08:13 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 21:08:13 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 21:08:13 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 21:08:16 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57825,localport=8080]
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57825,localport=8080]
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=d8ca9d5a-1255-489b-a11c-85d3b936b8d9, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=d8ca9d5a-1255-489b-a11c-85d3b936b8d9, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=d8ca9d5a-1255-489b-a11c-85d3b936b8d9, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@712f466e
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57825,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=d8ca9d5a-1255-489b-a11c-85d3b936b8d9, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@712f466e caught on path: /
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=d8ca9d5a-1255-489b-a11c-85d3b936b8d9, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@712f466e caught on route
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - response generated for /127.0.0.1 :
+edu.upenn.cis.cis455.m1.server.implementations.BasicResponse@30a2ecad
+2019-Feb-01 21:08:16 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57825,localport=8080] keeps open? true
+2019-Feb-01 21:11:36 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 21:11:36 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 21:11:36 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 21:11:36 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 21:11:36 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 21:11:36 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 21:11:36 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 21:11:41 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57837,localport=8080]
+2019-Feb-01 21:11:41 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57837,localport=8080]
+2019-Feb-01 21:11:41 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=e7f81a31-93b2-405e-8453-528827d7f9e8, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:11:41 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:11:41 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=e7f81a31-93b2-405e-8453-528827d7f9e8, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:11:41 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=e7f81a31-93b2-405e-8453-528827d7f9e8, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@73147d93
+2019-Feb-01 21:11:41 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:11:42 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57837,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:11:42 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:11:42 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:11:42 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 21:11:42 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:11:42 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=e7f81a31-93b2-405e-8453-528827d7f9e8, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@73147d93 caught on path: /
+2019-Feb-01 21:11:42 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=e7f81a31-93b2-405e-8453-528827d7f9e8, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@73147d93 caught on route
+2019-Feb-01 21:11:42 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - response generated for /127.0.0.1 :
+200
+
+
+
+hello world
+2019-Feb-01 21:11:42 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57837,localport=8080] keeps open? true
+2019-Feb-01 21:12:33 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 21:12:33 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 21:12:33 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 21:12:33 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 21:12:33 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 21:12:33 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 21:12:33 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 21:12:35 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57839,localport=8080]
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57839,localport=8080]
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=fb9c9de9-439e-454d-b834-022c3587a358, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=fb9c9de9-439e-454d-b834-022c3587a358, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=fb9c9de9-439e-454d-b834-022c3587a358, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@73147d93
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57839,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=fb9c9de9-439e-454d-b834-022c3587a358, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@73147d93 caught on path: /
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=fb9c9de9-439e-454d-b834-022c3587a358, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@73147d93 caught on route
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - response generated for /127.0.0.1 :
+200
+
+{}
+
+hello world
+2019-Feb-01 21:12:35 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57839,localport=8080] keeps open? true
+2019-Feb-01 21:18:49 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 21:18:49 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 21:18:49 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 21:18:49 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 21:18:49 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 21:18:49 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 21:18:49 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 21:18:52 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57852,localport=8080]
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57852,localport=8080]
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=49726e77-6788-403d-a9cc-d9cd2e2c737c, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=49726e77-6788-403d-a9cc-d9cd2e2c737c, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=49726e77-6788-403d-a9cc-d9cd2e2c737c, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@712f466e
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57852,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=49726e77-6788-403d-a9cc-d9cd2e2c737c, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@712f466e caught on path: /
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=49726e77-6788-403d-a9cc-d9cd2e2c737c, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@712f466e caught on route
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - response generated for /127.0.0.1 :
+200
+
+Content-Length: 11
+
+
+hello world
+2019-Feb-01 21:18:52 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57852,localport=8080] keeps open? true
+2019-Feb-01 21:29:09 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57906,localport=8080]
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57906,localport=8080]
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=a8e7053e-195f-428e-a48b-91b6201dd769, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=a8e7053e-195f-428e-a48b-91b6201dd769, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=a8e7053e-195f-428e-a48b-91b6201dd769, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@30a2ecad
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57906,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=a8e7053e-195f-428e-a48b-91b6201dd769, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@30a2ecad caught on path: /
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=a8e7053e-195f-428e-a48b-91b6201dd769, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@30a2ecad caught on route
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - response generated for /127.0.0.1 :
+200
+
+Content-Length: 11
+
+
+hello world
+2019-Feb-01 21:29:09 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57906,localport=8080] keeps open? true
+2019-Feb-01 21:32:42 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 21:32:42 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 21:32:42 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 21:32:42 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 21:32:42 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 21:32:42 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 21:32:42 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 21:32:45 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57911,localport=8080]
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57911,localport=8080]
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=c1db03e5-6f2e-4c50-88b2-0f809babae6f, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=c1db03e5-6f2e-4c50-88b2-0f809babae6f, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=c1db03e5-6f2e-4c50-88b2-0f809babae6f, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@3b323c76
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57911,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=c1db03e5-6f2e-4c50-88b2-0f809babae6f, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@3b323c76 caught on path: /
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=c1db03e5-6f2e-4c50-88b2-0f809babae6f, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@3b323c76 caught on route
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - response generated for /127.0.0.1 :
+200
+
+
+
+hello world
+2019-Feb-01 21:32:45 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57911,localport=8080] keeps open? true
+2019-Feb-01 21:35:57 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 21:35:57 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 21:35:57 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 21:35:57 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 21:35:57 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 21:35:57 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 21:35:58 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 21:36:00 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57923,localport=8080]
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57923,localport=8080]
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=c9ba43a2-a4b3-4e08-ba44-aaabdc382bdc, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=c9ba43a2-a4b3-4e08-ba44-aaabdc382bdc, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=c9ba43a2-a4b3-4e08-ba44-aaabdc382bdc, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@785f940b
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57923,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=c9ba43a2-a4b3-4e08-ba44-aaabdc382bdc, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@785f940b caught on path: /
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=c9ba43a2-a4b3-4e08-ba44-aaabdc382bdc, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@785f940b caught on route
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - response generated for /127.0.0.1 :
+200
+
+
+
+hello world
+2019-Feb-01 21:36:00 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57923,localport=8080] keeps open? true
+2019-Feb-01 21:36:44 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 21:36:44 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 21:36:44 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 21:36:44 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 21:36:44 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 21:36:44 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 21:36:44 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 21:36:47 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57925,localport=8080]
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57925,localport=8080]
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=88e1f782-e127-4b8b-98a0-4c37987e95f3, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=88e1f782-e127-4b8b-98a0-4c37987e95f3, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=88e1f782-e127-4b8b-98a0-4c37987e95f3, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@785f940b
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57925,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=88e1f782-e127-4b8b-98a0-4c37987e95f3, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@785f940b caught on path: /
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=88e1f782-e127-4b8b-98a0-4c37987e95f3, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@785f940b caught on route
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - response generated for /127.0.0.1 :
+200
+
+
+
+hello world
+2019-Feb-01 21:36:47 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57925,localport=8080] keeps open? true
+2019-Feb-01 21:39:18 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 21:39:18 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 21:39:18 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 21:39:18 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 21:39:18 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 21:39:18 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 21:39:18 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 21:39:20 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57931,localport=8080]
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57931,localport=8080]
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=c6e5ea21-39c5-45cd-b8b0-57faf0357a03, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=c6e5ea21-39c5-45cd-b8b0-57faf0357a03, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=c6e5ea21-39c5-45cd-b8b0-57faf0357a03, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@73147d93
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57931,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handelr: GET
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=c6e5ea21-39c5-45cd-b8b0-57faf0357a03, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@73147d93 caught on path: /
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=c6e5ea21-39c5-45cd-b8b0-57faf0357a03, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@73147d93 caught on route
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - response generated for /127.0.0.1 :
+200
+
+
+
+hello world
+2019-Feb-01 21:39:20 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57931,localport=8080] keeps open? true
+2019-Feb-01 21:42:09 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 21:42:09 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 21:42:09 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 21:42:09 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 21:42:09 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 21:42:09 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 21:42:09 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 21:42:11 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57950,localport=8080]
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57950,localport=8080]
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=04bab49d-6a40-4cb1-ac0e-ae47e7c70b27, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=04bab49d-6a40-4cb1-ac0e-ae47e7c70b27, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=04bab49d-6a40-4cb1-ac0e-ae47e7c70b27, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@38532bf0
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57950,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handler: GET
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=04bab49d-6a40-4cb1-ac0e-ae47e7c70b27, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@38532bf0 caught on path: /
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=04bab49d-6a40-4cb1-ac0e-ae47e7c70b27, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@38532bf0 caught on route
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - response generated for /127.0.0.1 :
+200
+
+
+
+hello world
+2019-Feb-01 21:42:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57950,localport=8080] keeps open? true
+2019-Feb-01 21:45:45 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 21:45:45 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 21:45:45 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 21:45:45 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 21:45:45 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 21:45:45 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 21:45:45 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 21:45:48 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57959,localport=8080]
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57959,localport=8080]
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=07480125-4357-4491-8236-ebcfe801a286, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=07480125-4357-4491-8236-ebcfe801a286, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=07480125-4357-4491-8236-ebcfe801a286, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@43ad315e
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57959,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handler: GET
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=07480125-4357-4491-8236-ebcfe801a286, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@43ad315e caught on path: /
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=07480125-4357-4491-8236-ebcfe801a286, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@43ad315e caught on route
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - response generated for /127.0.0.1 :
+200
+
+
+
+hello world
+2019-Feb-01 21:45:48 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57959,localport=8080] keeps open? true
+2019-Feb-01 21:47:21 PM [main] INFO  edu.upenn.cis.cis455.m1.server.interfaces.WebService - Initializing server
+2019-Feb-01 21:47:21 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Creatign the HttpServer
+2019-Feb-01 21:47:21 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - creating the threadpool
+2019-Feb-01 21:47:21 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - created new worker, current pool size: 1
+2019-Feb-01 21:47:21 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - HttpThreadPool running
+2019-Feb-01 21:47:21 PM [main] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - new handler added for new application on port 8080
+2019-Feb-01 21:47:21 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpServer - Listening on port: 8080
+2019-Feb-01 21:47:24 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57964,localport=8080]
+2019-Feb-01 21:47:24 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57964,localport=8080]
+2019-Feb-01 21:47:24 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=be20e46b-c76d-4189-9132-15dbd62d437f, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:47:24 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:47:24 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=be20e46b-c76d-4189-9132-15dbd62d437f, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:47:24 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=be20e46b-c76d-4189-9132-15dbd62d437f, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@710c299a
+2019-Feb-01 21:47:24 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:47:25 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57964,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:47:25 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:47:25 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:47:25 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handler: GET
+2019-Feb-01 21:47:25 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:47:25 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=be20e46b-c76d-4189-9132-15dbd62d437f, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@710c299a caught on path: /
+2019-Feb-01 21:47:25 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=be20e46b-c76d-4189-9132-15dbd62d437f, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@710c299a caught on route
+2019-Feb-01 21:47:25 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - response generated for /127.0.0.1 :
+200
+
+
+
+hello world
+2019-Feb-01 21:47:25 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57964,localport=8080] keeps open? true
+2019-Feb-01 21:49:10 PM [Thread-2] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offered new task: Socket[addr=/127.0.0.1,port=57973,localport=8080]
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpTaskQueue - task polled: Socket[addr=/127.0.0.1,port=57973,localport=8080]
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Accepting request for / from /127.0.0.1
+with header: {remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, postman-token=5937743e-9d22-40fc-90e0-da4f95b9056d, host=0.0.0.0:8080, useragent=PostmanRuntime/7.6.0, connection=keep-alive, protocolVersion=HTTP/1.1, Method=GET, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0, accept=*/*}
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get request without body from: /127.0.0.1
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.BasicRequest - parsing normal req: GET /HTTP/1.1
+{postman-token=5937743e-9d22-40fc-90e0-da4f95b9056d, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+null
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - Get reqesut with body: GET /HTTP/1.1
+{postman-token=5937743e-9d22-40fc-90e0-da4f95b9056d, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@edc00e9
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - sending 100 response
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57973,localport=8080] keeps open? true (100 response)
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - handling request path: /
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - checking filter
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - dispatch to handler: GET
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - GET checking routes: /
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=5937743e-9d22-40fc-90e0-da4f95b9056d, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@edc00e9 caught on path: /
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler - reqeust GET /HTTP/1.1
+{postman-token=5937743e-9d22-40fc-90e0-da4f95b9056d, useragent=PostmanRuntime/7.6.0, Method=GET, pathinfo=/, accept=*/*, remote-addr=/127.0.0.1, http-client-ip=/127.0.0.1, host=0.0.0.0:8080, connection=keep-alive, protocolVersion=HTTP/1.1, cache-control=no-cache, accept-encoding=gzip, deflate, user-agent=PostmanRuntime/7.6.0}
+[B@edc00e9 caught on route
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpWorker - response generated for /127.0.0.1 :
+200
+
+
+
+hello world
+2019-Feb-01 21:49:11 PM [Thread-1] INFO  edu.upenn.cis.cis455.m1.server.HttpIoHandler - socket: Socket[addr=/127.0.0.1,port=57973,localport=8080] keeps open? true

@@ -69,6 +69,7 @@ public class HttpWorker extends Thread {
 				req = BasicRequest.getBasicRequestExceptBody(uri, headers, parms);
 				logger.info("Get request without body from: " + clientAddr);
 				req.addBody(in);
+				logger.info("Get reqesut with body: " + req);
 				// send an 100 response
 				if (req.headers("protocolVersion").equals("HTTP/1.1")) {
 					logger.info("sending 100 response");
@@ -80,7 +81,8 @@ public class HttpWorker extends Thread {
 					throw new HaltException(401, "Connection Refused on the port");
 				}
 				// use handler to generate the response
-				handler.handle(req, new BasicResponse());
+				res = new BasicResponse();
+				handler.handle(req, res);
 				// use IO handler to send response
 				// persistent? (based on the handler's response)
 				if (!HttpIoHandler.sendResponse(sc, req, res))
