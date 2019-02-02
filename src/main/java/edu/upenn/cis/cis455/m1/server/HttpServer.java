@@ -55,9 +55,10 @@ public class HttpServer implements ThreadManager {
 		Thread daemonThread = new Thread(()-> {
 			ServerSocket socket = null;
 			try {
-				socket = new ServerSocket(context.getPort());
 				appCount.incrementAndGet();
-				logger.info("Listening on port: " + context.getPort());
+				socket = new ServerSocket(context.getPort());
+				logger.info("Listening on port: " + context.getPort() 
+				+ " with root: " + context.getFileLocation());
 				while (context.isActive()) {
 					Socket sc = socket.accept();
 					taskQueue.offer(new HttpTask(sc));

@@ -1,6 +1,7 @@
 package edu.upenn.cis.cis455.m1.server.implementations;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,7 +18,7 @@ import org.apache.logging.log4j.Logger;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m1.server.HttpMethod;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
-import edu.upenn.cis.cis455.util.BlankLineSkipper;
+import edu.upenn.cis.cis455.util.InputUtil;
 
 public class BasicRequest extends Request {
 
@@ -144,7 +145,7 @@ public class BasicRequest extends Request {
     	if (this.headers.containsKey("transfer-encoding")
                 && "chunked".equals(this.headers.get("transfer-encoding").toLowerCase())) {
             logger.info("parsing chunked req: " + this);
-            parseChunkedEncodingBdoy(in);
+            parseChunkedBdoy(in);
         } else {
             logger.info("parsing normal req: " + this);
             parsePlainBody(in);
@@ -152,47 +153,110 @@ public class BasicRequest extends Request {
     }
     
     //TODO enhance it
-    private void parseChunkedEncodingBdoy(InputStream in) throws IOException {
-        StringBuilder sb = new StringBuilder();
-        String line = null;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-        // skip the empty lines
-        do {
-            line = reader.readLine();
-        } while (line != null && (line.equals("\n") || line.equals("\r\n")));
-        // if the line is null, return empty body
-        if (line == null)
-            this.body = new byte[0];
+    private void parseChunkedBdoy(InputStream in) throws IOException {
+    	// skip the blank lines
+    	InputUtil.skipBlankLines(in);
+    	
+    	//get the body
+    	ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+    	byte[] buf = new byte[2048];
+    	while (true) {
+    		int chunkLength = readChunkLength(in);
+    		if (chunkLength == 0) {
+    			break;
+    		}
+    		if (chunkLength > buf.length) {
+    			buf = new byte[chunkLength];
+    		}
+    		int rlen = 0;
+    		while (rlen < chunkLength) {
+    			rlen += in.read(buf, rlen, chunkLength - rlen);
+    		}
+    		bytes.write(buf, 0, rlen);
+    		InputUtil.skipBlankLines(in);
+    	}
+    	body = bytes.toByteArray();
+    	bytes.close();
+    	
+    	//skip the footers
+    	in.mark(200);
+    	byte[] b = new byte[400];
+    	// 2. footer to lone: reject
+    	// 3. footer not yet transmitted completely
+    	int rlen = 0;
+    	int splitbyte = 0;
+    	while (rlen < b.length) {
+        	int size = in.read(b);
+        	// different cases:
+        	// 1. input closed
+        	if (size == -1) {
+        		return;
+        	}
+        	rlen += size;
+    		splitbyte = findBlankLine(b, rlen);
+    		if (splitbyte != 0) break;
+    	}
+    	if (splitbyte == 0) {
+    		throw new HaltException(400, "Request footer to long or malformated");
+    	}
+    	in.reset();
+    	in.skip(splitbyte);
+    }
 
-        // read the body
-        char[] cbuf = new char[2048];
-        while (true) {
-            // get the length of the following chunk
-            int length = Integer.parseInt(line.split(";")[0]);
-            // finish reading if length is 0
-            if (length == 0) {
-                // skip all the footers
-                while (line != null && !(line.equals("\n") || line.equals("\r\n"))) {
-                    line = reader.readLine();
-                }
-                this.body = sb.toString().getBytes();
-                return;
+	private int readChunkLength(InputStream in) throws IOException {
+    	in.mark(200);
+    	byte[] b = new byte[200];
+    	int rlen = in.read(b);
+    	int splitbyte = findLineBreak(b, rlen);
+    	if (splitbyte == 0) {
+    		throw new HaltException(400, "Request too long or malformated");
+    	}
+    	in.reset();
+    	in.skip(splitbyte);
+    	return Integer.parseInt(new String(b, 0, splitbyte).split(";")[0].trim(), 16);
+    }
+    
+    static int findLineBreak(final byte[] buf, int rlen) {
+        int splitbyte = 0;
+        while (splitbyte + 1 < rlen) {
+
+            // RFC2616
+            if (buf[splitbyte] == '\r' && buf[splitbyte + 1] == '\n') {
+                return splitbyte + 2;
             }
-            // append the chunk and read new line
-            if (length > cbuf.length) {
-                cbuf = new char[length];
+
+            // tolerance
+            if (buf[splitbyte] == '\n') {
+                return splitbyte + 1;
             }
-            reader.read(cbuf, 0, length);
-            sb.append(cbuf, 0, length);
-            line = reader.readLine();
+            splitbyte++;
         }
+        return 0;
+    }
+    
+    static int findBlankLine(final byte[] buf, int rlen) {
+        int splitbyte = 0;
+        while (splitbyte + 1 < rlen) {
+
+            // RFC2616
+            if (buf[splitbyte] == '\r' && buf[splitbyte + 1] == '\n' && splitbyte + 3 < rlen && buf[splitbyte + 2] == '\r' && buf[splitbyte + 3] == '\n') {
+                return splitbyte + 4;
+            }
+
+            // tolerance
+            if (buf[splitbyte] == '\n' && buf[splitbyte + 1] == '\n') {
+                return splitbyte + 2;
+            }
+            splitbyte++;
+        }
+        return 0;
     }
 
     private void parsePlainBody(InputStream in) throws IOException {
     	body = new byte[contentLength];
-//    	if (contentLength != 0) {
-//    		BlankLineSkipper.apply(in);
-//    	}
+    	if (contentLength != 0) {
+    		InputUtil.skipBlankLines(in);
+    	}
     	in.read(body);
     }
 
@@ -274,7 +338,7 @@ public class BasicRequest extends Request {
 
 	@Override
 	public String toString() {
-		return "" + method + " " + url + " " + protocol + " persisit: " + persistentConnection() + "\n" + headers + "\n" + body();
+		return "" + method + " " + url + " " + protocol + " persisit: " + persistentConnection() + " port: " + port + "\n" + headers + "\n" + body();
 	}
 
 }

@@ -9,12 +9,18 @@ public class WebServer {
         org.apache.logging.log4j.core.config.Configurator.setLevel("edu.upenn.cis.cis455", Level.DEBUG);
         
         // TODO: make sure you parse *BOTH* command line arguments properly
+        System.out.println(Arrays.toString(args));
+//        int port = Integer.parseInt(args[0]);
+//        String rootPath = args[1];
+        String rootPath = "./www";
+        int port = 8888;
+        // TODO: launch your server daemon  
+        staticFileLocation(rootPath);
+        port(port);
         get("/", (req, res) -> {
         	res.body("hello world");
         	return null;
         });
-        // TODO: launch your server daemon        
-        System.out.println(Arrays.toString(args));
         System.out.println("Waiting to handle requests!");
     }
 

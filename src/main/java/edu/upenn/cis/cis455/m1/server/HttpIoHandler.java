@@ -1,6 +1,7 @@
 package edu.upenn.cis.cis455.m1.server;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
@@ -66,44 +67,102 @@ public class HttpIoHandler {
      * persistent connections).
      */
     public static boolean sendResponse(Socket socket, Request request, Response response) {
-    	BufferedWriter writer = null;
-			try {
-				// get the writer
-				writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-//				writer = new StringBuilder();
-				// write the initial line
-				String firstLine = String.format("%s %d %s\r\n", 
-						request.protocol(), response.status(), HttpParsing.explainStatus(response.status()));
-				writer.append(firstLine);
-				// write the headers
-				writer.append("Server: CIS-550/JingWang\r\n");
-				if (request.protocol().equals("HTTP/1.1")) {
-					writer.append(String.format("Date: %s\r\n", DateTimeUtil.getDate()));
-				}
-				if (response.status() != 100 && ! request.persistentConnection()) {
-					writer.append("Connection: close\r\n");
-				}
-				writer.append(String.format("Content-Length: %d\r\n", response.body().length()));
-				writer.append(String.format("Content-Type: %s\r\n", response.type()));
-				writer.append(response.getHeaders());
-				writer.append("\r\n");
-				// write the body
-				writer.append(response.body());
-				writer.append("\r\n");
-				writer.flush();
-			}
-			catch (IOException e) {
-				logger.error(e);
-			} 
-			if (response.status() == 100) {
-				logger.info("socket: " + socket + " keeps open? true (100 response)");
-				return true;
-			} else {
-				logger.info("socket: " + socket + " keeps open? " + request.persistentConnection());
-				return request.persistentConnection();
-			}
+    	// filter the chunked req for chunked res
+    	if (request.headers().contains("response-tranfser-encoding")
+    			&& "chunked".equals(request.headers("response-transfer-encoding").toLowerCase())) {
+    		return sendChunkedResponse(socket, request, response);
+    	} else {
+    		return sendPlainResponse(socket, request, response);
+    	}
 			
     }
+
+	public static boolean sendChunkedResponse(Socket socket, Request request, Response response) {
+		BufferedWriter writer = null;
+		try {
+			// get the writer
+			writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+//			//debug
+//			writer = new StringBuilder();
+			// write the initial line
+			String firstLine = String.format("%s %d %s\r\n", 
+					request.protocol(), response.status(), HttpParsing.explainStatus(response.status()));
+			writer.append(firstLine);
+			// write the headers
+			writer.append("Server: CIS-550/JingWang\r\n");
+			if (request.protocol().equals("HTTP/1.1")) {
+				writer.append(String.format("Date: %s\r\n", DateTimeUtil.getDate()));
+			}
+			if (response.status() != 100 && ! request.persistentConnection()) {
+				writer.append("Connection: close\r\n");
+			}
+			writer.append("Transfer-Encoding: chunked");
+			writer.append(String.format("Content-Type: %s\r\n", response.type()));
+			writer.append(response.getHeaders());
+			writer.append("\r\n");
+			// write the body
+			ByteArrayInputStream bodyStream = new ByteArrayInputStream(response.bodyRaw());
+			int size = -1;
+			byte[] b = new byte[255];
+			while ((size = bodyStream.read(b)) != -1) {
+				writer.append(new String(b, 0, size));
+				writer.append("\r\n");
+			}
+			// end of transfer
+			writer.append("0\r\n\r\n");
+			writer.flush();
+		}
+		catch (IOException e) {
+			logger.error(e);
+		} 
+		if (response.status() == 100) {
+			logger.info("socket: " + socket + " keeps open? true (100 response)");
+			return true;
+		} else {
+			logger.info("socket: " + socket + " keeps open? " + request.persistentConnection());
+			return request.persistentConnection();
+		}
+	}
+	
+	private static boolean sendPlainResponse(Socket socket, Request request, Response response) {
+    	BufferedWriter writer = null;
+		try {
+			// get the writer
+			writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+//			//debug
+//			writer = new StringBuilder();
+			// write the initial line
+			String firstLine = String.format("%s %d %s\r\n", 
+					request.protocol(), response.status(), HttpParsing.explainStatus(response.status()));
+			writer.append(firstLine);
+			// write the headers
+			writer.append("Server: CIS-550/JingWang\r\n");
+			if (request.protocol().equals("HTTP/1.1")) {
+				writer.append(String.format("Date: %s\r\n", DateTimeUtil.getDate()));
+			}
+			if (response.status() != 100 && ! request.persistentConnection()) {
+				writer.append("Connection: close\r\n");
+			}
+			writer.append(String.format("Content-Length: %d\r\n", response.body().length()));
+			writer.append(String.format("Content-Type: %s\r\n", response.type()));
+			writer.append(response.getHeaders());
+			writer.append("\r\n");
+			// write the body
+			writer.append(response.body());
+			writer.append("\r\n");
+			writer.flush();
+		}
+		catch (IOException e) {
+			logger.error(e);
+		} 
+		if (response.status() == 100) {
+			logger.info("socket: " + socket + " keeps open? true (100 response)");
+			return true;
+		} else {
+			logger.info("socket: " + socket + " keeps open? " + request.persistentConnection());
+			return request.persistentConnection();
+		}
+	}
     
     public static boolean sendContinueResponse(Socket socket) {
     	BufferedWriter writer = null;

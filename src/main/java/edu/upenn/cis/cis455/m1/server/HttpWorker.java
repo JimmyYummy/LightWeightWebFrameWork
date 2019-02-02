@@ -13,10 +13,9 @@ import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicRequest;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicResponse;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
-import edu.upenn.cis.cis455.m1.server.interfaces.Request;
 import edu.upenn.cis.cis455.m1.server.interfaces.Response;
-import edu.upenn.cis.cis455.util.BlankLineSkipper;
 import edu.upenn.cis.cis455.util.HttpParsing;
+import edu.upenn.cis.cis455.util.InputUtil;
 
 /**
  * Stub class for a thread worker for handling Web requests
@@ -42,6 +41,7 @@ public class HttpWorker extends Thread {
 			work(task.getSocket());
 			this.isWorking = false;
 		}
+		logger.info("" + this + " is turned off");
 	}
 
 	public void turnOffWorker() {
@@ -66,7 +66,7 @@ public class HttpWorker extends Thread {
 				Map<String, String> headers = new HashMap<>();
 				Map<String, List<String>> parms = new HashMap<>();
 				String clientAddr = sc.getInetAddress().toString();
-				BlankLineSkipper.apply(in);
+				InputUtil.skipBlankLines(in);
 				String uri = HttpParsing.parseRequest(clientAddr, in, headers, parms);
 				if (headers.containsKey("user-agent")) {
 					headers.put("useragent", headers.get("user-agent"));
@@ -91,8 +91,8 @@ public class HttpWorker extends Thread {
 				res = new BasicResponse();
 				handler.handle(req, res);
 				// use IO handler to send response
-				// persistent? (based on the handler's response)
-				if (!HttpIoHandler.sendResponse(sc, req, res)) {
+				// persistent? (based on the handler's response) and the input stream
+				if (!HttpIoHandler.sendResponse(sc, req, res) || InputUtil.reachedEndOfStream(in)) {
 					sc.close();
 					logger.info("closed connection: " + sc);
 					return;

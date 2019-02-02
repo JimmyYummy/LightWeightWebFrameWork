@@ -125,7 +125,7 @@ public class SingleAppWebService extends WebService {
 			port = 8080;
 			ipaddr = "0.0.0.0";
 			fileLocation = "./www";
-			threadNum = 100;
+			threadNum = 10;
 			isActive = false;
 			isRunning = false;
 		}

@@ -223,7 +223,6 @@ public class HttpParsing {
             rlen = 0;
 
             int read = -1;
-//            inputStream = new BufferedInputStream(inputStream);
             inputStream.mark(BUFSIZE);
             try {
                 read = inputStream.read(buf, 0, BUFSIZE);
