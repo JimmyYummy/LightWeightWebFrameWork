@@ -199,7 +199,29 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		}
 
 		private void handleControlRequest(Request req, Response res) {
-			// TODO: actual implements the method
+			res.type("text/html");
+			StringBuilder sb = new StringBuilder();
+			Map<String, String> infos = server.getThreadPoolInfo();
+			sb.append("<!DOCTYPE html>\n" + 
+					"<html>\n" + 
+					"<head>\n" + 
+					"    <title>Sample File</title>\n" + 
+					"</head>\n" + 
+					"<body>\n" + 
+					"<h1>Welcome</h1>\n" + 
+					"<ul>\n" + 
+					"<li>Thread Pool:\n" + 
+					"	<ul>\n");
+			for (Map.Entry<String, String> threadInfo : infos.entrySet()) {
+				sb.append(String.format("<li>%s: %s</li>\n", threadInfo.getKey(), threadInfo.getValue()));
+			}
+			sb.append("	</ul>\n" + 
+					"</li>\n" + 
+					"<li><a href=\"/shutdown\">Shut down</a></li>\n" + 
+					"</ul>\n" + 
+					"</body>\n" + 
+					"</html>");
+			res.body(sb.toString());	
 			return;
 		}
 

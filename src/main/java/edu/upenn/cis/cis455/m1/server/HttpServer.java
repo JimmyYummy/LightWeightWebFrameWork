@@ -29,7 +29,7 @@ public class HttpServer implements ThreadManager {
 	
 	private AtomicInteger appCount;
 	private HttpTaskQueue taskQueue;
-	private ThreadPool pool;
+	private HttpThreadPool pool;
 	private HandlerResolver handlerResolver;
 	private List<Context> contexts;
 	
@@ -155,6 +155,10 @@ public class HttpServer implements ThreadManager {
     	System.err.println("final: " + appCount.get());
     }
     
+    public Map<String, String> getThreadPoolInfo() {
+    	return pool.getPoolInfo();
+    }
+    
     public class HttpThreadPool implements ThreadPool{
     	
     	private List<HttpWorker> workers;
@@ -166,8 +170,17 @@ public class HttpServer implements ThreadManager {
     		logger.info("HttpThreadPool running");
     	}
     	
+		public synchronized Map<String, String> getPoolInfo() {
+			Map<String, String> infos = new HashMap<>(workers.size());
+			for (HttpWorker w : workers) {
+				infos.put(w.toString(), w.isWorking() ? "handling URL" : "waiting");
+			}
+			
+			return infos;
+		}
+
 		@Override
-		public void addThread() {
+		public synchronized void addThread() {
 			HttpWorker t = new HttpWorker(getServer());
     		workers.add(t);
     		t.start();
@@ -183,7 +196,7 @@ public class HttpServer implements ThreadManager {
     	
 
 		@Override
-		public void closeThread(Thread t) {
+		public synchronized void closeThread(Thread t) {
 			HttpWorker w = (HttpWorker) t;
 			workers.remove(w);
 			w.turnOffWorker();
@@ -194,7 +207,7 @@ public class HttpServer implements ThreadManager {
 		public int closeThreads(int n) {
 			for (int i = 0; i < n; i++) {
 				if (workers.size() == 0) return i;
-				workers.remove(workers.size() - 1).turnOffWorker();
+				closeThread(workers.get(workers.size() - 1));
 			}
 			return n;
 		}
@@ -202,7 +215,7 @@ public class HttpServer implements ThreadManager {
     	@Override
     	public void closeAll() {
     		while (! workers.isEmpty()) {
-    			closeThread(workers.get(0));
+    			closeThread(workers.get(workers.size() - 1));
     		}
     		logger.info("All the workers are turned off");
     	}
