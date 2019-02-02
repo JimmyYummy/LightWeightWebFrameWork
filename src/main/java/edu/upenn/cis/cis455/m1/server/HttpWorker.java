@@ -35,13 +35,20 @@ public class HttpWorker extends Thread {
 
 	@Override
 	public void run() {
-		while (keepActive) {
-			HttpTask task = server.getRequestQueue().poll();
-			this.isWorking = true;
-			work(task.getSocket());
-			this.isWorking = false;
+		try {
+			while (keepActive) {
+				HttpTask task = server.getRequestQueue().poll();
+				if (task == null) continue;
+				this.isWorking = true;
+				work(task.getSocket());
+				this.isWorking = false;
+			}
+			logger.info("" + this + " is turned off");
+		} catch (Exception e) {
+			server.error(this);
+			throw e;
 		}
-		logger.info("" + this + " is turned off");
+		
 	}
 
 	public void turnOffWorker() {
@@ -115,6 +122,7 @@ public class HttpWorker extends Thread {
 				throw e;
 			} catch (Exception e) {
 				logger.error(e);
+				e.printStackTrace();
 			}
 		}
 		// close connection and return

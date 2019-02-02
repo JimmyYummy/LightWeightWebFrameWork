@@ -6,6 +6,8 @@ import edu.upenn.cis.cis455.m1.server.HttpServer;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m1.server.interfaces.WebService;
 
+import java.io.IOException;
+import java.net.ServerSocket;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -115,6 +117,7 @@ public class SingleAppWebService extends WebService {
 		private int threadNum;
 		private boolean isActive;
 		private boolean isRunning;
+		private ServerSocket socket;
 		
 		private SingleAppContext() {
 			routes = new HashMap<>();
@@ -175,6 +178,16 @@ public class SingleAppWebService extends WebService {
 		
 		public Map<Path, Filter> getFilters() {
 			return filterResolver;
+		}
+
+		@Override
+		public ServerSocket getServSocket() {
+			return socket;
+		}
+
+		@Override
+		public void putServSocket(ServerSocket socket) {
+			this.socket = socket;
 		}
 		
 	}

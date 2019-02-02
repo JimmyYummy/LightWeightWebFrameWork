@@ -1,5 +1,7 @@
 package edu.upenn.cis.cis455.m1.server.interfaces;
 
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.nio.file.Path;
 import java.util.Map;
 
@@ -23,4 +25,8 @@ public interface Context {
 	public Map<HttpMethod, Map<Path, Route>> getRoutes();
 	
 	public Map<Path, Filter> getFilters();
+	
+	public ServerSocket getServSocket();
+	
+	public void putServSocket(ServerSocket socket);
 }

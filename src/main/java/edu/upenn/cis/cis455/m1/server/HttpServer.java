@@ -55,8 +55,10 @@ public class HttpServer implements ThreadManager {
 		Thread daemonThread = new Thread(()-> {
 			ServerSocket socket = null;
 			try {
+				
 				appCount.incrementAndGet();
 				socket = new ServerSocket(context.getPort());
+				context.putServSocket(socket);
 				logger.info("Listening on port: " + context.getPort() 
 				+ " with root: " + context.getFileLocation());
 				while (context.isActive()) {
@@ -64,19 +66,22 @@ public class HttpServer implements ThreadManager {
 					taskQueue.offer(new HttpTask(sc));
 				}
 			} catch (IOException e) {
+				context.setUnactive();
 				logger.error(e);
-			} finally {
-				if (appCount.decrementAndGet() == 0) {
-					pool.closeAll();
-				}
-				logger.info("app " + context + " is shut down");
 				if (socket != null) {
 					try {
 						socket.close();
-					} catch (IOException e) {
-						logger.error(e);
+					} catch (IOException e2) {
+						logger.error(e2);
 					}
 				}
+			} finally {
+				if (appCount.decrementAndGet() == 0) {
+					pool.closeAll();
+					taskQueue.unactive();
+					logger.info("Web Service Closed");
+				}
+				logger.info("app " + context + " is shut down");
 			}
 		});
 		daemonThread.setName("Daemon Thread-Port:" + context.getPort());
@@ -117,7 +122,7 @@ public class HttpServer implements ThreadManager {
 
     @Override
     public void error(HttpWorker worker) {
-        // TODO Auto-generated method stub
+        pool.closeThread(worker);
         
     }
     
@@ -130,11 +135,19 @@ public class HttpServer implements ThreadManager {
     public void closeApp(Context context) {
     	if (contexts.remove(context)) {
     		context.setUnactive();
+    		try {
+				ServerSocket  sc = context.getServSocket();
+				sc.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     		logger.info("app is shutdonwn.");
     	} else {
     		logger.info("app already shutdown.");
 //    		throw new IllegalArgumentException("context in not loaded into the server");
     	}
+    	System.err.println("final: " + appCount.get());
     }
     
     public class HttpThreadPool implements ThreadPool{
@@ -167,11 +180,8 @@ public class HttpServer implements ThreadManager {
 		@Override
 		public void closeThread(Thread t) {
 			HttpWorker w = (HttpWorker) t;
-			if (workers.contains(w)) {
-				w.turnOffWorker();
-			} else {
-				throw new IllegalArgumentException("No a thread in the pool");
-			}
+			workers.remove(w);
+			w.turnOffWorker();
 			logger.info("deleted http worker, current pool size: " + workers.size());
 		}
 
@@ -186,10 +196,9 @@ public class HttpServer implements ThreadManager {
 				
     	@Override
     	public void closeAll() {
-    		for (HttpWorker w: workers) {
-    			w.turnOffWorker();
+    		while (! workers.isEmpty()) {
+    			closeThread(workers.get(0));
     		}
-    		workers.clear();
     		logger.info("All the workers are turned off");
     	}
     }

@@ -12,4 +12,9 @@ public class HttpTask {
     public Socket getSocket() {
         return requestSocket;
     }
+    
+    @Override
+    public String toString() {
+    	return "task on " + requestSocket;
+    }
 }
