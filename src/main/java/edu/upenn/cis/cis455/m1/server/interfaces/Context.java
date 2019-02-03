@@ -3,6 +3,7 @@ package edu.upenn.cis.cis455.m1.server.interfaces;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 
 import edu.upenn.cis.cis455.handlers.Filter;
@@ -24,7 +25,13 @@ public interface Context {
 	
 	public Map<HttpMethod, Map<Path, Route>> getRoutes();
 	
-	public Map<Path, Filter> getFilters();
+	public List<Filter> getGeneralBeforeFilters();
+	
+	public List<Filter> getGeneralAfterFilters();
+
+	public Map<Path, Map<String, List<Filter>>> getBeforeFilters();
+	
+	public Map<Path, Map<String, List<Filter>>> getAfterFilters();
 	
 	public ServerSocket getServSocket();
 	

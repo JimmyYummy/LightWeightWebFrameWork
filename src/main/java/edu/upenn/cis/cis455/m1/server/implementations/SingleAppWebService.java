@@ -107,10 +107,54 @@ public class SingleAppWebService extends WebService {
 		context.threadNum = threads;
 	}
 	
+	public void before(Filter filter) {
+		context.beforeGeneralFilters.add(filter);
+	}
+
+    /**
+     * Add filters that get called after a request
+     */
+    public void after(Filter filter) {
+    	context.afterGeneralFilters.add(filter);
+    }
+    /**
+     * Add filters that get called before a request
+     */
+    public void before(String path, String acceptType, Filter filter) {
+    	Map<Path, Map<String, List<Filter>>> filters = context.beforeFilters;
+    	Path normaledPath = Paths.get(path).normalize();
+    	if (! filters.containsKey(normaledPath)) {
+    		filters.put(normaledPath, new HashMap<>());
+    	}
+    	Map<String, List<Filter>> typeFilterMap = filters.get(normaledPath);
+    	if (! typeFilterMap.containsKey(acceptType)) {
+    		typeFilterMap.put(acceptType, new ArrayList<>());
+    	}
+    	typeFilterMap.get(acceptType).add(filter);
+    }
+    /**
+     * Add filters that get called after a request
+     */
+    public void after(String path, String acceptType, Filter filter) {
+    	Map<Path, Map<String, List<Filter>>> filters = context.afterFilters;
+    	Path normaledPath = Paths.get(path).normalize();
+    	if (! filters.containsKey(normaledPath)) {
+    		filters.put(normaledPath, new HashMap<>());
+    	}
+    	Map<String, List<Filter>> typeFilterMap = filters.get(normaledPath);
+    	if (! typeFilterMap.containsKey(acceptType)) {
+    		typeFilterMap.put(acceptType, new ArrayList<>());
+    	}
+    	typeFilterMap.get(acceptType).add(filter);
+    }
+	
 	public class SingleAppContext implements Context {
 		
 		private Map<HttpMethod, Map<Path, Route>> routes;
-		private Map<Path, Filter> filterResolver;
+		private List<Filter> beforeGeneralFilters;
+		private List<Filter> afterGeneralFilters;
+		private Map<Path, Map<String, List<Filter>>> beforeFilters;
+		private Map<Path, Map<String, List<Filter>>> afterFilters;
 		private int port;
 		private String ipaddr;
 		private String fileLocation;
@@ -124,7 +168,11 @@ public class SingleAppWebService extends WebService {
 			for (HttpMethod method : HttpMethod.values()) {
 				routes.put(method, new HashMap<>());
 			}
-			filterResolver = new HashMap<>(0);
+			beforeGeneralFilters = new ArrayList<>();
+			afterGeneralFilters = new ArrayList<>();
+			beforeFilters = new HashMap<>();
+			afterFilters = new HashMap<>();
+			
 			port = 8080;
 			ipaddr = "0.0.0.0";
 			fileLocation = "./www";
@@ -176,8 +224,12 @@ public class SingleAppWebService extends WebService {
 			return routes;
 		}
 		
-		public Map<Path, Filter> getFilters() {
-			return filterResolver;
+		public Map<Path, Map<String, List<Filter>>> getBeforeFilters() {
+			return beforeFilters;
+		}
+		
+		public Map<Path, Map<String, List<Filter>>> getAfterFilters() {
+			return afterFilters;
 		}
 
 		@Override
@@ -188,6 +240,16 @@ public class SingleAppWebService extends WebService {
 		@Override
 		public void putServSocket(ServerSocket socket) {
 			this.socket = socket;
+		}
+
+		@Override
+		public List<Filter> getGeneralBeforeFilters() {
+			return beforeGeneralFilters;
+		}
+
+		@Override
+		public List<Filter> getGeneralAfterFilters() {
+			return afterGeneralFilters;
 		}
 		
 	}

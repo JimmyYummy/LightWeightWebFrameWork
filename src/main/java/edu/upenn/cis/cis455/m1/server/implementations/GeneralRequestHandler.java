@@ -34,7 +34,10 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 
 	private Path rootPath;
 	private Map<HttpMethod, BasicRequestHandler> methodHandlerMap;
-	private Map<Path, Filter> filters;
+	private List<Filter> generalBeforeFilters;
+	private List<Filter> generalAfterFilters;
+	private Map<Path, Map<String, List<Filter>>> typeBeforeFilters;
+	private Map<Path, Map<String, List<Filter>>> typeAfterFilters;
 	private Context context;
 	private HttpServer server;
 	private static Path shutdown = Paths.get("/shutdown").normalize();
@@ -57,7 +60,10 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			methodHandlerMap.get(method).addRoutes(routeMap);
 		}
 		// do the filter mapping
-		filters = context.getFilters();
+		generalBeforeFilters = context.getGeneralBeforeFilters();
+		generalAfterFilters = context.getGeneralAfterFilters();
+		typeBeforeFilters = context.getBeforeFilters();
+		typeAfterFilters = context.getAfterFilters();
 
 		this.context = context;
 		this.server = server;
@@ -91,16 +97,30 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		logger.info("handling request path: " + requestPath);
 		// check before filter here
 		logger.info("checking filter");
-		for (Map.Entry<Path, Filter> filterPair : filters.entrySet()) {
-			if (requestPath.startsWith(filterPair.getKey())) {
-				try {
-					filterPair.getValue().handle(request, response);
-				} catch (Exception e) {
-					logger.error(e);
-					throw new HaltException(500, "Error while handling the request.");
+		try {
+			for (Path filterPath : typeBeforeFilters.keySet()) {
+				if (requestPath.startsWith(filterPath)) {
+					Map<String, List<Filter>> typeToFilters = typeBeforeFilters.get(filterPath);
+					if (typeToFilters.containsKey(response.type()));
+					List<Filter> filters = typeToFilters.get(response.type());
+					for (Filter f : filters) {
+						f.handle(request, response);
+					}
 				}
 			}
+			
+			for (Filter f : generalBeforeFilters) {
+				f.handle(request, response);
+			}
+			
+		} catch (HaltException he) {
+			throw he;
+		} catch (Exception e) {
+			logger.catching(e);
+			throw new HaltException(500, "Unexpected Error");
 		}
+		
+		
 		if (response.status() != 200) {
 			throw new HaltException(401, "Unauthorized");
 		}
@@ -116,6 +136,28 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		// 
 		if (response.type() == null && response.body().length() != 0) {
 			response.type("text/plain");
+		}
+		
+		try {
+			for (Path filterPath : typeAfterFilters.keySet()) {
+				if (requestPath.startsWith(filterPath)) {
+					Map<String, List<Filter>> typeToFilters = typeAfterFilters.get(filterPath);
+					if (typeToFilters.containsKey(response.type()));
+					List<Filter> filters = typeToFilters.get(response.type());
+					for (Filter f : filters) {
+						f.handle(request, response);
+					}
+				}
+			}
+			
+			for (Filter f : generalAfterFilters) {
+				f.handle(request, response);
+			}
+		} catch (HaltException he) {
+			throw he;
+		} catch (Exception e) {
+			logger.catching(e);
+			throw new HaltException(500, "Unexpected Error");
 		}
 	}
 
