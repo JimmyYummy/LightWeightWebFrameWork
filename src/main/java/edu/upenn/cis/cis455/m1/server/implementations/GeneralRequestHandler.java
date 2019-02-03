@@ -42,6 +42,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 	private HttpServer server;
 	private static Path shutdown = Paths.get("/shutdown").normalize();
 	private static Path control = Paths.get("/control").normalize();
+	private static Path unimatcher = Paths.get("*");
 
 	public GeneralRequestHandler(Path rootPath) {
 		this.rootPath = rootPath;
@@ -99,7 +100,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		logger.info("checking before filter");
 		try {
 			for (Path filterPath : typeBeforeFilters.keySet()) {
-				if (requestPath.startsWith(filterPath)) {
+				if (checkFilterMatch(filterPath, requestPath)) {
 					Map<String, List<Filter>> typeToFilters = typeBeforeFilters.get(filterPath);
 					if (typeToFilters.containsKey(response.type())) {
 						List<Filter> filters = typeToFilters.get(response.type());
@@ -135,7 +136,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		logger.info("checking after filters");
 		try {
 			for (Path filterPath : typeAfterFilters.keySet()) {
-				if (requestPath.startsWith(filterPath)) {
+				if (checkFilterMatch(filterPath, requestPath)) {
 					Map<String, List<Filter>> typeToFilters = typeAfterFilters.get(filterPath);
 					if (typeToFilters.containsKey(response.type())) {
 						List<Filter> filters = typeToFilters.get(response.type());
@@ -321,4 +322,26 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		return requestPath.startsWith("etc/passwd");
 	}
 
+	// TODO:
+	public boolean checkFilterMatch(Path filterPath, Path requestPath) {
+
+		return checkPathMatch(0, 0, filterPath, requestPath);
+	}
+
+	private static boolean checkPathMatch(int fIdx, int rIdx, Path fPath, Path rPath) {
+		if (fIdx == fPath.getNameCount() && rIdx == rPath.getNameCount())
+			return true;
+		if (fIdx == fPath.getNameCount() || rIdx == rPath.getNameCount())
+			return false;
+		if (fPath.getName(fIdx).equals(unimatcher)) {
+			for (int i = rIdx + 1; i <= rPath.getNameCount(); i++) {
+				if (checkPathMatch(fIdx + 1, i, fPath, rPath))
+					return true;
+			}
+			return false;
+		}
+		if (!fPath.getName(fIdx).equals(rPath.getName(rIdx)))
+			return false;
+		return checkPathMatch(fIdx + 1, rIdx + 1, fPath, rPath);
+	}
 }
