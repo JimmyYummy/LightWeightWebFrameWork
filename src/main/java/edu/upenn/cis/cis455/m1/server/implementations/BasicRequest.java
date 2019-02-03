@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -111,7 +112,8 @@ public class BasicRequest extends Request {
         if (start >= end) {
             throw new IllegalArgumentException("malformat url or host");
         }
-        request.headers.put("pathinfo", url.substring(start, end));
+        String rawPath = url.substring(start, end);
+        request.headers.put("pathinfo", Paths.get("/" + rawPath).normalize().toString());
         
         // put the rest of headers in the requst's header
         for (Map.Entry<String, String> ent : headers.entrySet()) {

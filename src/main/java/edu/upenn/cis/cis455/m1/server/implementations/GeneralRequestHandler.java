@@ -96,31 +96,31 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		Path requestPath = Paths.get(request.pathInfo()).normalize();
 		logger.info("handling request path: " + requestPath);
 		// check before filter here
-		logger.info("checking filter");
+		logger.info("checking before filter");
 		try {
 			for (Path filterPath : typeBeforeFilters.keySet()) {
 				if (requestPath.startsWith(filterPath)) {
 					Map<String, List<Filter>> typeToFilters = typeBeforeFilters.get(filterPath);
-					if (typeToFilters.containsKey(response.type()));
-					List<Filter> filters = typeToFilters.get(response.type());
-					for (Filter f : filters) {
-						f.handle(request, response);
+					if (typeToFilters.containsKey(response.type())) {
+						List<Filter> filters = typeToFilters.get(response.type());
+						for (Filter f : filters) {
+							f.handle(request, response);
+						}
 					}
 				}
 			}
-			
+
 			for (Filter f : generalBeforeFilters) {
 				f.handle(request, response);
 			}
-			
+
 		} catch (HaltException he) {
 			throw he;
 		} catch (Exception e) {
 			logger.catching(e);
 			throw new HaltException(500, "Unexpected Error");
 		}
-		
-		
+
 		if (response.status() != 200) {
 			throw new HaltException(401, "Unauthorized");
 		}
@@ -132,24 +132,20 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			throw new HaltException(404, "Not Found");
 		}
 		// TODO: check after filter here
-		
-		// 
-		if (response.type() == null && response.body().length() != 0) {
-			response.type("text/plain");
-		}
-		
+		logger.info("checking after filters");
 		try {
 			for (Path filterPath : typeAfterFilters.keySet()) {
 				if (requestPath.startsWith(filterPath)) {
 					Map<String, List<Filter>> typeToFilters = typeAfterFilters.get(filterPath);
-					if (typeToFilters.containsKey(response.type()));
-					List<Filter> filters = typeToFilters.get(response.type());
-					for (Filter f : filters) {
-						f.handle(request, response);
+					if (typeToFilters.containsKey(response.type())) {
+						List<Filter> filters = typeToFilters.get(response.type());
+						for (Filter f : filters) {
+							f.handle(request, response);
+						}
 					}
 				}
 			}
-			
+
 			for (Filter f : generalAfterFilters) {
 				f.handle(request, response);
 			}
@@ -158,6 +154,11 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		} catch (Exception e) {
 			logger.catching(e);
 			throw new HaltException(500, "Unexpected Error");
+		}
+
+		// added content type if not specified
+		if (response.type() == null && response.body().length() != 0) {
+			response.type("text/plain");
 		}
 	}
 
@@ -244,26 +245,14 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			res.type("text/html");
 			StringBuilder sb = new StringBuilder();
 			Map<String, String> infos = server.getThreadPoolInfo();
-			sb.append("<!DOCTYPE html>\n" + 
-					"<html>\n" + 
-					"<head>\n" + 
-					"    <title>Sample File</title>\n" + 
-					"</head>\n" + 
-					"<body>\n" + 
-					"<h1>Welcome</h1>\n" + 
-					"<ul>\n" + 
-					"<li>Thread Pool:\n" + 
-					"	<ul>\n");
+			sb.append("<!DOCTYPE html>\n" + "<html>\n" + "<head>\n" + "    <title>Sample File</title>\n" + "</head>\n"
+					+ "<body>\n" + "<h1>Welcome</h1>\n" + "<ul>\n" + "<li>Thread Pool:\n" + "	<ul>\n");
 			for (Map.Entry<String, String> threadInfo : infos.entrySet()) {
 				sb.append(String.format("<li>%s: %s</li>\n", threadInfo.getKey(), threadInfo.getValue()));
 			}
-			sb.append("	</ul>\n" + 
-					"</li>\n" + 
-					"<li><a href=\"/shutdown\">Shut down</a></li>\n" + 
-					"</ul>\n" + 
-					"</body>\n" + 
-					"</html>");
-			res.body(sb.toString());	
+			sb.append("	</ul>\n" + "</li>\n" + "<li><a href=\"/shutdown\">Shut down</a></li>\n" + "</ul>\n"
+					+ "</body>\n" + "</html>");
+			res.body(sb.toString());
 			return;
 		}
 
@@ -279,7 +268,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			logger.info("requesting file on paht: " + filePath);
 			File requestedFile = filePath.toFile();
 			// Check whether the file exists
-			if (!requestedFile.exists() || ! requestedFile.isFile()) {
+			if (!requestedFile.exists() || !requestedFile.isFile()) {
 				throw new HaltException(404, "Not Found");
 			}
 			// Check special conditions
@@ -327,7 +316,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 
 	}
 
-	//TODO: future improvement to throw halt exceptions
+	// TODO: future improvement to throw halt exceptions
 	public boolean checkPermission(Path requestPath) {
 		return requestPath.startsWith("etc/passwd");
 	}

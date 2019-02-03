@@ -45,7 +45,7 @@ public class HttpIoHandler {
 					writer.append(String.format("Date: %s\r\n", DateTimeUtil.getDate()));
 					keepOpen = true;
 				}
-				if (request.headers("connection").toLowerCase().equals("close")) {
+				if (request.persistentConnection()) {
 					writer.append("Connection: close\r\n");
 					keepOpen = false;
 				}

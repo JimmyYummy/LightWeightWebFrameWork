@@ -38,7 +38,8 @@ public class HttpWorker extends Thread {
 		try {
 			while (keepActive) {
 				HttpTask task = server.getRequestQueue().poll();
-				if (task == null) continue;
+				if (task == null)
+					continue;
 				this.isWorking = true;
 				work(task.getSocket());
 				this.isWorking = false;
@@ -48,7 +49,7 @@ public class HttpWorker extends Thread {
 			server.error(this);
 			throw e;
 		}
-		
+
 	}
 
 	public void turnOffWorker() {
@@ -105,21 +106,21 @@ public class HttpWorker extends Thread {
 					return;
 				}
 			} catch (HaltException e) {
-//				logger.error("" + e + e.statusCode() + e.body());
-//				// return error response if error occurs
-//				// persistent? (based on the handler's response)
-//				if (req == null)
-//					req = BasicRequest.getRequestForException();
-//				if (!HttpIoHandler.sendException(sc, req, e)) {
-//					logger.info("closed connection: " + sc);
-//					try {
-//						sc.close();
-//					} catch (IOException e1) {
-//						logger.error(e);
-//					}
-//					return;
-//				}
-				throw e;
+				logger.error("" + e + e.statusCode() + e.body());
+				// return error response if error occurs
+				// persistent? (based on the handler's response)
+				if (req == null)
+					req = BasicRequest.getRequestForException();
+				if (!HttpIoHandler.sendException(sc, req, e)) {
+					logger.info("closed connection: " + sc);
+					try {
+						sc.close();
+					} catch (IOException e1) {
+						logger.error(e);
+					}
+					return;
+				}
+//				throw e;
 			} catch (Exception e) {
 				logger.error(e);
 				e.printStackTrace();

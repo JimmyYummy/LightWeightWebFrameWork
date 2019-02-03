@@ -108,6 +108,9 @@ public class SingleAppWebService extends WebService {
 	}
 	
 	public void before(Filter filter) {
+		if (! context.isRunning) {
+			this.awaitInitialization();
+		}
 		context.beforeGeneralFilters.add(filter);
 	}
 
@@ -115,12 +118,19 @@ public class SingleAppWebService extends WebService {
      * Add filters that get called after a request
      */
     public void after(Filter filter) {
+    	if (! context.isRunning) {
+			this.awaitInitialization();
+		}
     	context.afterGeneralFilters.add(filter);
     }
     /**
      * Add filters that get called before a request
      */
     public void before(String path, String acceptType, Filter filter) {
+    	if (! context.isRunning) {
+			this.awaitInitialization();
+		}
+    	
     	Map<Path, Map<String, List<Filter>>> filters = context.beforeFilters;
     	Path normaledPath = Paths.get(path).normalize();
     	if (! filters.containsKey(normaledPath)) {
@@ -136,6 +146,10 @@ public class SingleAppWebService extends WebService {
      * Add filters that get called after a request
      */
     public void after(String path, String acceptType, Filter filter) {
+    	if (! context.isRunning) {
+			this.awaitInitialization();
+		}
+    	
     	Map<Path, Map<String, List<Filter>>> filters = context.afterFilters;
     	Path normaledPath = Paths.get(path).normalize();
     	if (! filters.containsKey(normaledPath)) {
