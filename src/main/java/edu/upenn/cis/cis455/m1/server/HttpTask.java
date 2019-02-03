@@ -4,13 +4,19 @@ import java.net.Socket;
 
 public class HttpTask {
     private Socket requestSocket;
+    private int port;
     
-    public HttpTask(Socket socket) {
+    public HttpTask(Socket socket, int port) {
         requestSocket = socket;
+        this.port = port;
     }
     
     public Socket getSocket() {
         return requestSocket;
+    }
+    
+    public int getPort() {
+    	return port;
     }
     
     @Override

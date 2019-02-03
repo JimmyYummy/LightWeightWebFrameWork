@@ -32,20 +32,20 @@ public class HttpWorkerTest {
 		
 	}
 
-	@Test
-	public void test() {
-		System.out.println(sc.getInetAddress());
-		try{
-			worker.work(sc);
-		} catch (Exception e) {
-			
-		}
-		try {
-			System.out.println(sc.getOutputStream().toString());
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-	}
+//	@Test
+//	public void test() {
+//		System.out.println(sc.getInetAddress());
+//		try{
+//			worker.work(sc);
+//		} catch (Exception e) {
+//			
+//		}
+//		try {
+//			System.out.println(sc.getOutputStream().toString());
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//	}
 
 }

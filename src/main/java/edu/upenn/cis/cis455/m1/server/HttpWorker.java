@@ -41,7 +41,7 @@ public class HttpWorker extends Thread {
 				if (task == null)
 					continue;
 				this.isWorking = true;
-				work(task.getSocket());
+				work(task);
 				this.isWorking = false;
 			}
 			logger.info("" + this + " is turned off");
@@ -56,9 +56,10 @@ public class HttpWorker extends Thread {
 		this.keepActive = false;
 	}
 
-	public void work(Socket sc) {
+	public void work(HttpTask task) {
 		// get the input stream of the socket
 		InputStream in = null;
+		Socket sc = task.getSocket();
 		try {
 			in = new BufferedInputStream(sc.getInputStream());
 		} catch (IOException e) {
@@ -79,9 +80,10 @@ public class HttpWorker extends Thread {
 				if (headers.containsKey("user-agent")) {
 					headers.put("useragent", headers.get("user-agent"));
 				}
+				headers.put("port", String.valueOf(task.getPort()));
 				logger.info("Accepting request for " + uri + " from " + clientAddr + "\nwith header: " + headers);
 				// generate the request object, take care of chucked request
-				req = BasicRequest.getBasicRequestExceptBody(server.getPrimaryPortNumber(), uri, headers, parms);
+				req = BasicRequest.getBasicRequestExceptBody(uri, headers, parms);
 				logger.info("Get request without body from: " + clientAddr);
 				req.addBody(in);
 				logger.info("Get reqesut with body: " + req);

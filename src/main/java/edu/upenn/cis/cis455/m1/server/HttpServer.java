@@ -63,7 +63,7 @@ public class HttpServer implements ThreadManager {
 				+ " with root: " + context.getFileLocation());
 				while (context.isActive()) {
 					Socket sc = socket.accept();
-					taskQueue.offer(new HttpTask(sc));
+					taskQueue.offer(new HttpTask(sc, sc.getLocalPort()));
 				}
 			} catch (IOException e) {
 				context.setUnactive();
@@ -90,11 +90,6 @@ public class HttpServer implements ThreadManager {
 	
 	public HandlerResolver getHandlerResolver() {
 		return handlerResolver;
-	}
-	
-	
-	public int getPrimaryPortNumber() {
-		return contexts.get(0).getPort();
 	}
 	
 	private HttpServer getServer() {

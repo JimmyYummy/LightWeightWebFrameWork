@@ -45,13 +45,6 @@ public class BasicRequest extends Request {
     }
     
     private BasicRequest() {};
-    
-    public static BasicRequest getBasicRequestExceptBody (int port, String url, Map<String, String> headers,
-            Map<String, List<String>> params) {
-    	BasicRequest request = getBasicRequestExceptBody(url, headers, params);
-    	request.port = port;
-    	return request;
-    }
 	
     public static BasicRequest getBasicRequestExceptBody(String url, Map<String, String> headers,
             Map<String, List<String>> params) {
@@ -86,20 +79,10 @@ public class BasicRequest extends Request {
         request.headers = new HashMap<String, String>(headers.size());
         // parse host header:
         // get the port number
-        String host = headers.get("host").split(";")[0];
-        int idx = host.lastIndexOf(':');
-        if (idx != -1) {
-            if (host.endsWith("/")) {
-                request.port = Integer.parseInt(host.substring(idx + 1, host.length() - 1));
-            } else {
-                request.port = Integer.parseInt(host.substring(idx + 1));
-            }
-
-        } else {
-        	request.port = 8080;
-        }
+        request.port = Integer.parseInt(headers.get("port"));
         
         // get the requested path from root
+        String host = headers.get("host").split(";")[0];
         int start = url.indexOf(host);
         if (start != -1) {
         	start += host.length();
