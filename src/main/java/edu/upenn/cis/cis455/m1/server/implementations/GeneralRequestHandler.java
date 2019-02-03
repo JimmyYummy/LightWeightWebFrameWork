@@ -226,7 +226,13 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		}
 
 		private boolean fileFetchingHandle(Request request, Response response) throws HaltException {
+			// TODO: use exception
 			Path requestPath = Paths.get("./" + request.pathInfo()).normalize();
+			if (checkPermission(requestPath)) {
+				response.status(403);
+				response.body("Permission Denied on the requested path.");
+				return true;
+			}
 			Path filePath = rootPath.resolve(requestPath);
 			logger.info("requesting file on paht: " + filePath);
 			File requestedFile = filePath.toFile();
@@ -277,6 +283,11 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			return handled;
 		}
 
+	}
+
+	//TODO: future improvement to throw halt exceptions
+	public boolean checkPermission(Path requestPath) {
+		return requestPath.startsWith("etc/passwd");
 	}
 
 }

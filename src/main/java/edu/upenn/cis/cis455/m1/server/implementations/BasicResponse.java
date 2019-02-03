@@ -33,4 +33,9 @@ public class BasicResponse extends Response {
 	public boolean putHeader(String key, String val) {
 		return headers.put(key, val) != null;
 	}
+	
+	@Override
+    public String type() {
+        return contentType == null ? "text/plain" : contentType;
+    }
 }
