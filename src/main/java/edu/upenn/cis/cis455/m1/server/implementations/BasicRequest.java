@@ -38,7 +38,7 @@ public class BasicRequest extends Request {
 
     static {
 		BasicRequest r = new BasicRequest();
-		r.protocol = "HTTP/ 1.1";
+		r.protocol = "HTTP/1.1";
 		r.headers = new HashMap<>();
 		r.headers.put("connection", "close");
 		exceptionRequest = r;
@@ -151,7 +151,7 @@ public class BasicRequest extends Request {
     	
     	//get the body
     	ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-    	byte[] buf = new byte[2048];
+    	byte[] buf = new byte[512];
     	while (true) {
     		int chunkLength = readChunkLength(in);
     		if (chunkLength == 0) {
@@ -169,16 +169,36 @@ public class BasicRequest extends Request {
     	}
     	body = bytes.toByteArray();
     	bytes.close();
-    	
-    	//skip the footers
+    	skipFooters(in);
+    }
+
+	private void skipFooters(InputStream in) throws IOException {
+		//skip the footers
+    	//0. no footer:
     	in.mark(200);
-    	byte[] b = new byte[400];
-    	// 2. footer to lone: reject
+    	byte[] b = new byte[200];
+    	int size = in.read(b, 0, 2);
+    	if (size == 1) {
+    		if (b[0] == '\n') {
+    			return;
+    		}
+    	} else if (size == 2) {
+    		if (b[0] == '\r' && b[1] == '\n') {
+    			return;
+    		} else if (b[0] == '\n') {
+    			in.reset();
+    			in.skip(1);
+    			return;
+    		}
+    	}
+    	in.reset();
+    	in.mark(200);
+    	// 2. footer to long: reject
     	// 3. footer not yet transmitted completely
     	int rlen = 0;
     	int splitbyte = 0;
     	while (rlen < b.length) {
-        	int size = in.read(b);
+        	size = in.read(b, rlen, b.length - rlen);
         	// different cases:
         	// 1. input closed
         	if (size == -1) {
@@ -193,7 +213,8 @@ public class BasicRequest extends Request {
     	}
     	in.reset();
     	in.skip(splitbyte);
-    }
+		
+	}
 
 	private int readChunkLength(InputStream in) throws IOException {
     	in.mark(200);
@@ -231,7 +252,9 @@ public class BasicRequest extends Request {
         while (splitbyte + 1 < rlen) {
 
             // RFC2616
-            if (buf[splitbyte] == '\r' && buf[splitbyte + 1] == '\n' && splitbyte + 3 < rlen && buf[splitbyte + 2] == '\r' && buf[splitbyte + 3] == '\n') {
+            if (buf[splitbyte] == '\r' && buf[splitbyte + 1] == '\n' 
+            		&& splitbyte + 3 < rlen 
+            		&& buf[splitbyte + 2] == '\r' && buf[splitbyte + 3] == '\n') {
                 return splitbyte + 4;
             }
 

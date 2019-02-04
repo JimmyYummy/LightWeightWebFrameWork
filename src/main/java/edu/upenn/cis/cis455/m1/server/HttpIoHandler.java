@@ -33,14 +33,14 @@ public class HttpIoHandler {
 				writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 				// write initial line
 				logger.debug(request);
-				String firstLine = String.format("%d %s %s\r\n\r\n", 
-						except.statusCode(), HttpParsing.explainStatus(except.statusCode()), request.protocol());
+				String firstLine = String.format("%s %d %s\r\n\r\n", 
+						request.protocol(), except.statusCode(), HttpParsing.explainStatus(except.statusCode()));
 				writer.append(firstLine);
 				// append headers
 				writer.append("Server: CIS-550/JingWang\r\n");
-				writer.append(String.format("Last-Modified: %s", DateTimeUtil.getDate()));
+				writer.append(String.format("Last-Modified: %s\r\n", DateTimeUtil.getDate()));
 				int bodyLength = except.body() == null ? 0 : except.body().length();
-				writer.append(String.format("Content-Length: ", bodyLength));
+				writer.append(String.format("Content-Length: %d\r\n", bodyLength));
 				if (request.protocol().equals("HTTP/1.1")) {
 					writer.append(String.format("Date: %s\r\n", DateTimeUtil.getDate()));
 					keepOpen = true;
