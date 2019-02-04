@@ -63,7 +63,7 @@ public class HttpWorker extends Thread {
 		try {
 			in = new BufferedInputStream(sc.getInputStream());
 		} catch (IOException e) {
-			logger.error(e);
+			logger.catching(e);
 		}
 		// do the loop processing, assuming persistent connections
 		while (keepActive) {
@@ -102,13 +102,14 @@ public class HttpWorker extends Thread {
 				handler.handle(req, res);
 				// use IO handler to send response
 				// persistent? (based on the handler's response) and the input stream
+				InputUtil.skipBlankLines(in);
 				if (!HttpIoHandler.sendResponse(sc, req, res) || InputUtil.reachedEndOfStream(in)) {
 					sc.close();
 					logger.info("closed connection: " + sc);
 					return;
 				}
 			} catch (HaltException e) {
-				logger.error("" + e + e.statusCode() + e.body());
+				logger.catching(e);
 				// return error response if error occurs
 				// persistent? (based on the handler's response)
 				if (req == null)
@@ -118,13 +119,13 @@ public class HttpWorker extends Thread {
 					try {
 						sc.close();
 					} catch (IOException e1) {
-						logger.error(e);
+						logger.catching(e);
 					}
 					return;
 				}
 //				throw e;
 			} catch (Exception e) {
-				logger.error(e);
+				logger.catching(e);
 				e.printStackTrace();
 			}
 		}
@@ -132,7 +133,7 @@ public class HttpWorker extends Thread {
 		try {
 			sc.close();
 		} catch (IOException e) {
-			logger.error(e);
+			logger.catching(e);
 		}
 		logger.info("closed connection: " + sc);
 		return;

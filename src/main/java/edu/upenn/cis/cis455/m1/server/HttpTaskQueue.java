@@ -35,7 +35,7 @@ public class HttpTaskQueue {
 			try {
 				this.wait();
 			} catch (InterruptedException e) {
-				logger.error(e);
+				logger.catching(e);
 			}
 		}
 		HttpTask t = q.poll();

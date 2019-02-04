@@ -67,12 +67,12 @@ public class HttpServer implements ThreadManager {
 				}
 			} catch (IOException e) {
 				context.setUnactive();
-				logger.error(e);
+				logger.catching(e);
 				if (socket != null) {
 					try {
 						socket.close();
 					} catch (IOException e2) {
-						logger.error(e2);
+						logger.catching(e2);
 					}
 				}
 			} finally {

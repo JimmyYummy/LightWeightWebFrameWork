@@ -55,7 +55,7 @@ public class HttpIoHandler {
 				writer.append("\r\n");
 				writer.flush();
 			} catch (IOException e) {
-				logger.error(e);
+				logger.catching(e);
 			} 
 			logger.info("socekt: " + socket + " keeps open? " + keepOpen);
 			return keepOpen;
@@ -113,7 +113,7 @@ public class HttpIoHandler {
 			writer.flush();
 		}
 		catch (IOException e) {
-			logger.error(e);
+			logger.catching(e);
 		} 
 		if (response.status() == 100) {
 			logger.info("socket: " + socket + " keeps open? true (100 response)");
@@ -153,7 +153,7 @@ public class HttpIoHandler {
 			writer.flush();
 		}
 		catch (IOException e) {
-			logger.error(e);
+			logger.catching(e);
 		} 
 		if (response.status() == 100) {
 			logger.info("socket: " + socket + " keeps open? true (100 response)");
@@ -174,7 +174,7 @@ public class HttpIoHandler {
 			writer.append("HTTP/1.1 100 Continue\r\n\r\n");
 			writer.flush();
 		} catch (IOException e) {
-			logger.error(e);
+			logger.catching(e);
 		}
 		return true;
     }

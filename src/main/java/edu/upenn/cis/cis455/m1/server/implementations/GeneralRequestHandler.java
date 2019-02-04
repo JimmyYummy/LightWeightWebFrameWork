@@ -193,7 +193,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 						routes.get(routePath).handle(request, response);
 
 					} catch (Exception e) {
-						logger.error(e);
+						logger.catching(e);
 						throw new HaltException(500, "Error while handling the request.");
 					}
 					return true;
@@ -296,7 +296,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 				response.status(200);
 				return true;
 			} catch (IOException e) {
-				logger.error(e);
+				logger.catching(e);
 				throw new HaltException(500, "internal Error");
 			}
 		}
