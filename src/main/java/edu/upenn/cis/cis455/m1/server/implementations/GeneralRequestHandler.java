@@ -18,9 +18,7 @@ import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
 import edu.upenn.cis.cis455.m1.server.interfaces.Response;
-import edu.upenn.cis.cis455.methodHandlers.BasicRequestHandler;
-import edu.upenn.cis.cis455.methodHandlers.GetRequestHandler;
-import edu.upenn.cis.cis455.methodHandlers.HeadRequestHandler;
+import edu.upenn.cis.cis455.methodHandlers.*;
 import edu.upenn.cis.cis455.util.PathUtil;
 
 public class GeneralRequestHandler implements HttpRequestHandler {
