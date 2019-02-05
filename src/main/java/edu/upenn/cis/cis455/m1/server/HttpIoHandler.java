@@ -33,7 +33,7 @@ public class HttpIoHandler {
 				writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 				// write initial line
 				logger.debug(request);
-				String firstLine = String.format("%s %d %s\r\n\r\n", 
+				String firstLine = String.format("%s %d %s\r\n", 
 						request.protocol(), except.statusCode(), HttpParsing.explainStatus(except.statusCode()));
 				writer.append(firstLine);
 				// append headers
@@ -55,7 +55,8 @@ public class HttpIoHandler {
 				writer.append("\r\n");
 				writer.flush();
 			} catch (IOException e) {
-				logger.catching(e);
+				logger.error("Error caught: IOException on Sending Exception - " + e.getMessage());
+				return false;
 			} 
 			logger.info("socekt: " + socket + " keeps open? " + keepOpen);
 			return keepOpen;
@@ -113,7 +114,8 @@ public class HttpIoHandler {
 			writer.flush();
 		}
 		catch (IOException e) {
-			logger.catching(e);
+			logger.error("Error caught: IOException on Sending Chunked Response - " + e.getMessage());
+			return false;
 		} 
 		if (response.status() == 100) {
 			logger.info("socket: " + socket + " keeps open? true (100 response)");
@@ -153,7 +155,8 @@ public class HttpIoHandler {
 			writer.flush();
 		}
 		catch (IOException e) {
-			logger.catching(e);
+			logger.error("Error caught: IOException on Sending Noraml Response" + e.getMessage());
+			return false;
 		} 
 		if (response.status() == 100) {
 			logger.info("socket: " + socket + " keeps open? true (100 response)");
@@ -174,7 +177,8 @@ public class HttpIoHandler {
 			writer.append("HTTP/1.1 100 Continue\r\n\r\n");
 			writer.flush();
 		} catch (IOException e) {
-			logger.catching(e);
+			logger.error("Error caught: IOException on Sending 100 Response" + e.getMessage());
+			return false;
 		}
 		return true;
     }

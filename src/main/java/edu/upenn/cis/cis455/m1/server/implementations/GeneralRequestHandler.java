@@ -1,7 +1,11 @@
 package edu.upenn.cis.cis455.m1.server.implementations;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -43,6 +47,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 	private static Path shutdown = Paths.get("/shutdown").normalize();
 	private static Path control = Paths.get("/control").normalize();
 	private static Path unimatcher = Paths.get("*");
+	private static Path errorLogPath = Paths.get("error.log");
 
 	public GeneralRequestHandler(Path rootPath) {
 		this.rootPath = rootPath;
@@ -118,19 +123,19 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		} catch (HaltException he) {
 			throw he;
 		} catch (Exception e) {
-			logger.catching(e);
-			throw new HaltException(500, "Unexpected Error");
+			logger.error("Error caught: Uncaught General Exception On Before Filter - " + e.getMessage());
+			throw new HaltException(500, "Unexpected Error" + requestPath);
 		}
 
 		if (response.status() != 200) {
-			throw new HaltException(401, "Unauthorized");
+			throw new HaltException(401, "Unauthorized " + requestPath);
 		}
 		logger.info("dispatch to handler: " + request.requestMethod());
 		// dispatch the request to corresponding handlers
 		HttpMethod method = Enum.valueOf(HttpMethod.class, request.requestMethod());
 		boolean handled = methodHandlerMap.get(method).handle(request, response);
 		if (!handled) {
-			throw new HaltException(404, "Not Found");
+			throw new HaltException(404, "Not Found " + requestPath);
 		}
 		// TODO: check after filter here
 		logger.info("checking after filters");
@@ -153,8 +158,8 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		} catch (HaltException he) {
 			throw he;
 		} catch (Exception e) {
-			logger.catching(e);
-			throw new HaltException(500, "Unexpected Error");
+			logger.error("Error caught: Exception on After Filter - " + e.getMessage());
+			throw new HaltException(500, "Unexpected Error " + requestPath);
 		}
 
 		// added content type if not specified
@@ -190,11 +195,12 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 				if (requestPath.equals(routePath)) {
 					try {
 						logger.info("reqeust " + request + " caught on path: " + routePath);
-						routes.get(routePath).handle(request, response);
+						Object body = routes.get(routePath).handle(request, response);
+						response.body(body.toString());
 
 					} catch (Exception e) {
-						logger.catching(e);
-						throw new HaltException(500, "Error while handling the request.");
+						logger.error("Error caught: Exception on Router Handling - " + e.getMessage());
+						throw new HaltException(500, "Error while handling the request. " + requestPath);
 					}
 					return true;
 				}
@@ -246,13 +252,35 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			res.type("text/html");
 			StringBuilder sb = new StringBuilder();
 			Map<String, String> infos = server.getThreadPoolInfo();
-			sb.append("<!DOCTYPE html>\n" + "<html>\n" + "<head>\n" + "    <title>Sample File</title>\n" + "</head>\n"
-					+ "<body>\n" + "<h1>Welcome</h1>\n" + "<ul>\n" + "<li>Thread Pool:\n" + "	<ul>\n");
+			// start of doc
+			sb.append("<!DOCTYPE html>\n<html>\n<head>\n<title>Sample File</title>\n</head>\n"
+					+ "<body>\n<h1>Welcome</h1>\n<ul>\n");
+			// ThreadPool Monitor
+			sb.append("<li>Thread Pool:\n" + "	<ul>\n");
 			for (Map.Entry<String, String> threadInfo : infos.entrySet()) {
 				sb.append(String.format("<li>%s: %s</li>\n", threadInfo.getKey(), threadInfo.getValue()));
 			}
-			sb.append("	</ul>\n" + "</li>\n" + "<li><a href=\"/shutdown\">Shut down</a></li>\n" + "</ul>\n"
-					+ "</body>\n" + "</html>");
+			// Shutdown URL
+			sb.append("	</ul>\n" + "</li>\n" + "<li><a href=\"/shutdown\">Shut down</a></li>\n");
+			// Error log
+			File errorLogFile = errorLogPath.toFile();
+			if (errorLogFile.exists() && errorLogFile.isFile() && errorLogFile.canRead()) {
+				try {
+					BufferedReader reader = new BufferedReader(new FileReader(errorLogFile));
+					sb.append("<li>Error Log:\n" + "	<ul>\n");
+					String line = null;
+					while ((line = reader.readLine()) != null) {
+						sb.append(line);
+					}
+				} catch (IOException e) {
+					logger.error("error on reading error log");
+					e.printStackTrace();
+				} finally {
+					
+				}
+			}
+			//end of doc
+			sb.append("</ul>\n</body>\n</html>");
 			res.body(sb.toString());
 			return;
 		}
@@ -270,14 +298,14 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			File requestedFile = filePath.toFile();
 			// Check whether the file exists
 			if (!requestedFile.exists() || !requestedFile.isFile()) {
-				throw new HaltException(404, "Not Found");
+				throw new HaltException(404, "Not Found " + requestPath);
 			}
 			// Check special conditions
 			if (request.headers().contains("if-modified-since")) {
 
 				ZonedDateTime reqDate = DateTimeUtil.parseDate(request.headers("if-modified-since"));
 				if (reqDate != null && reqDate.toInstant().toEpochMilli() < requestedFile.lastModified()) {
-					throw new HaltException(304, "Not Modified");
+					throw new HaltException(304, "Not Modified " + requestPath);
 				}
 			}
 
@@ -285,7 +313,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 
 				ZonedDateTime reqDate = DateTimeUtil.parseDate(request.headers("if-unmodified-since"));
 				if (reqDate != null && reqDate.toInstant().toEpochMilli() > requestedFile.lastModified()) {
-					throw new HaltException(412, "Precondition Failed");
+					throw new HaltException(412, "Precondition Failed " + requestPath);
 				}
 			}
 			// try return the file
@@ -296,8 +324,8 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 				response.status(200);
 				return true;
 			} catch (IOException e) {
-				logger.catching(e);
-				throw new HaltException(500, "internal Error");
+				logger.error("Error caught: FileIOException on GET - " + e.getMessage());
+				throw new HaltException(500, "internal Error " + requestPath);
 			}
 		}
 

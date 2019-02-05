@@ -10,9 +10,18 @@ Configuration:
         pattern: '%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n'
       name: File
       fileName: app.log
+    File:
+      PatternLayout:
+        pattern: '<li>%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg</li>%n'
+      name: Error
+      fileName: error.log
+      Filters:
+        ThresholdFilter:
+          level: error
   Loggers:
     Root:
       AppenderRef:
       - ref: Console
       - ref: File
+      - ref: Error
       level: trace

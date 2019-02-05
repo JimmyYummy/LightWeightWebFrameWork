@@ -59,11 +59,18 @@ public class HttpWorker extends Thread {
 	public void work(HttpTask task) {
 		// get the input stream of the socket
 		InputStream in = null;
+		if (task == null) {
+			logger.error("Unexcepted null task");
+		}
 		Socket sc = task.getSocket();
+		if (sc == null) {
+			logger.error("Unexpected null socket");
+			return;
+		}
 		try {
 			in = new BufferedInputStream(sc.getInputStream());
 		} catch (IOException e) {
-			logger.catching(e);
+			logger.error("Error caught: IOException on Get Socket's Inputstream / create BufferedInputStream - " + e.getMessage());
 		}
 		// do the loop processing, assuming persistent connections
 		while (keepActive) {
@@ -95,7 +102,7 @@ public class HttpWorker extends Thread {
 				// find the proper router
 				HttpRequestHandler handler = null;
 				if ((handler = server.getHandlerResolver().getHandler(req.port())) == null) {
-					throw new HaltException(401, "Connection Refused on the port");
+					throw new HaltException(401, "Connection Refused on the port " + sc.getPort());
 				}
 				// use handler to generate the response
 				res = new BasicResponse();
@@ -103,12 +110,17 @@ public class HttpWorker extends Thread {
 				// use IO handler to send response
 				// persistent? (based on the handler's response) and the input stream
 				if (!HttpIoHandler.sendResponse(sc, req, res) || InputUtil.reachedEndOfStream(in)) {
-					sc.close();
+					try {
+						sc.close();
+					} catch (IOException e1) {
+						logger.error("Error caught: IOException on Closing Socket after Responding - " + e1.getMessage());
+					}
 					logger.info("closed connection: " + sc);
 					return;
 				}
 			} catch (HaltException e) {
-				logger.catching(e);
+				logger.error("Error caught: Port " + sc.getPort() + " HaltException on Request Processing - " 
+							+ e.statusCode() + " " + e.body() + " " + e.getMessage());
 				// return error response if error occurs
 				// persistent? (based on the handler's response)
 				if (req == null)
@@ -118,13 +130,13 @@ public class HttpWorker extends Thread {
 					try {
 						sc.close();
 					} catch (IOException e1) {
-						logger.catching(e);
+						logger.error("Error caught: IOException on Closing Socket after Exception - " + e1.getMessage());
 					}
 					return;
 				}
 //				throw e;
 			} catch (Exception e) {
-				logger.catching(e);
+				logger.error("Error caught: Unexception Exception on Task Working - " + e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -132,7 +144,7 @@ public class HttpWorker extends Thread {
 		try {
 			sc.close();
 		} catch (IOException e) {
-			logger.catching(e);
+			logger.error("Error caught: IOException on Closing Socket after Finishing Task - " + e.getMessage());
 		}
 		logger.info("closed connection: " + sc);
 		return;

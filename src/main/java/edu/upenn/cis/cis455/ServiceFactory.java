@@ -49,7 +49,7 @@ public class ServiceFactory {
         	req.addBody(socket.getInputStream());
 			req.persistentConnection(keepAlive);
         } catch (HaltException | IOException e) {
-			logger.error(e);
+			logger.error("Error on Creating new Request: " + e.getMessage());
 		}
         return req;
     }

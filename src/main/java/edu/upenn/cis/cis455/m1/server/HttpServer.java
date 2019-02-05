@@ -67,7 +67,7 @@ public class HttpServer implements ThreadManager {
 				}
 			} catch (IOException e) {
 				context.setUnactive();
-				logger.catching(e);
+				logger.error("Error caught:IOException on Server Listening - " + e.getMessage());
 				if (socket != null) {
 					try {
 						socket.close();

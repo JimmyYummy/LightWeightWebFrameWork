@@ -35,7 +35,7 @@ public class HttpTaskQueue {
 			try {
 				this.wait();
 			} catch (InterruptedException e) {
-				logger.catching(e);
+				logger.error("Error caught: The Polling is Interrupted (may not be an error) - " + e.getMessage());
 			}
 		}
 		HttpTask t = q.poll();
