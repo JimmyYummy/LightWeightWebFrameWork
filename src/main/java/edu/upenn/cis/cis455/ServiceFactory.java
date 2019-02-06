@@ -9,7 +9,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import edu.upenn.cis.cis455.m1.server.interfaces.WebService;
+import edu.upenn.cis.cis455.m2.server.interfaces.WebService;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m1.server.HandlerResolver;
 import edu.upenn.cis.cis455.m1.server.HttpMethod;

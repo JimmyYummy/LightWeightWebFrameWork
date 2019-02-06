@@ -76,10 +76,10 @@ public class BasicRequest extends Request {
         int end = url.indexOf('?');
         if (end == -1)
             end = url.length();
-        if (start >= end) {
+        if (start > end) {
             throw new IllegalArgumentException("malformat url or host");
         }
-        String rawPath = url.substring(start, end);
+        String rawPath = start == end ? "/" : url.substring(start, end);
         request.headers.put("pathinfo", Paths.get("/" + rawPath).normalize().toString());
         
         // put the rest of headers in the requst's header

@@ -68,7 +68,7 @@ public class SingleAppWebService extends WebService {
 	 */
 	@Override
 	public void get(String path, Route route) {
-		if (context.isActive()) {
+		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
 		this.context.routes.get(HttpMethod.GET).put(Paths.get(path).normalize(), route);
@@ -76,7 +76,7 @@ public class SingleAppWebService extends WebService {
 	
 	@Override
 	public void post(String path, Route route) {
-		if (context.isActive()) {
+		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
 		this.context.routes.get(HttpMethod.POST).put(Paths.get(path).normalize(), route);
@@ -85,7 +85,7 @@ public class SingleAppWebService extends WebService {
 
 	@Override
 	public void put(String path, Route route) {
-		if (context.isActive()) {
+		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
 		this.context.routes.get(HttpMethod.PUT).put(Paths.get(path).normalize(), route);
@@ -94,7 +94,7 @@ public class SingleAppWebService extends WebService {
 
 	@Override
 	public void delete(String path, Route route) {
-		if (context.isActive()) {
+		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
 		this.context.routes.get(HttpMethod.DELETE).put(Paths.get(path).normalize(), route);
@@ -103,7 +103,7 @@ public class SingleAppWebService extends WebService {
 
 	@Override
 	public void head(String path, Route route) {
-		if (context.isActive()) {
+		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
 		this.context.routes.get(HttpMethod.HEAD).put(Paths.get(path).normalize(), route);
@@ -112,7 +112,7 @@ public class SingleAppWebService extends WebService {
 
 	@Override
 	public void options(String path, Route route) {
-		if (context.isActive()) {
+		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
 		this.context.routes.get(HttpMethod.OPTIONS).put(Paths.get(path).normalize(), route);
