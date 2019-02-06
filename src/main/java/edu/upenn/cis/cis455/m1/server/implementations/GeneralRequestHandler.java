@@ -30,19 +30,15 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 	private List<Filter> generalAfterFilters;
 	private Map<Path, Map<String, List<Filter>>> typeBeforeFilters;
 	private Map<Path, Map<String, List<Filter>>> typeAfterFilters;
-	private Context context;
-	private HttpServer server;
 
 
 	public GeneralRequestHandler(Path rootPath) {
-		methodHandlerMap = createHandlerMap();
+		methodHandlerMap = createHandlerMap(ServiceFactory.getNewApplication().context);
 	}
 
-	public GeneralRequestHandler(Context context, HttpServer server) {
-		this.context = context;
-		this.server = server;
+	public GeneralRequestHandler(Context context) {
 		// create sub-handers and feed in the routes
-		methodHandlerMap = createHandlerMap();
+		methodHandlerMap = createHandlerMap(context);
 		Map<HttpMethod, Map<Path, Route>> routes = context.getRoutes();
 		for (Map.Entry<HttpMethod, Map<Path, Route>> ent : routes.entrySet()) {
 			HttpMethod method = ent.getKey();
@@ -56,10 +52,10 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		typeAfterFilters = context.getAfterFilters();
 	}
 
-	private Map<HttpMethod, BasicRequestHandler> createHandlerMap() {
+	private Map<HttpMethod, BasicRequestHandler> createHandlerMap(Context context) {
 		Map<HttpMethod, BasicRequestHandler> m = new HashMap<>();
 		for (HttpMethod method : HttpMethod.values()) {
-			m.put(method, ServiceFactory.createReqeustHandler(method, context, server));
+			m.put(method, ServiceFactory.createReqeustHandler(method, context));
 		}
 		return m;
 	}

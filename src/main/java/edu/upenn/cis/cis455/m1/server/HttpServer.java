@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -40,12 +39,12 @@ public class HttpServer implements ThreadManager {
 	
 	public void start(Context context) {	
 		if (pool == null) {
-			pool = ServiceFactory.getNewThreadPool(this, context.getThreadNum());
+			pool = ServiceFactory.getThreadPool(context.getThreadNum());
 		}
 		
 		contexts.add(context);
 		
-		handlerResolver.addHandler(context, this);
+		handlerResolver.addHandler(context);
 		
 		// create new listener thread
 		Thread daemonThread = new Thread(()-> {

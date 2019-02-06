@@ -13,13 +13,8 @@ public class HttpThreadPool {
 	final static Logger logger = LogManager.getLogger(HttpThreadPool.class);
 	
 	private List<HttpWorker> workers;
-	private HttpServer server;
 	
-	public HttpThreadPool(HttpServer server, int num) {
-		if (server == null) {
-			throw new IllegalArgumentException("the server cannot be null for pool creation");
-		}
-		this.server = server;
+	public HttpThreadPool(int num) {
 		logger.info("creating the threadpool");
 		workers = new ArrayList<>(num);
 		addThreads(num);
@@ -36,7 +31,7 @@ public class HttpThreadPool {
 	}
 
 	public synchronized void addThread() {
-		HttpWorker t = new HttpWorker(server);
+		HttpWorker t = new HttpWorker();
 		workers.add(t);
 		t.start();
 		logger.info("created new worker, current pool size: " + workers.size());

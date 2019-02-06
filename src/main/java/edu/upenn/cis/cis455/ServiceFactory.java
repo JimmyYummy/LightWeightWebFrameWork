@@ -41,6 +41,8 @@ public class ServiceFactory {
 	private static WebService ws;
 	private static HandlerResolver hr;
 	private static HttpServer hs;
+	private static HttpThreadPool pool;
+	
     /**
      * Get the HTTP server associated with port 8080
      */
@@ -53,6 +55,10 @@ public class ServiceFactory {
     
     public static Application getNewApplication() {
     	return new Application();
+    }
+    
+    public static WebService getNewWebService() {
+    	return new SingleAppWebService();
     }
     
     /**
@@ -84,12 +90,12 @@ public class ServiceFactory {
         return new GeneralRequestHandler(serverRoot);
     }
     
-	public static BasicRequestHandler createReqeustHandler(HttpMethod method, Context context, HttpServer server) {
+	public static BasicRequestHandler createReqeustHandler(HttpMethod method, Context context) {
 		switch (method) {
 		case GET:
-			return new GetRequestHandler(context, server);
+			return new GetRequestHandler(context, hs);
 		case HEAD:
-			return new HeadRequestHandler(context, server);
+			return new HeadRequestHandler(context, hs);
 		case POST:
 			return new PostRequestHandler(context);
 		case PUT:
@@ -110,6 +116,34 @@ public class ServiceFactory {
     public static Response createResponse() {
         return new BasicResponse();
     }
+    
+	public static HandlerResolver getHandlerResolver() {
+		if (hr == null) {
+			hr = new HandlerResolver();
+		}
+		return hr;
+	}
+	
+	public static HttpThreadPool getThreadPool(int num) {
+		if (pool == null) {
+			if (hs == null) {
+				throw new IllegalStateException("Cannot create the thread poll without server initialized");
+			}
+			pool = new HttpThreadPool(num);
+		}
+		return pool;
+	}
+
+	public static HttpServer getHttpServer() {
+		if (hs == null) {
+			hs = new HttpServer();
+		}
+		return hs;
+	}
+	
+	public static boolean webServiceCreated() {
+		return ! (ws == null);
+	}
 
     /**
      * Creates a blank session ID and registers a Session object for the request
@@ -125,22 +159,4 @@ public class ServiceFactory {
         
         return null;
     }
-
-	public static HandlerResolver getHandlerResolver() {
-		if (hr == null) {
-			hr = new HandlerResolver();
-		}
-		return hr;
-	}
-	
-	public static HttpThreadPool getNewThreadPool(HttpServer server, int num) {
-		return new HttpThreadPool(server, num);
-	}
-
-	public static HttpServer getHttpServer() {
-		if (hs == null) {
-			hs = new HttpServer();
-		}
-		return hs;
-	}
 }

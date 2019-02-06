@@ -29,8 +29,8 @@ public class HttpWorker extends Thread {
 	private boolean keepActive;
 	private boolean isWorking;
 
-	public HttpWorker(HttpServer server) {
-		this.server = server;
+	public HttpWorker() {
+		this.server = ServiceFactory.getHttpServer();
 		this.keepActive = true;
 		this.isWorking = false;
 	}

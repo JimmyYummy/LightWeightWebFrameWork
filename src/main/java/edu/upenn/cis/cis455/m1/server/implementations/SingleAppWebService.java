@@ -40,7 +40,6 @@ public class SingleAppWebService extends WebService {
 		context.setRunning();
 		if (basicServer == null) {
 			basicServer = ServiceFactory.getHttpServer();
-
 		}
 		basicServer.start(context);
 	}

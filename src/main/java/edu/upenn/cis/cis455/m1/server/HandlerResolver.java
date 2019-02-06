@@ -20,11 +20,11 @@ public class HandlerResolver {
 		handlerMap = new HashMap<>();
 	}
 
-	protected void addHandler(Context context, HttpServer server) {
+	protected void addHandler(Context context) {
 		if (handlerMap.containsKey(context.getPort())) {
 			throw new IllegalArgumentException("Port already in use");
 		}
-		handlerMap.put(context.getPort(), new GeneralRequestHandler(context, server));
+		handlerMap.put(context.getPort(), new GeneralRequestHandler(context));
 		logger.info("new handler added for new application on port " + context.getPort());
 	}
 	
