@@ -51,18 +51,8 @@ public class PutRequestHandler extends BasicRequestHandler {
 		if (requestedFile.exists()) {
 			logger.warn("Overwriting the file on path: " + requestPath);
 			// Check special conditions
-			if (request.headers().contains("if-modified-since")) {
-				ZonedDateTime reqDate = DateTimeUtil.parseDate(request.headers("if-modified-since"));
-				if (reqDate != null && reqDate.toInstant().toEpochMilli() < requestedFile.lastModified()) {
-					throw new HaltException(304, "Not Modified " + requestPath);
-				}
-			}
-			if (request.headers().contains("if-modified-since")) {
-				ZonedDateTime reqDate = DateTimeUtil.parseDate(request.headers("if-unmodified-since"));
-				if (reqDate != null && reqDate.toInstant().toEpochMilli() > requestedFile.lastModified()) {
-					throw new HaltException(412, "Precondition Failed " + requestPath);
-				}
-			}
+			modificationHeaderCheck(request, requestedFile, requestPath);
+
 		}
 		
 		// write the file

@@ -138,6 +138,16 @@ public class HttpWorker extends Thread {
 			} catch (Exception e) {
 				logger.error("Error caught: Unexception Exception on Task Working - " + e.getMessage());
 				e.printStackTrace();
+				HaltException he = new HaltException(500, e.getMessage());
+				if (!HttpIoHandler.sendException(sc, req, he)) {
+					logger.info("closed connection: " + sc);
+					try {
+						sc.close();
+					} catch (IOException e1) {
+						logger.error("Error caught: IOException on Closing Socket after Exception - " + e1.getMessage());
+					}
+					return;
+				}
 			}
 		}
 		// close connection and return

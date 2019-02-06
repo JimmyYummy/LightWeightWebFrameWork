@@ -1,7 +1,9 @@
 package edu.upenn.cis.cis455.methodHandlers;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -14,6 +16,7 @@ import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.handlers.Route;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
 import edu.upenn.cis.cis455.m1.server.interfaces.Response;
+import edu.upenn.cis.cis455.util.DateTimeUtil;
 import edu.upenn.cis.cis455.util.PathUtil;
 
 public class BasicRequestHandler {
@@ -56,6 +59,24 @@ public class BasicRequestHandler {
 			}
 		}
 		return false;
+	}
+	
+	protected void modificationHeaderCheck(Request request, File requestedFile, Path requestPath) {
+		if (request.headers().contains("if-modified-since")) {
+
+			ZonedDateTime reqDate = DateTimeUtil.parseDate(request.headers("if-modified-since"));
+			if (reqDate != null && reqDate.toInstant().toEpochMilli() < requestedFile.lastModified()) {
+				throw new HaltException(304, "Not Modified " + requestPath);
+			}
+		}
+
+		if (request.headers().contains("if-unmodified-since")) {
+
+			ZonedDateTime reqDate = DateTimeUtil.parseDate(request.headers("if-unmodified-since"));
+			if (reqDate != null && reqDate.toInstant().toEpochMilli() > requestedFile.lastModified()) {
+				throw new HaltException(412, "Precondition Failed " + requestPath);
+			}
+		}
 	}
 
 }

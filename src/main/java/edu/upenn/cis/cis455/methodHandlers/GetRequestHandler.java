@@ -23,7 +23,7 @@ import edu.upenn.cis.cis455.util.HttpParsing;
 import edu.upenn.cis.cis455.util.PathUtil;
 
 public class GetRequestHandler extends BasicRequestHandler {
-	
+
 	protected final static Logger logger = LogManager.getLogger(GetRequestHandler.class);
 
 	private static Path shutdown = Paths.get("/shutdown").normalize();
@@ -33,7 +33,7 @@ public class GetRequestHandler extends BasicRequestHandler {
 	private Context context;
 	private HttpServer server;
 	private Path rootPath;
-	
+
 	public GetRequestHandler(Context context, HttpServer server) {
 		if (context == null || server == null) {
 			throw new IllegalArgumentException("Null context or server on crearting GET handler");
@@ -107,10 +107,10 @@ public class GetRequestHandler extends BasicRequestHandler {
 				logger.error("error on reading error log");
 				e.printStackTrace();
 			} finally {
-				
+
 			}
 		}
-		//end of doc
+		// end of doc
 		sb.append("</ul>\n</body>\n</html>");
 		res.body(sb.toString());
 		return;
@@ -128,22 +128,9 @@ public class GetRequestHandler extends BasicRequestHandler {
 		if (!requestedFile.exists() || !requestedFile.isFile()) {
 			throw new HaltException(404, "Not Found " + requestPath);
 		}
-		// Check special conditions
-		if (request.headers().contains("if-modified-since")) {
+		// Check special headers
+		modificationHeaderCheck(request, requestedFile, requestPath);
 
-			ZonedDateTime reqDate = DateTimeUtil.parseDate(request.headers("if-modified-since"));
-			if (reqDate != null && reqDate.toInstant().toEpochMilli() < requestedFile.lastModified()) {
-				throw new HaltException(304, "Not Modified " + requestPath);
-			}
-		}
-
-		if (request.headers().contains("if-modified-since")) {
-
-			ZonedDateTime reqDate = DateTimeUtil.parseDate(request.headers("if-unmodified-since"));
-			if (reqDate != null && reqDate.toInstant().toEpochMilli() > requestedFile.lastModified()) {
-				throw new HaltException(412, "Precondition Failed " + requestPath);
-			}
-		}
 		// try return the file
 		try {
 			byte[] allBytes = Files.readAllBytes(filePath);

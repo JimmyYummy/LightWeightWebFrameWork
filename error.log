@@ -3,3 +3,13 @@
 <li>2019-Feb-05 20:02:40 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
 <li>2019-Feb-05 20:10:46 PM [Daemon Thread-Port:8889] ERROR edu.upenn.cis.cis455.m1.server.HttpServer - Error caught:IOException on Server Listening - Socket closed</li>
 <li>2019-Feb-05 20:14:43 PM [Daemon Thread-Port:8889] ERROR edu.upenn.cis.cis455.m1.server.HttpServer - Error caught:IOException on Server Listening - Socket closed</li>
+<li>2019-Feb-05 22:18:30 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - text</li>
+<li>2019-Feb-05 22:24:15 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - null</li>
+<li>2019-Feb-05 22:26:02 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - null</li>
+<li>2019-Feb-05 22:26:33 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - null</li>
+<li>2019-Feb-05 22:30:24 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 57297 HaltException on Request Processing - 412 Precondition Failed index.html null</li>
+<li>2019-Feb-05 22:33:17 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 57320 HaltException on Request Processing - 412 Precondition Failed index.html null</li>
+<li>2019-Feb-05 22:33:42 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 57320 HaltException on Request Processing - 404 Not Found /index.html null</li>
+<li>2019-Feb-05 22:37:28 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 57346 HaltException on Request Processing - 400 BAD REQUEST: Missing URI. Usage: GET /example/file.html null</li>
+<li>2019-Feb-05 22:41:36 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - null</li>
+<li>2019-Feb-05 22:46:03 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 57374 HaltException on Request Processing - 412 Precondition Failed index.html null</li>

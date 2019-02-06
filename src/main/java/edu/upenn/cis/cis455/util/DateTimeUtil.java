@@ -20,7 +20,7 @@ public abstract class DateTimeUtil {
 	public static String getDate() {
     	ZoneId zone = ZoneId.of("GMT");
     	ZonedDateTime zonedDT = ZonedDateTime.of(LocalDateTime.now(), zone);
-    	return zonedDT.format(DateTimeFormatter.RFC_1123_DATE_TIME);
+    	return zonedDT.format(formater1);
 	}
 	
 	public static ZonedDateTime parseDate(String dateStr) {

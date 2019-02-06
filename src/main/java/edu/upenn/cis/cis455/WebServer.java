@@ -17,6 +17,7 @@ public class WebServer {
         // TODO: launch your server daemon  
         staticFileLocation(rootPath);
         port(port);
+        awaitInitialization();
 //        get("/", (req, res) -> {
 //        	return "Hello world";
 //        });

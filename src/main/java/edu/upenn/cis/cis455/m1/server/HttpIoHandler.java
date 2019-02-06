@@ -52,7 +52,7 @@ public class HttpIoHandler {
 					writer.append(String.format("Date: %s\r\n", DateTimeUtil.getDate()));
 					keepOpen = true;
 				}
-				if (request.persistentConnection()) {
+				if (! request.persistentConnection()) {
 					writer.append("Connection: close\r\n");
 					keepOpen = false;
 				}
