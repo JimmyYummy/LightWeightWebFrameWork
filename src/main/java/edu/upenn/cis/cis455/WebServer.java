@@ -17,9 +17,9 @@ public class WebServer {
         // TODO: launch your server daemon  
         staticFileLocation(rootPath);
         port(port);
-        get("/", (req, res) -> {
-        	return "Hello world";
-        });
+//        get("/", (req, res) -> {
+//        	return "Hello world";
+//        });
         System.out.println("Waiting to handle requests!");
             
     }

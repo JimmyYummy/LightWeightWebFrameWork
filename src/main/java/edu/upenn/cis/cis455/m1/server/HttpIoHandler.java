@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import edu.upenn.cis.cis455.exceptions.HaltException;
+import edu.upenn.cis.cis455.m1.server.implementations.BasicRequest;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
 import edu.upenn.cis.cis455.m1.server.interfaces.Response;
 import edu.upenn.cis.cis455.util.DateTimeUtil;
@@ -28,6 +29,12 @@ public class HttpIoHandler {
     public static boolean sendException(Socket socket, Request request, HaltException except) {
     	BufferedWriter writer = null;
     	boolean keepOpen = false;
+    	if (except == null) {
+    		except = new HaltException(500, "Unknown Error");
+    	}
+    	if (request == null) {
+    		request = BasicRequest.getRequestForException();
+    	}
 			try {
 				//get writer
 				writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
