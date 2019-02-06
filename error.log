@@ -24,3 +24,5 @@
 <li>2019-Feb-06 09:52:28 AM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 59379 HaltException on Request Processing - 404 Not Found /localhost:8889 null</li>
 <li>2019-Feb-06 09:54:13 AM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - malformat url or host</li>
 <li>2019-Feb-06 09:57:11 AM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 59395 HaltException on Request Processing - 400 BAD REQUEST: Missing URI. Usage: GET /example/file.html null</li>
+<li>2019-Feb-06 10:06:10 AM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - null</li>
+<li>2019-Feb-06 10:08:58 AM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 59435 HaltException on Request Processing - 404 Not Found  null</li>

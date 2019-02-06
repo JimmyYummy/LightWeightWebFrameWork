@@ -77,7 +77,7 @@ public class HttpIoHandler {
      */
     public static boolean sendResponse(Socket socket, Request request, Response response) {
     	// filter the chunked req for chunked res
-    	if (request.headers().contains("response-tranfser-encoding")
+    	if (request.headers().contains("response-transfer-encoding")
     			&& "chunked".equals(request.headers("response-transfer-encoding").toLowerCase())) {
     		return sendChunkedResponse(socket, request, response);
     	} else {
@@ -86,7 +86,7 @@ public class HttpIoHandler {
 			
     }
 
-	public static boolean sendChunkedResponse(Socket socket, Request request, Response response) {
+	private static boolean sendChunkedResponse(Socket socket, Request request, Response response) {
 		BufferedWriter writer = null;
 		try {
 			// get the writer
@@ -105,7 +105,7 @@ public class HttpIoHandler {
 			if (response.status() != 100 && ! request.persistentConnection()) {
 				writer.append("Connection: close\r\n");
 			}
-			writer.append("Transfer-Encoding: chunked");
+			writer.append("Transfer-Encoding: chunked\r\n");
 			writer.append(String.format("Content-Type: %s\r\n", response.type()));
 			writer.append(response.getHeaders());
 			writer.append("\r\n");
@@ -114,6 +114,8 @@ public class HttpIoHandler {
 			int size = -1;
 			byte[] b = new byte[255];
 			while ((size = bodyStream.read(b)) != -1) {
+				writer.append(String.valueOf(size));
+				writer.append("\r\n");
 				writer.append(new String(b, 0, size));
 				writer.append("\r\n");
 			}
