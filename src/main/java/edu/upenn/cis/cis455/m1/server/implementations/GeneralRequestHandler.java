@@ -58,24 +58,9 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 	private Map<HttpMethod, BasicRequestHandler> createHandlerMap() {
 		Map<HttpMethod, BasicRequestHandler> m = new HashMap<>();
 		for (HttpMethod method : HttpMethod.values()) {
-			m.put(method, createReqeustHandler(method));
+			m.put(method, methodHandlerFactory.createReqeustHandler(method, context, server));
 		}
 		return m;
-	}
-
-	private BasicRequestHandler createReqeustHandler(HttpMethod method) {
-		switch (method) {
-		case GET:
-			return new GetRequestHandler(context, server);
-		case HEAD:
-			return new HeadRequestHandler(context, server);
-		case OPTIONS:
-			return new OptionsRequestHandler(context);
-		// TODO: add more methods
-		default:
-			return new BasicRequestHandler();
-		}
-
 	}
 
 	@Override
