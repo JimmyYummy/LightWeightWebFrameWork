@@ -69,6 +69,8 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			return new GetRequestHandler(context, server);
 		case HEAD:
 			return new HeadRequestHandler(context, server);
+		case OPTIONS:
+			return new OptionsRequestHandler(context);
 		// TODO: add more methods
 		default:
 			return new BasicRequestHandler();
@@ -111,13 +113,15 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			throw new HaltException(401, "Unauthorized " + requestPath);
 		}
 		logger.info("dispatch to handler: " + request.requestMethod());
+		
 		// dispatch the request to corresponding handlers
 		HttpMethod method = Enum.valueOf(HttpMethod.class, request.requestMethod());
 		boolean handled = methodHandlerMap.get(method).handle(request, response);
 		if (!handled) {
 			throw new HaltException(404, "Not Found " + requestPath);
 		}
-		// TODO: check after filter here
+		
+		//check after filter here
 		logger.info("checking after filters");
 		try {
 			for (Path filterPath : typeAfterFilters.keySet()) {

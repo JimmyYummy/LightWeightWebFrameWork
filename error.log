@@ -1,0 +1,5 @@
+<li>2019-Feb-05 20:02:40 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56278 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-05 20:02:40 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56278 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-05 20:02:40 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
+<li>2019-Feb-05 20:10:46 PM [Daemon Thread-Port:8889] ERROR edu.upenn.cis.cis455.m1.server.HttpServer - Error caught:IOException on Server Listening - Socket closed</li>
+<li>2019-Feb-05 20:14:43 PM [Daemon Thread-Port:8889] ERROR edu.upenn.cis.cis455.m1.server.HttpServer - Error caught:IOException on Server Listening - Socket closed</li>

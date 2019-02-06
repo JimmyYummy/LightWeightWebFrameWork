@@ -1,13 +1,9 @@
 package edu.upenn.cis.cis455.m1.server.implementations;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +48,7 @@ public class BasicRequest extends Request {
         BasicRequest request = new BasicRequest();
         // set request method
         String method = headers.get("Method").split(";")[0];
-        request.method = HttpMethod.parse(method);
+        request.method = Enum.valueOf(HttpMethod.class, method);
         // get version of the request
         String protocolVersion = headers.get("protocolVersion").split(";")[0];
         if ("HTTP/1.0".equals(protocolVersion) || "HTTP/1.1".equals(protocolVersion)) {
