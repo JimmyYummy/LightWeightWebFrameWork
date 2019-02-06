@@ -3,14 +3,14 @@ import edu.upenn.cis.cis455.ServiceFactory;
 import edu.upenn.cis.cis455.handlers.Filter;
 import edu.upenn.cis.cis455.handlers.Route;
 import edu.upenn.cis.cis455.m1.server.HttpMethod;
-import edu.upenn.cis.cis455.m1.server.HttpServer;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
-import edu.upenn.cis.cis455.m1.server.interfaces.WebService;
+import edu.upenn.cis.cis455.m2.server.interfaces.WebService;
 
 import java.net.ServerSocket;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+
 /**
  * The single app web service implementation
  */
@@ -73,6 +73,52 @@ public class SingleAppWebService extends WebService {
 		}
 		this.context.routes.get(HttpMethod.GET).put(Paths.get(path).normalize(), route);
 	}
+	
+	@Override
+	public void post(String path, Route route) {
+		if (context.isActive()) {
+			this.awaitInitialization();
+		}
+		this.context.routes.get(HttpMethod.POST).put(Paths.get(path).normalize(), route);
+		
+	}
+
+	@Override
+	public void put(String path, Route route) {
+		if (context.isActive()) {
+			this.awaitInitialization();
+		}
+		this.context.routes.get(HttpMethod.PUT).put(Paths.get(path).normalize(), route);
+		
+	}
+
+	@Override
+	public void delete(String path, Route route) {
+		if (context.isActive()) {
+			this.awaitInitialization();
+		}
+		this.context.routes.get(HttpMethod.DELETE).put(Paths.get(path).normalize(), route);
+		
+	}
+
+	@Override
+	public void head(String path, Route route) {
+		if (context.isActive()) {
+			this.awaitInitialization();
+		}
+		this.context.routes.get(HttpMethod.HEAD).put(Paths.get(path).normalize(), route);
+		
+	}
+
+	@Override
+	public void options(String path, Route route) {
+		if (context.isActive()) {
+			this.awaitInitialization();
+		}
+		this.context.routes.get(HttpMethod.OPTIONS).put(Paths.get(path).normalize(), route);
+		
+	}
+	
 
 	/* (non-Javadoc)
 	 * @see edu.upenn.cis.cis455.m1.server.interfaces.WebService#ipAddress(java.lang.String)
