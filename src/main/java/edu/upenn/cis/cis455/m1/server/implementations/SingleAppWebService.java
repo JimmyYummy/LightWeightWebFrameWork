@@ -6,7 +6,6 @@ import edu.upenn.cis.cis455.m1.server.HttpServer;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m1.server.interfaces.WebService;
 
-import java.io.IOException;
 import java.net.ServerSocket;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -21,12 +20,12 @@ import java.util.*;
  */
 public class SingleAppWebService extends WebService {
 		
-	private SingleAppContext context;
+	protected final AppContext context;
 	/**
 	 * 
 	 */
 	public SingleAppWebService() {
-		context = new SingleAppContext();
+		context = new AppContext();
 	}
 
 	/* (non-Javadoc)
@@ -34,12 +33,14 @@ public class SingleAppWebService extends WebService {
 	 */
 	@Override
 	public void start() {
-		if (context.isRunning) {
+		if (context.isRunning()) {
 			throw new IllegalStateException("The service is already running");
 		}
-		context.isRunning = true;
-		context.isActive = true;
-		basicServer = new HttpServer();
+		context.setRunning();
+		if (basicServer == null) {
+			basicServer = new HttpServer();
+
+		}
 		basicServer.start(context);
 	}
 
@@ -162,7 +163,7 @@ public class SingleAppWebService extends WebService {
     	typeFilterMap.get(acceptType).add(filter);
     }
 	
-	public class SingleAppContext implements Context {
+	public class AppContext implements Context {
 		
 		private Map<HttpMethod, Map<Path, Route>> routes;
 		private List<Filter> beforeGeneralFilters;
@@ -177,7 +178,7 @@ public class SingleAppWebService extends WebService {
 		private boolean isRunning;
 		private ServerSocket socket;
 		
-		private SingleAppContext() {
+		private AppContext() {
 			routes = new HashMap<>();
 			for (HttpMethod method : HttpMethod.values()) {
 				routes.put(method, new HashMap<>());
@@ -193,6 +194,10 @@ public class SingleAppWebService extends WebService {
 			threadNum = 10;
 			isActive = false;
 			isRunning = false;
+		}
+
+		public boolean isRunning() {
+			return isRunning;
 		}
 
 		/**
@@ -225,6 +230,11 @@ public class SingleAppWebService extends WebService {
 		
 		public boolean isActive() {
 			return isActive; 
+		}
+		
+		protected void setRunning() {
+			this.isRunning = true;
+			this.isActive = true;
 		}
 
 		/**
