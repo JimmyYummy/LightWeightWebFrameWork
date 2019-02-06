@@ -11,7 +11,7 @@ public class MultipleAppWebService extends SingleAppWebService {
 			otherApps = new HashSet<>();
 		}
 		otherApps.add(app);
-		app.run();
+		app.registerService(this);
 		basicServer.start(app.context);
 	}
 	
@@ -19,14 +19,18 @@ public class MultipleAppWebService extends SingleAppWebService {
 		if (! otherApps.contains(app)) {
 			throw new IllegalArgumentException("the app is not registered in this webservice");
 		}
-		app.stop();
+		basicServer.closeApp(app.context);
 	}
 	
 	@Override
 	public void stop() {
 		for (Application app : otherApps) {
-			app.stop();
+			stop(app);
 		}
 		super.stop();
+	}
+	
+	public void stopOwnAppOnly() {
+		basicServer.closeApp(context);
 	}
 }

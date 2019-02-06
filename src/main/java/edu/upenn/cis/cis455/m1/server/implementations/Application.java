@@ -1,6 +1,7 @@
 package edu.upenn.cis.cis455.m1.server.implementations;
 
 public class Application extends SingleAppWebService {
+	MultipleAppWebService webService;
 
 	@Override
 	public void start() {
@@ -15,10 +16,17 @@ public class Application extends SingleAppWebService {
 	
 	@Override
 	public void stop() {
-		context.setUnactive();
+		if (! context.isRunning()) {
+			throw new IllegalStateException("the app is not running");
+		}
+		webService.stop(this);
 	}
 	
-	protected void run() {
+	protected void registerService(MultipleAppWebService mws) {
+		if (context.isRunning()) {
+			throw new IllegalStateException("The service is already running");
+		}
+		webService = mws;
 		context.setRunning();
 	}
 }

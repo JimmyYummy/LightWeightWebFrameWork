@@ -49,7 +49,6 @@ public class SingleAppWebService extends WebService {
 	 */
 	@Override
 	public void stop() {
-		context.isActive = false;
 		basicServer.closeServer();
 	}
 
