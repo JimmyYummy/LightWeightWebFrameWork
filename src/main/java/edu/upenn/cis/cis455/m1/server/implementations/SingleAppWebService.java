@@ -1,4 +1,5 @@
 package edu.upenn.cis.cis455.m1.server.implementations;
+import edu.upenn.cis.cis455.ServiceFactory;
 import edu.upenn.cis.cis455.handlers.Filter;
 import edu.upenn.cis.cis455.handlers.Route;
 import edu.upenn.cis.cis455.m1.server.HttpMethod;
@@ -33,12 +34,12 @@ public class SingleAppWebService extends WebService {
 	 */
 	@Override
 	public void start() {
-		if (context.isRunning()) {
+		if (context.isActive()) {
 			throw new IllegalStateException("The service is already running");
 		}
 		context.setRunning();
 		if (basicServer == null) {
-			basicServer = new HttpServer();
+			basicServer = ServiceFactory.getHttpServer();
 
 		}
 		basicServer.start(context);
@@ -49,7 +50,7 @@ public class SingleAppWebService extends WebService {
 	 */
 	@Override
 	public void stop() {
-		basicServer.closeServer();
+		basicServer.closeApp(context);
 	}
 
 	/* (non-Javadoc)
@@ -57,7 +58,7 @@ public class SingleAppWebService extends WebService {
 	 */
 	@Override
 	public void staticFileLocation(String directory) {
-		if (context.isRunning) {
+		if (context.isActive()) {
 			throw new IllegalStateException("This must be done before the route mapping");
 		}
 		context.fileLocation = directory;
@@ -68,7 +69,7 @@ public class SingleAppWebService extends WebService {
 	 */
 	@Override
 	public void get(String path, Route route) {
-		if (! context.isRunning) {
+		if (context.isActive()) {
 			this.awaitInitialization();
 		}
 		this.context.routes.get(HttpMethod.GET).put(Paths.get(path).normalize(), route);
@@ -79,7 +80,7 @@ public class SingleAppWebService extends WebService {
 	 */
 	@Override
 	public void ipAddress(String ipAddress) {
-		if (context.isRunning) {
+		if (context.isActive()) {
 			throw new IllegalStateException("This must be done before the route mapping");
 		}
 		context.ipaddr = ipAddress;
@@ -90,7 +91,7 @@ public class SingleAppWebService extends WebService {
 	 */
 	@Override
 	public void port(int port) {
-		if (context.isRunning) {
+		if (context.isActive()) {
 			throw new IllegalStateException("This must be done before the route mapping");
 		}
 		context.port = port;
@@ -101,14 +102,14 @@ public class SingleAppWebService extends WebService {
 	 */
 	@Override
 	public void threadPool(int threads) {
-		if (context.isRunning) {
+		if (context.isActive()) {
 			throw new IllegalStateException("This must be done before the route mapping");
 		}
 		context.threadNum = threads;
 	}
 	
 	public void before(Filter filter) {
-		if (! context.isRunning) {
+		if (context.isActive()) {
 			this.awaitInitialization();
 		}
 		context.beforeGeneralFilters.add(filter);
@@ -118,7 +119,7 @@ public class SingleAppWebService extends WebService {
      * Add filters that get called after a request
      */
     public void after(Filter filter) {
-    	if (! context.isRunning) {
+		if (context.isActive()) {
 			this.awaitInitialization();
 		}
     	context.afterGeneralFilters.add(filter);
@@ -127,7 +128,7 @@ public class SingleAppWebService extends WebService {
      * Add filters that get called before a request
      */
     public void before(String path, String acceptType, Filter filter) {
-    	if (! context.isRunning) {
+		if (context.isActive()) {
 			this.awaitInitialization();
 		}
     	
@@ -146,7 +147,7 @@ public class SingleAppWebService extends WebService {
      * Add filters that get called after a request
      */
     public void after(String path, String acceptType, Filter filter) {
-    	if (! context.isRunning) {
+		if (context.isActive()) {
 			this.awaitInitialization();
 		}
     	
@@ -174,7 +175,6 @@ public class SingleAppWebService extends WebService {
 		private String fileLocation;
 		private int threadNum;
 		private boolean isActive;
-		private boolean isRunning;
 		private ServerSocket socket;
 		
 		private AppContext() {
@@ -192,11 +192,6 @@ public class SingleAppWebService extends WebService {
 			fileLocation = "./www";
 			threadNum = 10;
 			isActive = false;
-			isRunning = false;
-		}
-
-		public boolean isRunning() {
-			return isRunning;
 		}
 
 		/**
@@ -232,7 +227,6 @@ public class SingleAppWebService extends WebService {
 		}
 		
 		protected void setRunning() {
-			this.isRunning = true;
 			this.isActive = true;
 		}
 

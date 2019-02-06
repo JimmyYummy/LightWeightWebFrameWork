@@ -9,6 +9,7 @@ import java.net.Socket;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import edu.upenn.cis.cis455.ServiceFactory;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicRequest;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
@@ -33,7 +34,7 @@ public class HttpIoHandler {
     		except = new HaltException(500, "Unknown Error");
     	}
     	if (request == null) {
-    		request = BasicRequest.getRequestForException();
+    		request = ServiceFactory.getRequestForException();
     	}
 			try {
 				//get writer

@@ -12,10 +12,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler;
+import edu.upenn.cis.cis455.ServiceFactory;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
-import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
-import edu.upenn.cis.cis455.m1.server.interfaces.ThreadPool;
 
 /**
  * Stub for your HTTP server, which
@@ -36,18 +34,18 @@ public class HttpServer implements ThreadManager {
 		taskQueue = new HttpTaskQueue();
 		appCount = new AtomicInteger(0);
 		pool = null;
-		handlerResolver = new HandlerResolver();
+		handlerResolver = ServiceFactory.getHandlerResolver();
 		contexts = new ArrayList<>();
 	}
 	
 	public void start(Context context) {	
 		if (pool == null) {
-			pool = new HttpThreadPool(context.getThreadNum());
+			pool = ServiceFactory.getNewThreadPool(this, context.getThreadNum());
 		}
 		
 		contexts.add(context);
 		
-		handlerResolver.addHandler(context);
+		handlerResolver.addHandler(context, this);
 		
 		// create new listener thread
 		Thread daemonThread = new Thread(()-> {
@@ -89,10 +87,6 @@ public class HttpServer implements ThreadManager {
 	
 	public HandlerResolver getHandlerResolver() {
 		return handlerResolver;
-	}
-	
-	private HttpServer getServer() {
-		return this;
 	}
 	
     @Override
@@ -150,91 +144,5 @@ public class HttpServer implements ThreadManager {
     
     public Map<String, String> getThreadPoolInfo() {
     	return pool.getPoolInfo();
-    }
-    
-    public class HttpThreadPool implements ThreadPool{
-    	
-    	private List<HttpWorker> workers;
-    	
-    	private HttpThreadPool(int num) {
-    		logger.info("creating the threadpool");
-    		workers = new ArrayList<>(num);
-    		addThreads(num);
-    		logger.info("HttpThreadPool running");
-    	}
-    	
-		public synchronized Map<String, String> getPoolInfo() {
-			Map<String, String> infos = new HashMap<>(workers.size());
-			for (HttpWorker w : workers) {
-				infos.put(w.toString(), w.isWorking() ? "handling URL" : "waiting");
-			}
-			
-			return infos;
-		}
-
-		@Override
-		public synchronized void addThread() {
-			HttpWorker t = new HttpWorker(getServer());
-    		workers.add(t);
-    		t.start();
-    		logger.info("created new worker, current pool size: " + workers.size());
-		}
-
-    	@Override
-    	public void addThreads(int num) {
-    		for (int i = 0; i < num; i++) {
-    			addThread();
-    		}
-    	}
-    	
-
-		@Override
-		public synchronized void closeThread(Thread t) {
-			HttpWorker w = (HttpWorker) t;
-			workers.remove(w);
-			w.turnOffWorker();
-			logger.info("deleted http worker, current pool size: " + workers.size());
-		}
-
-		@Override
-		public int closeThreads(int n) {
-			for (int i = 0; i < n; i++) {
-				if (workers.size() == 0) return i;
-				closeThread(workers.get(workers.size() - 1));
-			}
-			return n;
-		}
-				
-    	@Override
-    	public void closeAll() {
-    		while (! workers.isEmpty()) {
-    			closeThread(workers.get(workers.size() - 1));
-    		}
-    		logger.info("All the workers are turned off");
-    	}
-    }
-    
-    class HandlerResolver {
-    	private Map<Integer, HttpRequestHandler> handlerMap;
-    	
-    	private HandlerResolver() {
-    		handlerMap = new HashMap<>();
-    	}
-
-		private void addHandler(Context context) {
-			if (handlerMap.containsKey(context.getPort())) {
-				throw new IllegalArgumentException("Port already in use");
-			}
-			handlerMap.put(context.getPort(), new GeneralRequestHandler(context, getServer()));
-			logger.info("new handler added for new application on port " + context.getPort());
-		}
-		
-		/**
-		 * return the request handle on the port if exists,
-		 * else return null
-		 */
-		public HttpRequestHandler getHandler(int port) {
-			return handlerMap.getOrDefault(port, null);
-		}
     }
 }

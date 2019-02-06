@@ -8,9 +8,9 @@ import edu.upenn.cis.cis455.m1.server.interfaces.Response;
 public class BasicResponse extends Response {
 	public Map<String, String> headers;
 	
-	public BasicResponse(Map<String, String> headers) {
-		this.headers = headers;
-	}
+//	public BasicResponse(Map<String, String> headers) {
+//		this.headers = headers;
+//	}
 	
 	public BasicResponse() {
 		headers = new HashMap<>();

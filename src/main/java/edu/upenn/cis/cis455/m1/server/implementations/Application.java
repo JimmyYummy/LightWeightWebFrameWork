@@ -16,14 +16,14 @@ public class Application extends SingleAppWebService {
 	
 	@Override
 	public void stop() {
-		if (! context.isRunning()) {
+		if (context.isActive()) {
 			throw new IllegalStateException("the app is not running");
 		}
 		webService.stop(this);
 	}
 	
 	protected void registerService(MultipleAppWebService mws) {
-		if (context.isRunning()) {
+		if (context.isActive()) {
 			throw new IllegalStateException("The service is already running");
 		}
 		webService = mws;

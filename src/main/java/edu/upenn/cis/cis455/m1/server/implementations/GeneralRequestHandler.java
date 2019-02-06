@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import edu.upenn.cis.cis455.ServiceFactory;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.handlers.Filter;
 import edu.upenn.cis.cis455.handlers.Route;
@@ -58,7 +59,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 	private Map<HttpMethod, BasicRequestHandler> createHandlerMap() {
 		Map<HttpMethod, BasicRequestHandler> m = new HashMap<>();
 		for (HttpMethod method : HttpMethod.values()) {
-			m.put(method, methodHandlerFactory.createReqeustHandler(method, context, server));
+			m.put(method, ServiceFactory.createReqeustHandler(method, context, server));
 		}
 		return m;
 	}

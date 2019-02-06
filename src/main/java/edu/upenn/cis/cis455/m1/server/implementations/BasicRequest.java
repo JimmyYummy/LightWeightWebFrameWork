@@ -31,16 +31,8 @@ public class BasicRequest extends Request {
 	private String bodyStr;
 	
 	private static BasicRequest exceptionRequest;
-
-    static {
-		BasicRequest r = new BasicRequest();
-		r.protocol = "HTTP/1.1";
-		r.headers = new HashMap<>();
-		r.headers.put("connection", "close");
-		exceptionRequest = r;
-    }
     
-    private BasicRequest() {};
+    public BasicRequest() {};
 	
     public static BasicRequest getBasicRequestExceptBody(String url, Map<String, String> headers,
             Map<String, List<String>> params) {
@@ -65,11 +57,7 @@ public class BasicRequest extends Request {
         	}
         	
         }
-        
-        // get the URL of the request
-        if (!isValidURL(url)) {
-            throw new IllegalArgumentException("Illegal URL");
-        }
+
         request.url = url;
 
         request.headers = new HashMap<String, String>(headers.size());
@@ -122,11 +110,14 @@ public class BasicRequest extends Request {
     }
     
     public static BasicRequest getRequestForException() {
+    	if (exceptionRequest == null) {
+    		BasicRequest r = new BasicRequest();
+    		r.protocol = "HTTP/1.1";
+    		r.headers = new HashMap<>();
+    		r.headers.put("connection", "close");
+    		exceptionRequest = r;
+    	}
     	return exceptionRequest;
-    }
-
-    private static boolean isValidURL(String url) {
-        return true;
     }
     
     public void addBody(InputStream in) throws IOException {

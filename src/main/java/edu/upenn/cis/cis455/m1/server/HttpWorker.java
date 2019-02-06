@@ -9,10 +9,12 @@ import java.util.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import edu.upenn.cis.cis455.ServiceFactory;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicRequest;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicResponse;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
+import edu.upenn.cis.cis455.m1.server.interfaces.Request;
 import edu.upenn.cis.cis455.m1.server.interfaces.Response;
 import edu.upenn.cis.cis455.util.HttpParsing;
 import edu.upenn.cis.cis455.util.InputUtil;
@@ -74,7 +76,7 @@ public class HttpWorker extends Thread {
 		}
 		// do the loop processing, assuming persistent connections
 		while (keepActive) {
-			BasicRequest req = null;
+			Request req = null;
 			Response res = null;
 			try {
 				// generate the request
@@ -90,10 +92,15 @@ public class HttpWorker extends Thread {
 				headers.put("port", String.valueOf(task.getPort()));
 				logger.info("Accepting request for " + uri + " from " + clientAddr + "\nwith header: " + headers);
 				// generate the request object, take care of chucked request
-				req = BasicRequest.getBasicRequestExceptBody(uri, headers, parms);
-				logger.info("Get request without body from: " + clientAddr);
-				req.addBody(in);
-				logger.info("Get reqesut with body: " + req);
+				BasicRequest breq = null;
+				try {
+					breq = BasicRequest.getBasicRequestExceptBody(uri, headers, parms);
+					logger.info("Get request without body from: " + clientAddr);
+					breq.addBody(in);
+					logger.info("Get reqesut with body: " + req);
+				} finally {
+					req = breq;
+				}
 				// send an 100 response
 				if (req.headers("protocolVersion").equals("HTTP/1.1")) {
 					logger.info("sending 100 response");
@@ -105,7 +112,7 @@ public class HttpWorker extends Thread {
 					throw new HaltException(401, "Connection Refused on the port " + sc.getPort());
 				}
 				// use handler to generate the response
-				res = new BasicResponse();
+				res = ServiceFactory.createResponse();
 				handler.handle(req, res);
 				// use IO handler to send response
 				// persistent? (based on the handler's response) and the input stream
@@ -124,7 +131,7 @@ public class HttpWorker extends Thread {
 				// return error response if error occurs
 				// persistent? (based on the handler's response)
 				if (req == null)
-					req = BasicRequest.getRequestForException();
+					req = ServiceFactory.getRequestForException();
 				if (!HttpIoHandler.sendException(sc, req, e)) {
 					logger.info("closed connection: " + sc);
 					try {

@@ -11,14 +11,27 @@ import org.apache.logging.log4j.Logger;
 
 import edu.upenn.cis.cis455.m1.server.interfaces.WebService;
 import edu.upenn.cis.cis455.exceptions.HaltException;
+import edu.upenn.cis.cis455.m1.server.HandlerResolver;
+import edu.upenn.cis.cis455.m1.server.HttpMethod;
+import edu.upenn.cis.cis455.m1.server.HttpServer;
+import edu.upenn.cis.cis455.m1.server.HttpThreadPool;
+import edu.upenn.cis.cis455.m1.server.implementations.Application;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicRequest;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicResponse;
 import edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler;
 import edu.upenn.cis.cis455.m1.server.implementations.SingleAppWebService;
+import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
 import edu.upenn.cis.cis455.m1.server.interfaces.Response;
 import edu.upenn.cis.cis455.m2.server.interfaces.Session;
+import edu.upenn.cis.cis455.methodHandlers.BasicRequestHandler;
+import edu.upenn.cis.cis455.methodHandlers.DeleteRequestHandler;
+import edu.upenn.cis.cis455.methodHandlers.GetRequestHandler;
+import edu.upenn.cis.cis455.methodHandlers.HeadRequestHandler;
+import edu.upenn.cis.cis455.methodHandlers.OptionsRequestHandler;
+import edu.upenn.cis.cis455.methodHandlers.PostRequestHandler;
+import edu.upenn.cis.cis455.methodHandlers.PutRequestHandler;
 
 
 public class ServiceFactory {
@@ -26,6 +39,8 @@ public class ServiceFactory {
 	final static Logger logger = LogManager.getLogger(ServiceFactory.class);
 	
 	private static WebService ws;
+	private static HandlerResolver hr;
+	private static HttpServer hs;
     /**
      * Get the HTTP server associated with port 8080
      */
@@ -34,6 +49,10 @@ public class ServiceFactory {
     		ws = new SingleAppWebService();
     	}
         return ws;
+    }
+    
+    public static Application getNewApplication() {
+    	return new Application();
     }
     
     /**
@@ -54,12 +73,36 @@ public class ServiceFactory {
         return req;
     }
     
+    public static Request getRequestForException() {
+    	return BasicRequest.getRequestForException();
+    }
+    
     /**
      * Gets a request handler for files (i.e., static content) or dynamic content
      */
     public static HttpRequestHandler createRequestHandlerInstance(Path serverRoot) {
         return new GeneralRequestHandler(serverRoot);
     }
+    
+	public static BasicRequestHandler createReqeustHandler(HttpMethod method, Context context, HttpServer server) {
+		switch (method) {
+		case GET:
+			return new GetRequestHandler(context, server);
+		case HEAD:
+			return new HeadRequestHandler(context, server);
+		case POST:
+			return new PostRequestHandler(context);
+		case PUT:
+			return new PutRequestHandler(context);
+		case DELETE:
+			return new DeleteRequestHandler(context);
+		case OPTIONS:
+			return new OptionsRequestHandler(context);
+		default:
+			return new BasicRequestHandler();
+		}
+
+	}
 
     /**
      * Gets a new HTTP Response object
@@ -82,4 +125,22 @@ public class ServiceFactory {
         
         return null;
     }
+
+	public static HandlerResolver getHandlerResolver() {
+		if (hr == null) {
+			hr = new HandlerResolver();
+		}
+		return hr;
+	}
+	
+	public static HttpThreadPool getNewThreadPool(HttpServer server, int num) {
+		return new HttpThreadPool(server, num);
+	}
+
+	public static HttpServer getHttpServer() {
+		if (hs == null) {
+			hs = new HttpServer();
+		}
+		return hs;
+	}
 }
