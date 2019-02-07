@@ -44,14 +44,26 @@ import static edu.upenn.cis.cis455.WebServiceController.*;
  * general or specific |_ DeleteRequestHandler --		.
  * file type)		   |_ OptionsRequestHandler -		.
  * 
- * 	1) The HttpRequestHandler applies the before filters on the request
- * 	2) The HttpRequestHandler find the corresponding sub-handler based on the request's HTTP method
- * 	3) The sub-handler (e.g. GetRequestHandler) try to find the proper router of the path
+ * 	1) The HttpRequestHandler applies the before filters on the request.
+ * 
+ * 	2) The HttpRequestHandler find the corresponding sub-handler based on the request's HTTP method.
+ * 
+ * 	3) The sub-handler (e.g. GetRequestHandler) try to find the proper router of the path.
+ * 		Special case: the GET Request will be checked if it was a special URL request first before 
+ * 		checking the routers, this will avoid the control panel / shutdown URL being overwritten by route
+ *   
  *  4) If the sub-handler failed to find a router to handle the request, it will use the default method
- *     to process the request (e.g. for GET, try to return the file on the path)
- *  5) If even the default method failed, throw a HaltException
- *  6) The HttpRequestHandler apply the after filters on the request
- *  7) Finish the handling process
+ *     to process the request (e.g. for GET, try to return the file on the path).
+ *  	Special case: for the HEAD request, it will try to run the handler as a GET request if there is 
+ *  	no HEAD route matches the request. In other words, the GET routes and special URL may also work
+ *  	on the HEAD request (but the response will have body content removed), as long as the HEAD 
+ *  	request is not caught on a HEAD route.
+ *  
+ *  5) If even the default method failed, throw a HaltException.
+ *  
+ *  6) The HttpRequestHandler apply the after filters on the request.
+ *  
+ *  7) Finish the handling process.
  * 
  * 
  * 
