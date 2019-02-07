@@ -7,6 +7,82 @@ import edu.upenn.cis.cis455.m2.server.interfaces.WebService;
 import java.util.*;
 import static edu.upenn.cis.cis455.WebServiceController.*;
 
+/**
+ * 
+ * USER GUIDE:
+ * 
+ * @author Jing Wang
+ *
+ *
+ * 1. How to use the framework: Just like SparkJava!
+ *
+ *
+ *
+ * 2. The architecture for the project and mechanics
+ * WebServiceController -- WebService -- Context (hold the information for the WebService)
+ * 											|
+ * 											|
+ * 					HandlerResolver	--	HttpServer -- Daemon Threads <-- request ---------- client
+ * 							   \		/		\		/ (offer new task to the queue)		|
+ * 	(2. find the handler of the \	ThreadPool	TaskQueue									|
+ * 	corresponding server socket) \	  | ... |   / (poll from queue)  						|
+ * 								  \	  |		|  /											|
+ *			HttpRequestHandler ----- HttpWorkers --------------- HttpIOHandler  ---> response / error
+ *	(3. handler handler requests) 	(working or waiting)				(4. send response or exception, 
+ *									(1. create request and response)	could be chunked or unchunked, 
+ *									(1.1 may send a 100 response)		HTTP/1.0 or HTTP/1.1. return if 
+ *					
+ *
+ *
+ *													keep a persistent connection)
+ * 3. Process inside the HttpRequestHandler
+ * 
+ *	HttpRequestHandler -- GetRequestHandler ----- corresponding routers
+ *		|			   |_ HeadRequestHandler ----		.
+ *		Filters		   |_ PostRequestHandler ----		.
+ * (before and after,  |_ PutRequestHandler  ----		.
+ * general or specific |_ DeleteRequestHandler --		.
+ * file type)		   |_ OptionsRequestHandler -		.
+ * 
+ * 	1) The HttpRequestHandler applies the before filters on the request
+ * 	2) The HttpRequestHandler find the corresponding sub-handler based on the request's HTTP method
+ * 	3) The sub-handler (e.g. GetRequestHandler) try to find the proper router of the path
+ *  4) If the sub-handler failed to find a router to handle the request, it will use the default method
+ *     to process the request (e.g. for GET, try to return the file on the path)
+ *  5) If even the default method failed, throw a HaltException
+ *  6) The HttpRequestHandler apply the after filters on the request
+ *  7) Finish the handling process
+ * 
+ * 
+ * 
+ * 4. = Extra Credit =
+ * 
+ *  1) Persistent connection and chunked encoding
+ * 
+ * 	Persistent connection is used by default on HTTP/1.1 requests, unless the request's header contains 
+ *  "connection: close". HTTP/1.0 request will always be a transient connection
+ *  
+ * 	Chunked encoding could be process if there is an header "transfer-encoding: chunked" in the request, 
+ * 	or the content's body will be taken care of normally. If there is the request contains a body, but 
+ * 	it does not specify the "Content-Length" header, the request will be regarded as having no body, and 
+ *  its body will be regarded as another request (wrongly formatted), and a 400 error will be sent back.
+ * 
+ *  2) Performance testing: Not finished yet
+ * 
+ *  3) Multiple simultaneous sockets / servers
+ * 
+ *  To create a new web service on the server, please get a new WebService from the ServiceFactory using
+ *  getNewWebService() method, then configure the WebService by calling the methods of the instance of 
+ *  the WebService. 
+ *  
+ *  Be noted that each WebService's port will increment by 1 from 8888 based on the order
+ *  of their creation. If the default WebService is created later (based on the lazy initialization, it 
+ *  won't be created until any WebServiceController's method is called).
+ *  
+ *  4) General wildcards in routes: supported already
+ * 
+*/
+
 public class WebServer {
     public static void main(String[] args) {
         org.apache.logging.log4j.core.config.Configurator.setLevel("edu.upenn.cis.cis455", Level.DEBUG);
@@ -24,12 +100,21 @@ public class WebServer {
 //        	return "Hello world";
 //        });
         System.out.println("Waiting to handle requests!");
-        WebService ws = ServiceFactory.getNewWebService();
-        ws.port(8889);
-        ws.options("/", (req, res) -> {
-        	return "Hello world";
-        });
+//        WebService ws = ServiceFactory.getNewWebService();
+//        ws.port(8889);
+//        ws.get("/compute", (req, res) -> {
+//        	
+//        	return fibonacciNum(40);
+//        });
+//        ws.awaitInitialization();
             
     }
+    
+    
+//    // return the n-th fibonacciNumber, computed through recursion
+//    private static int fibonacciNum(int n) {
+//    	if (n == 0 || n == 1) return 1;
+//    	return fibonacciNum(n - 1) + fibonacciNum(n - 2);
+//    }
 
 }
