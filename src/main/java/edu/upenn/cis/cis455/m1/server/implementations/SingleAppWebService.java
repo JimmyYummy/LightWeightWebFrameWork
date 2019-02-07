@@ -10,6 +10,7 @@ import java.net.ServerSocket;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * The single app web service implementation
@@ -22,6 +23,7 @@ import java.util.*;
 public class SingleAppWebService extends WebService {
 		
 	protected final AppContext context;
+	private static AtomicInteger portNum = new AtomicInteger(8888);
 	/**
 	 * 
 	 */
@@ -207,7 +209,7 @@ public class SingleAppWebService extends WebService {
     	}
     	typeFilterMap.get(acceptType).add(filter);
     }
-	
+    	
 	public class AppContext implements Context {
 		
 		private Map<HttpMethod, Map<Path, Route>> routes;
@@ -231,8 +233,7 @@ public class SingleAppWebService extends WebService {
 			afterGeneralFilters = new ArrayList<>();
 			beforeFilters = new HashMap<>();
 			afterFilters = new HashMap<>();
-			
-			port = 8080;
+			port = portNum.getAndIncrement();
 			ipaddr = "0.0.0.0";
 			fileLocation = "./www";
 			threadNum = 10;
