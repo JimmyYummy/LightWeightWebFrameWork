@@ -12,9 +12,11 @@ import java.util.Set;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import edu.upenn.cis.cis455.ServiceFactory;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m1.server.HttpMethod;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
+import edu.upenn.cis.cis455.m2.server.interfaces.Session;
 import edu.upenn.cis.cis455.util.InputUtil;
 
 public class BasicRequest extends Request {
@@ -29,6 +31,7 @@ public class BasicRequest extends Request {
 	private Map<String, String> headers;
 	private byte[] body;
 	private String bodyStr;
+	private String sessionId;
 	
 	private static BasicRequest exceptionRequest;
     
@@ -341,6 +344,21 @@ public class BasicRequest extends Request {
 	@Override
 	public String toString() {
 		return "" + method + " " + url + " " + protocol + " persisit: " + persistentConnection() + " port: " + port + "\n" + headers + "\n" + body();
+	}
+	
+	public Session session() {
+		return session(true);
+	}
+	
+	public Session session(boolean create) {
+		if (ServiceFactory.getSession(sessionId) == null)  {
+			if (create) {
+				sessionId = ServiceFactory.createSession();
+			} else {
+				sessionId = null;
+			}
+		}
+		return ServiceFactory.getSession(sessionId);
 	}
 
 }

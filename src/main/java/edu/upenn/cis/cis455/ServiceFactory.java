@@ -156,6 +156,7 @@ public class ServiceFactory {
      * Looks up a session by ID and updates / returns it
      */
     public static Session getSession(String id) {
+        if (id == null) return null;
         
         return null;
     }
