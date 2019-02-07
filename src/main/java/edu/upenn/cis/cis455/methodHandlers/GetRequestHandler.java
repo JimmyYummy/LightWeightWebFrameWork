@@ -118,7 +118,7 @@ public class GetRequestHandler extends BasicRequestHandler {
 
 	private boolean fileFetchingHandle(Request request, Response response) throws HaltException {
 		Path requestPath = Paths.get("./" + request.pathInfo()).normalize();
-		if (PathUtil.checkPermission(requestPath)) {
+		if (PathUtil.checkPermission(requestPath) && PathUtil.checkReadPermission(requestPath)) {
 			throw new HaltException(403, "Permission Denied on the requested path.");
 		}
 		Path filePath = rootPath.resolve(requestPath);

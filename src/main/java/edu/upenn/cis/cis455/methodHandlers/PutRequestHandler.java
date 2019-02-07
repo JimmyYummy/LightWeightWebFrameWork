@@ -41,7 +41,7 @@ public class PutRequestHandler extends BasicRequestHandler {
 
 	private boolean createFile(Request request, Response response) throws HaltException {
 		Path requestPath = Paths.get("./" + request.pathInfo()).normalize();
-		if (PathUtil.checkPermission(requestPath)) {
+		if (PathUtil.checkPermission(requestPath) && PathUtil.checkWritePermission(requestPath)) {
 			throw new HaltException(403, "Permission Denied on the requested path.");
 		}
 		Path filePath = rootPath.resolve(requestPath);
