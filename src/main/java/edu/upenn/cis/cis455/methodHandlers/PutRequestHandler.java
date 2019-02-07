@@ -56,7 +56,11 @@ public class PutRequestHandler extends BasicRequestHandler {
 		}
 		
 		// write the file
-		byte[] bytes = response.bodyRaw();
+		byte[] bytes = request.body().getBytes();
+		if (bytes == null) {
+			bytes = new byte[0];
+		}
+		logger.debug("file content: " + new String(bytes));
 		try { 
             // Initialize a pointer 
             // in file using OutputStream 

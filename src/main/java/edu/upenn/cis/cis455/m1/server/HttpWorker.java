@@ -96,7 +96,7 @@ public class HttpWorker extends Thread {
 					breq = BasicRequest.getBasicRequestExceptBody(uri, headers, parms);
 					logger.info("Get request without body from: " + clientAddr);
 					breq.addBody(in);
-					logger.info("Get reqesut with body: " + req);
+					logger.info("Get reqesut with body: " + breq);
 				} finally {
 					req = breq;
 				}

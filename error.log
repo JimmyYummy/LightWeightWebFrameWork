@@ -11146,3 +11146,6 @@
 <li>2019-Feb-06 20:53:24 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56923 HaltException on Request Processing - 404 Not Found  null</li>
 <li>2019-Feb-06 20:53:24 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56924 HaltException on Request Processing - 404 Not Found  null</li>
 <li>2019-Feb-06 20:53:24 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56925 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-07 09:08:07 AM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - null</li>
+<li>2019-Feb-07 09:10:39 AM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - null</li>
+<li>2019-Feb-07 09:11:57 AM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 64318 HaltException on Request Processing - 404 Not Found .txt null</li>
