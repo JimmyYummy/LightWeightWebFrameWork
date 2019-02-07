@@ -6,7 +6,7 @@ import java.util.Map;
 import edu.upenn.cis.cis455.m1.server.interfaces.Response;
 
 public class BasicResponse extends Response {
-	public Map<String, String> headers;
+	private Map<String, String> headers;
 	
 //	public BasicResponse(Map<String, String> headers) {
 //		this.headers = headers;
