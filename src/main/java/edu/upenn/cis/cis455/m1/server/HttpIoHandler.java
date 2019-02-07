@@ -40,8 +40,8 @@ public class HttpIoHandler {
 				writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 				// write initial line
 				logger.debug(request);
-				String firstLine = String.format("%s %d %s\r\n", 
-						request.protocol(), except.statusCode(), HttpParsing.explainStatus(except.statusCode()));
+				String firstLine = String.format("%s %d %s\r\n", request.protocol(), 
+									except.statusCode(), HttpParsing.explainStatus(except.statusCode()));
 				writer.append(firstLine);
 				// append headers
 				writer.append("Server: CIS-550/JingWang\r\n");

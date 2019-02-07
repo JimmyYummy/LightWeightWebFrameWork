@@ -2,7 +2,9 @@ package edu.upenn.cis.cis455.util;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public abstract class PathUtil {
@@ -13,10 +15,11 @@ public abstract class PathUtil {
 	}
 
 	public static boolean checkPathMatch(Path webPath, Path requestPath) {
-		return checkPathMatch(0, 0, webPath, requestPath, new HashSet<>());
+		// TODO: support update on requestPath
+		return checkPathMatch(0, 0, webPath, requestPath, new HashMap<>());
 	}
 
-	private static boolean checkPathMatch(int fIdx, int rIdx, Path fPath, Path rPath, Set<Path> params) {
+	private static boolean checkPathMatch(int fIdx, int rIdx, Path fPath, Path rPath, Map<String, String> params) {
 		if (fIdx == fPath.getNameCount() && rIdx == rPath.getNameCount())
 			return true;
 		if (fIdx == fPath.getNameCount() || rIdx == rPath.getNameCount())
@@ -29,19 +32,19 @@ public abstract class PathUtil {
 			}
 			return false;
 		}
-		String eleStr = fPathEle.toString();
-		if (eleStr.startsWith(":")) {
-			if (eleStr.length() == 1) {
+		String fEleStr = fPathEle.toString();
+		if (fEleStr.startsWith(":")) {
+			if (fEleStr.length() == 1) {
 				throw new IllegalArgumentException("Bad filter / router path: \":\" without name");
 			}
-			if (params.contains(fPathEle)) {
-				throw new IllegalArgumentException("Bad filter / router path: duplicate parameter");
+			if (params.containsKey(fEleStr)) {
+				throw new IllegalArgumentException("Bad filter / router path: duplicate route parameter");
 			}
-			params.add(fPathEle);
+			params.put(fEleStr, rPath.getName(rIdx).toString());
 			if (checkPathMatch(fIdx + 1, rIdx + 1, fPath, rPath, params)) {
 				return true;
 			} else {
-				params.remove(fPathEle);
+				params.remove(fEleStr);
 				return false;
 			}
 		} else if (! fPathEle.equals(rPath.getName(rIdx))) {
