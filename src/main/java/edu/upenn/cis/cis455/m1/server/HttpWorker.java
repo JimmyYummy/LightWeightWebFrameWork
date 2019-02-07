@@ -12,7 +12,6 @@ import org.apache.logging.log4j.Logger;
 import edu.upenn.cis.cis455.ServiceFactory;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicRequest;
-import edu.upenn.cis.cis455.m1.server.implementations.BasicResponse;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
 import edu.upenn.cis.cis455.m1.server.interfaces.Response;
