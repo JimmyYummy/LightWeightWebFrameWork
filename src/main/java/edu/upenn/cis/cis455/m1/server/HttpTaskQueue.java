@@ -1,5 +1,6 @@
 package edu.upenn.cis.cis455.m1.server;
 
+import java.util.ArrayDeque;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -18,16 +19,22 @@ public class HttpTaskQueue {
 	private Queue<HttpTask> q;
 	
 	public HttpTaskQueue() {
-		q = new LinkedList<HttpTask>();
+		q = new ArrayDeque<HttpTask>();
 		isActive = true;
 	}
 	
 	public synchronized void offer(HttpTask t) {
-		logger.info("offered new task: " + t.getSocket());
-		q.offer(t);
-		if (q.size() == 1) {
-			this.notify();
+		if (isActive) {
+			logger.info("offered new task: " + t.getSocket());
+			q.offer(t);
+			if (q.size() == 1) {
+				this.notify();
+			}
+		} else {
+			logger.error("offering task to a unactive task queue");
+			throw new IllegalStateException("The queue is deactivated");
 		}
+		
 	}
 	
 	public synchronized HttpTask poll() {
@@ -38,7 +45,11 @@ public class HttpTaskQueue {
 				logger.error("Error caught: The Polling is Interrupted (may not be an error) - " + e.getMessage());
 			}
 		}
-		HttpTask t = q.poll();
+		
+		HttpTask t = null;
+		if (isActive) {
+			t = q.poll();
+		}
 		logger.info("task polled: " + t);
 		return t;
 	}
@@ -46,5 +57,9 @@ public class HttpTaskQueue {
 	public synchronized void unactive() {
 		isActive = false;
 		this.notifyAll();
+	}
+	
+	public synchronized int size() {
+		return q.size();
 	}
 }

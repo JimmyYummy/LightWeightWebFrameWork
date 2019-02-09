@@ -11157,3 +11157,5 @@
 <li>2019-Feb-09 12:21:33 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50027 HaltException on Request Processing - 400 null null</li>
 <li>2019-Feb-09 12:21:34 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50031 HaltException on Request Processing - 404 Not Found  null</li>
 <li>2019-Feb-09 12:21:34 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50031 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-09 13:51:31 PM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
+<li>2019-Feb-09 13:52:41 PM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
