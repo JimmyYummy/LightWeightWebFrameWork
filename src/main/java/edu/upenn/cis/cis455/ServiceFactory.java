@@ -1,5 +1,6 @@
 package edu.upenn.cis.cis455;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.file.Path;
@@ -71,7 +72,7 @@ public class ServiceFactory {
                          Map<String, List<String>> parms) {
     	BasicRequest req = BasicRequest.getBasicRequestExceptBody(uri, headers, parms);
         try {
-        	req.addBody(socket.getInputStream());
+        	req.addBody(new BufferedInputStream(socket.getInputStream()));
 			req.persistentConnection(keepAlive);
         } catch (HaltException | IOException e) {
 			logger.error("Error on Creating new Request: " + e.getMessage());

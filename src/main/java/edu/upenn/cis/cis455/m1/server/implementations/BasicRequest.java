@@ -56,7 +56,7 @@ public class BasicRequest extends Request {
         	if (request.protocol.endsWith("1")) {
         		throw new HaltException(400, "the HTTP/1.1 request miss the host header");
         	} else {
-        		headers.put("host", "~~");
+        		headers.put("host", "=This-Server=");
         	}
         	
         }
@@ -65,8 +65,6 @@ public class BasicRequest extends Request {
 
         request.headers = new HashMap<String, String>(headers.size());
         // parse host header:
-        // get the port number
-        request.port = Integer.parseInt(headers.get("port"));
         
         // get the requested path from root
         String host = headers.get("host").split(";")[0];
@@ -84,6 +82,18 @@ public class BasicRequest extends Request {
         }
         String rawPath = start == end ? "/" : url.substring(start, end);
         request.headers.put("pathinfo", Paths.get("/" + rawPath).normalize().toString());
+        
+        // get the port number
+        if (headers.containsKey("port")) {
+        	request.port = Integer.parseInt(headers.get("port"));
+        } else {
+        	int portStart = rawPath.indexOf(':');
+        	if (portStart == -1) {
+        		request.port = 8080;
+        	} else {
+        		request.port = Integer.parseInt(rawPath.substring(portStart));
+        	}
+        }
         
         // put the rest of headers in the requst's header
         for (Map.Entry<String, String> ent : headers.entrySet()) {
@@ -107,6 +117,10 @@ public class BasicRequest extends Request {
         	request.persistentConnection(false);
     	} else {
     		request.persistentConnection(true);
+        }
+        // user-agent
+        if (! request.headers.containsKey("useragent")) {
+        	request.headers.put("useragent", "UNKNOWN");
         }
         
         return request;
@@ -343,7 +357,7 @@ public class BasicRequest extends Request {
 
 	@Override
 	public String toString() {
-		return "" + method + " " + url + " " + protocol + " persisit: " + persistentConnection() + " port: " + port + "\n" + headers + "\n" + body();
+		return "" + method + " " + url + " " + protocol + " persist? " + persistentConnection() + " port: " + port + "\n" + headers + "\n" + body();
 	}
 	
 	public Session session() {
