@@ -30,9 +30,9 @@ public class BasicResponse extends Response {
 		return String.format("%d\n\n%s\n\n%s", statusCode, getHeaders(), body());
 	}
 	
-	public boolean putHeader(String key, String val) {
-		return headers.put(key, val) != null;
-	}
+//	public boolean putHeader(String key, String val) {
+//		return headers.put(key, val) != null;
+//	}
 	
 	@Override
     public String type() {
