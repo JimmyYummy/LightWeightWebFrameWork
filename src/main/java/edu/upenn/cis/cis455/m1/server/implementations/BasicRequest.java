@@ -35,7 +35,7 @@ public class BasicRequest extends Request {
     private BasicRequest() {};
 	
     public static BasicRequest getBasicRequestExceptBody(String url, Map<String, String> headers,
-            Map<String, List<String>> params) {
+            Map<String, List<String>> parms) {
         // create request object
         BasicRequest request = new BasicRequest();
         // set request method

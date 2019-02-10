@@ -46,6 +46,7 @@ public class ServiceFactory {
 	private static HttpThreadPool pool;
 	private static Request exceptionRequest0;
 	private static Request exceptionRequest1;
+	private static Map<String, String> cookieToSession;
 	
     /**
      * Get the HTTP server associated with port 8080
@@ -77,7 +78,7 @@ public class ServiceFactory {
     }
     
     
-    private static Request createBasicRequest(Socket socket,
+    public static BasicRequest createBasicRequest(Socket socket,
                          String uri,
                          boolean keepAlive,
                          Map<String, String> headers,
@@ -127,8 +128,13 @@ public class ServiceFactory {
      * Gets a new HTTP Response object
      */
     public static Response createResponse() {
-        return new BasicResponse();
+        return createBasicResponse();
     }
+    
+	public static BasicResponse createBasicResponse() {
+		// TODO Auto-generated method stub
+		return new BasicResponse();
+	}
     
 	public static HandlerResolver getHandlerResolver() {
 		if (hr == null) {
@@ -206,5 +212,9 @@ public class ServiceFactory {
 			exceptionRequest1 = BasicRequest.getBasicRequestExceptBody(url, headers, params);
     	}
     	return exceptionRequest1;
+	}
+
+	public static String cookieToSessionId(String cookie) {
+		return cookieToSession.get(cookie);
 	}
 }

@@ -1,5 +1,7 @@
 package edu.upenn.cis.cis455.m2.server.implementations;
 
+import java.net.Socket;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -12,24 +14,51 @@ import edu.upenn.cis.cis455.m2.server.interfaces.Session;
 public class EnhancedRequest extends Request {
 	private BasicRequest innerRequest;
 	private Map<String, Object> attrs;
+	private Map<String, String> params;
+	private Map<String, List<String>> qParms;
+	private String queryString;
+
+	private Map<String, String> cookies;
 	private String sessionId;
 
-	private EnhancedRequest() {};
-	
-	public static EnhancedRequest getBasicRequestExceptBody(String url, Map<String, String> headers,
-            Map<String, List<String>> params) {
-		EnhancedRequest req = new EnhancedRequest();
-		return null;
+	@SuppressWarnings("unused")
+	private EnhancedRequest() {
+	};
+
+	public EnhancedRequest(Socket socket, String uri, boolean keepAlive, Map<String, String> headers,
+			Map<String, List<String>> parms) {
+		this.innerRequest = ServiceFactory.createBasicRequest(socket, uri, keepAlive, headers, parms);
+		this.attrs = new HashMap<>();
+		this.params = new HashMap<>();
+		this.qParms = parms;
+		
+		int qStart = uri.indexOf('?');
+		queryString = qStart == -1 ? "" : uri.substring(qStart);
+		
+		cookies = new HashMap<>();
+		if (headers.containsKey("cookie")) {
+			String[] cookiePairs = headers.get("cookie").split(";");
+			for (String cookiePair : cookiePairs) {
+				int equalPosition = cookiePair.indexOf("=");
+				if (equalPosition == -1) {
+					break;
+				}
+				String key = cookiePair.substring(0, equalPosition);
+				String val = cookiePair.substring(equalPosition + 1);
+				cookies.put(key, val);
+			}
+		}
+		sessionId = cookies.getOrDefault("id", null);
 	}
-	
+
 	@Override
 	public Session session() {
 		return session(true);
 	}
-	
+
 	@Override
 	public Session session(boolean create) {
-		if (ServiceFactory.getSession(sessionId) == null)  {
+		if (ServiceFactory.getSession(sessionId) == null) {
 			if (create) {
 				sessionId = ServiceFactory.createSession();
 			} else {
@@ -41,140 +70,121 @@ public class EnhancedRequest extends Request {
 
 	@Override
 	public Map<String, String> params() {
-		// TODO Auto-generated method stub
-		return null;
+		return params;
 	}
 
 	@Override
 	public String queryParams(String param) {
-		// TODO Auto-generated method stub
-		return null;
+		return qParms.get(param).toString();
 	}
 
 	@Override
 	public List<String> queryParamsValues(String param) {
-		// TODO Auto-generated method stub
-		return null;
+		return qParms.get(param);
 	}
 
 	@Override
 	public Set<String> queryParams() {
-		// TODO Auto-generated method stub
-		return null;
+		return qParms.keySet();
 	}
 
 	@Override
 	public String queryString() {
-		// TODO Auto-generated method stub
-		return null;
+		return queryString;
 	}
 
 	@Override
 	public void attribute(String attrib, Object val) {
-		// TODO Auto-generated method stub
+		attrs.put(attrib, val);
 
 	}
 
 	@Override
 	public Object attribute(String attrib) {
-		// TODO Auto-generated method stub
-		return null;
+		return attrs.get(attrib);
 	}
 
 	@Override
 	public Set<String> attributes() {
-		// TODO Auto-generated method stub
-		return null;
+		return attrs.keySet();
 	}
 
 	@Override
 	public Map<String, String> cookies() {
-		// TODO Auto-generated method stub
-		return null;
+		return cookies;
 	}
+	
+	
+	// Old Methods from M1
 
 	@Override
 	public String requestMethod() {
-		// TODO Auto-generated method stub
-		return null;
+		return innerRequest.requestMethod();
 	}
 
 	@Override
 	public String host() {
-		// TODO Auto-generated method stub
-		return null;
+		return innerRequest.host();
 	}
 
 	@Override
 	public String userAgent() {
-		// TODO Auto-generated method stub
-		return null;
+		return innerRequest.userAgent();
 	}
 
 	@Override
 	public int port() {
-		// TODO Auto-generated method stub
-		return 0;
+		return innerRequest.port();
 	}
 
 	@Override
 	public String pathInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return innerRequest.pathInfo();
 	}
 
 	@Override
 	public String url() {
-		// TODO Auto-generated method stub
-		return null;
+		return innerRequest.url();
 	}
 
 	@Override
 	public String uri() {
-		// TODO Auto-generated method stub
-		return null;
+		return innerRequest.uri();
 	}
 
 	@Override
 	public String protocol() {
-		// TODO Auto-generated method stub
-		return null;
+		return innerRequest.protocol();
 	}
 
 	@Override
 	public String contentType() {
-		// TODO Auto-generated method stub
-		return null;
+		return innerRequest.contentType();
 	}
 
 	@Override
 	public String ip() {
-		// TODO Auto-generated method stub
-		return null;
+		return innerRequest.ip();
 	}
 
 	@Override
 	public String body() {
-		// TODO Auto-generated method stub
-		return null;
+		return innerRequest.body();
 	}
 
 	@Override
 	public int contentLength() {
-		// TODO Auto-generated method stub
-		return 0;
+		return innerRequest.contentLength();
 	}
 
 	@Override
 	public String headers(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return innerRequest.headers(name);
 	}
 
 	@Override
 	public Set<String> headers() {
-		// TODO Auto-generated method stub
-		return null;
+		return innerRequest.headers();
 	}
 
 }
