@@ -23,7 +23,7 @@ public class BasicSession extends Session {
 		creationTime = Instant.now().toEpochMilli();
 		lastAccessedTime = creationTime;
 		valid = true;
-		validInterval = 600000;
+		validInterval = 1800;
 		attrs = new HashMap<>();
 	}
 	
@@ -43,8 +43,10 @@ public class BasicSession extends Session {
 	}
 
 	@Override
-	public void invalidate() {
+	public synchronized void invalidate() {
 		valid = false;
+		attrs.clear();
+		// checkout from service factory
 	}
 
 	@Override
@@ -53,17 +55,19 @@ public class BasicSession extends Session {
 	}
 
 	@Override
-	public void maxInactiveInterval(int interval) {
+	public synchronized void maxInactiveInterval(int interval) {
+		access();
 		validInterval = interval;
 	}
 
 	@Override
-	public void access() {
+	public synchronized void access() {
 		lastAccessedTime = Instant.now().toEpochMilli();
 	}
 
 	@Override
-	public void attribute(String name, Object value) {
+	public synchronized void attribute(String name, Object value) {
+		access();
 		attrs.put(name, value);
 	}
 
@@ -71,17 +75,23 @@ public class BasicSession extends Session {
 	/**
 	 * return null if the entry does not exist
 	 */
-	public Object attribute(String name) {
+	public synchronized Object attribute(String name) {
+		access();
 		return attrs.getOrDefault(name, null);
 	}
 
 	@Override
-	public Set<String> attributes() {
-		return attrs.keySet();
+	public synchronized Set<String> attributes() {
+		access();
+		if (valid) {
+			return attrs.keySet();
+		}
+		return null;
 	}
 
 	@Override
-	public void removeAttribute(String name) {
+	public synchronized void removeAttribute(String name) {
+		access();
 		attrs.remove(name);
 	}
 
