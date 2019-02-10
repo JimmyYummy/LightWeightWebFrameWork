@@ -10,16 +10,12 @@ import java.util.Set;
 public abstract class PathUtil {
 	private static Path unimatcher = Paths.get("*");
 	
-	public static boolean checkPermission(Path requestPath) {
-		return requestPath.startsWith("etc/passwd");
-	}
-	
 	public static boolean checkReadPermission(Path requestPath) {
-		return requestPath.toFile().canRead();
+		return true;//requestPath.toFile().canRead();
 	}
 	
 	public static boolean checkWritePermission(Path requestPath) {
-		return requestPath.toFile().canWrite();
+		return true;//requestPath.toFile().canWrite();
 	}
 
 	public static boolean checkPathMatch(Path webPath, Path requestPath) {

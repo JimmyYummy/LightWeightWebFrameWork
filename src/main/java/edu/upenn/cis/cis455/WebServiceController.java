@@ -34,7 +34,7 @@ package edu.upenn.cis.cis455;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.handlers.Filter;
 import edu.upenn.cis.cis455.handlers.Route;
-import edu.upenn.cis.cis455.m1.server.interfaces.WebService;
+import edu.upenn.cis.cis455.m2.server.interfaces.WebService;
 
 public class WebServiceController {
     
@@ -184,5 +184,9 @@ public class WebServiceController {
      */
     public static void stop() {
         getInstance().stop();
+    }
+    
+    public static void before(Filter filter) {
+    	getInstance().before(filter);
     }
 }

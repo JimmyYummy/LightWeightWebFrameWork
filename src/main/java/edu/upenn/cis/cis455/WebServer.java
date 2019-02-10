@@ -2,6 +2,7 @@ package edu.upenn.cis.cis455;
 
 import org.apache.logging.log4j.Level;
 
+import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m2.server.interfaces.WebService;
 
 import java.util.*;
@@ -108,6 +109,12 @@ public class WebServer {
         staticFileLocation(rootPath);
         port(port);
         awaitInitialization();
+        before((req, res) -> {
+        	if (req.pathInfo().equals("/etc/passwd")) {
+        		throw new HaltException(403, "Access forbidden");
+        	}
+        });
+        
 //        get("/", (req, res) -> {
 //        	return "Hello world";
 //        });

@@ -11194,3 +11194,18 @@
 <li>2019-Feb-09 19:30:10 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 58173 HaltException on Request Processing - 404 Not Found  null</li>
 <li>2019-Feb-09 19:30:10 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 58173 HaltException on Request Processing - 400 null null</li>
 <li>2019-Feb-10 02:01:41 AM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
+<li>2019-Feb-10 02:35:04 AM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52841 HaltException on Request Processing - 403 Permission Denied on the requested path. null</li>
+<li>2019-Feb-10 02:35:04 AM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52841 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-10 02:35:05 AM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52842 HaltException on Request Processing - 403 Permission Denied on the requested path. null</li>
+<li>2019-Feb-10 02:35:05 AM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52842 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-10 02:35:28 AM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52844 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-10 02:37:22 AM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52918 HaltException on Request Processing - 403 Permission Denied on the requested path. null</li>
+<li>2019-Feb-10 02:37:22 AM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52918 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-10 02:37:23 AM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52919 HaltException on Request Processing - 403 Permission Denied on the requested path. null</li>
+<li>2019-Feb-10 02:37:23 AM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52919 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-10 02:39:02 AM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52920 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-10 02:39:58 AM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 53001 HaltException on Request Processing - 404 Not Found etc/passwd null</li>
+<li>2019-Feb-10 02:39:58 AM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 53001 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-10 02:40:49 AM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 53002 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-10 02:40:58 AM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 53041 HaltException on Request Processing - 403 Access forbidden null</li>
+<li>2019-Feb-10 02:40:58 AM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 53041 HaltException on Request Processing - 400 null null</li>

@@ -39,7 +39,7 @@ public class SingleAppWebService extends WebService {
 		if (context.isActive()) {
 			throw new IllegalStateException("The service is already running");
 		}
-		context.setRunning();
+		context.isActive = true;
 		if (basicServer == null) {
 			basicServer = ServiceFactory.getHttpServer();
 		}
@@ -157,7 +157,7 @@ public class SingleAppWebService extends WebService {
 	
 	@Override
 	public void before(Filter filter) {
-		if (context.isActive()) {
+		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
 		context.beforeGeneralFilters.add(filter);
@@ -168,7 +168,7 @@ public class SingleAppWebService extends WebService {
      * Add filters that get called after a request
      */
     public void after(Filter filter) {
-		if (context.isActive()) {
+		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
     	context.afterGeneralFilters.add(filter);
@@ -179,7 +179,7 @@ public class SingleAppWebService extends WebService {
      * Add filters that get called before a request
      */
     public void before(String path, String acceptType, Filter filter) {
-		if (context.isActive()) {
+		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
     	
@@ -200,7 +200,7 @@ public class SingleAppWebService extends WebService {
      * Add filters that get called after a request
      */
     public void after(String path, String acceptType, Filter filter) {
-		if (context.isActive()) {
+		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
     	
@@ -276,10 +276,6 @@ public class SingleAppWebService extends WebService {
 		
 		public boolean isActive() {
 			return isActive; 
-		}
-		
-		protected void setRunning() {
-			this.isActive = true;
 		}
 
 		/**

@@ -17,7 +17,6 @@ import edu.upenn.cis.cis455.m1.server.HandlerResolver;
 import edu.upenn.cis.cis455.m1.server.HttpMethod;
 import edu.upenn.cis.cis455.m1.server.HttpServer;
 import edu.upenn.cis.cis455.m1.server.HttpThreadPool;
-import edu.upenn.cis.cis455.m1.server.implementations.Application;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicRequest;
 import edu.upenn.cis.cis455.m1.server.implementations.BasicResponse;
 import edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler;
@@ -57,10 +56,6 @@ public class ServiceFactory {
     		ws = new SingleAppWebService();
     	}
         return ws;
-    }
-    
-    public static Application getNewApplication() {
-    	return new Application();
     }
     
     public static WebService getNewWebService() {
