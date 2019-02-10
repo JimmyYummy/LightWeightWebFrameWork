@@ -13,8 +13,8 @@ public class HeadRequestHandler extends GetRequestHandler {
 	
 	protected final static Logger logger = LogManager.getLogger(HeadRequestHandler.class);
 
-	public HeadRequestHandler(Context context, HttpServer server) {
-		super(context, server);
+	public HeadRequestHandler(Context context) {
+		super(context);
 	}
 
 	@Override

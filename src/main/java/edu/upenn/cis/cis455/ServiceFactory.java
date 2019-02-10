@@ -109,9 +109,9 @@ public class ServiceFactory {
 	public static BasicRequestHandler createReqeustHandler(HttpMethod method, Context context) {
 		switch (method) {
 		case GET:
-			return new GetRequestHandler(context, hs);
+			return new GetRequestHandler(context);
 		case HEAD:
-			return new HeadRequestHandler(context, hs);
+			return new HeadRequestHandler(context);
 		case POST:
 			return new PostRequestHandler(context);
 		case PUT:

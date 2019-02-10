@@ -5,6 +5,12 @@ import org.apache.logging.log4j.Level;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m2.server.interfaces.WebService;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import static edu.upenn.cis.cis455.WebServiceController.*;
 
@@ -115,6 +121,46 @@ public class WebServer {
         	}
         });
         
+        get("/control", (req, res) -> {
+        	Path errorLogPath = Paths.get("error.log");
+        	res.type("text/html");
+    		StringBuilder sb = new StringBuilder();
+    		Map<String, String> infos = ServiceFactory.getHttpServer().getThreadPoolInfo();
+    		// start of doc
+    		sb.append("<!DOCTYPE html>\n<html>\n<head>\n<title>Control Panel</title>\n</head>\n"
+    				+ "<body>\n<h1>Control Panel</h1>\n<ul>\n");
+    		// ThreadPool Monitor
+    		sb.append("<li>Thread Pool:\n" + "	<ul>\n");
+    		for (Map.Entry<String, String> threadInfo : infos.entrySet()) {
+    			sb.append(String.format("<li>%s: %s</li>\n", threadInfo.getKey(), threadInfo.getValue()));
+    		}
+    		// Shutdown URL
+    		sb.append("	</ul>\n" + "</li>\n" + "<li><a href=\"/shutdown\">Shut down</a></li>\n");
+    		// Error log
+    		File errorLogFile = errorLogPath.toFile();
+    		if (errorLogFile.exists() && errorLogFile.isFile() && errorLogFile.canRead()) {
+    			try {
+    				BufferedReader reader = new BufferedReader(new FileReader(errorLogFile));
+    				sb.append("<li>Error Log:\n" + "	<ul>\n");
+    				String line = null;
+    				while ((line = reader.readLine()) != null) {
+    					sb.append(line);
+    				}
+    			} catch (IOException e) {
+    				e.printStackTrace();
+    			} finally {
+
+    			}
+    		}
+    		// end of doc
+    		sb.append("</ul>\n</body>\n</html>");
+    		return sb.toString();
+        });
+        
+        get("/shutdown", (req, res) -> {
+        	stop();
+    		return "The server is shut down.";
+        });
 //        get("/", (req, res) -> {
 //        	return "Hello world";
 //        });
