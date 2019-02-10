@@ -106,11 +106,6 @@ public class HttpWorker extends Thread {
 					persist = true;
 				}
 				req.persistentConnection(persist);
-				// send an 100 response
-				if (req.headers("protocolVersion").equals("HTTP/1.1")) {
-					logger.info("sending 100 response");
-					HttpIoHandler.sendContinueResponse(sc);
-				}
 				// find the proper router
 				HttpRequestHandler handler = null;
 				if ((handler = server.getHandlerResolver().getHandler(req.port())) == null) {

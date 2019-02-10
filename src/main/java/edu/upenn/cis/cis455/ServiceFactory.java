@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import edu.upenn.cis.cis455.m2.server.interfaces.WebService;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m1.server.HandlerResolver;
+import edu.upenn.cis.cis455.m1.server.HttpIoHandler;
 import edu.upenn.cis.cis455.m1.server.HttpMethod;
 import edu.upenn.cis.cis455.m1.server.HttpServer;
 import edu.upenn.cis.cis455.m1.server.HttpThreadPool;
@@ -84,6 +85,11 @@ public class ServiceFactory {
 			headers.put("useragent", headers.get("user-agent"));
 		}
     	BasicRequest req = BasicRequest.getBasicRequestExceptBody(uri, headers, parms);
+    	// send an 100 response
+		if (req.headers("protocolVersion").equals("HTTP/1.1")) {
+			logger.info("sending 100 response");
+			HttpIoHandler.sendContinueResponse(socket);
+		}
         try {
         	req.addBody(new BufferedInputStream(socket.getInputStream()));
 			req.persistentConnection(keepAlive);

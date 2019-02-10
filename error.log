@@ -11209,3 +11209,5 @@
 <li>2019-Feb-10 02:40:49 AM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 53002 HaltException on Request Processing - 400 null null</li>
 <li>2019-Feb-10 02:40:58 AM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 53041 HaltException on Request Processing - 403 Access forbidden null</li>
 <li>2019-Feb-10 02:40:58 AM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 53041 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-10 07:49:18 AM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
+<li>2019-Feb-10 07:50:16 AM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
