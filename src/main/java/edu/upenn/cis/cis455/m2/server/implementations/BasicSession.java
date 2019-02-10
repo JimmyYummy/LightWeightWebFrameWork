@@ -64,7 +64,6 @@ public class BasicSession extends Session {
 
 	@Override
 	public void attribute(String name, Object value) {
-		access();
 		attrs.put(name, value);
 	}
 
@@ -73,19 +72,16 @@ public class BasicSession extends Session {
 	 * return null if the entry does not exist
 	 */
 	public Object attribute(String name) {
-		access();
 		return attrs.getOrDefault(name, null);
 	}
 
 	@Override
 	public Set<String> attributes() {
-		access();
 		return attrs.keySet();
 	}
 
 	@Override
 	public void removeAttribute(String name) {
-		access();
 		attrs.remove(name);
 	}
 

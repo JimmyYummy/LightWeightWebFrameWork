@@ -84,8 +84,8 @@ public class GetRequestHandler extends BasicRequestHandler {
 		StringBuilder sb = new StringBuilder();
 		Map<String, String> infos = server.getThreadPoolInfo();
 		// start of doc
-		sb.append("<!DOCTYPE html>\n<html>\n<head>\n<title>Sample File</title>\n</head>\n"
-				+ "<body>\n<h1>Welcome</h1>\n<ul>\n");
+		sb.append("<!DOCTYPE html>\n<html>\n<head>\n<title>Control Panel</title>\n</head>\n"
+				+ "<body>\n<h1>Control Panel</h1>\n<ul>\n");
 		// ThreadPool Monitor
 		sb.append("<li>Thread Pool:\n" + "	<ul>\n");
 		for (Map.Entry<String, String> threadInfo : infos.entrySet()) {

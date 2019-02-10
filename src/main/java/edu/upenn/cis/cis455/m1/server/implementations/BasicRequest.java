@@ -42,7 +42,7 @@ public class BasicRequest extends Request {
         String method = headers.get("Method").split(";")[0];
         request.method = Enum.valueOf(HttpMethod.class, method);
         // get version of the request
-        String protocolVersion = headers.get("protocolVersion").split(";")[0];
+        String protocolVersion = headers.get("protocolVersion").split(";")[0].toUpperCase();
         if ("HTTP/1.0".equals(protocolVersion) || "HTTP/1.1".equals(protocolVersion)) {
             request.protocol = protocolVersion;
         } else {

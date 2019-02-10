@@ -26,6 +26,7 @@ import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
 import edu.upenn.cis.cis455.m1.server.interfaces.Response;
+import edu.upenn.cis.cis455.m2.server.implementations.BasicCookie;
 import edu.upenn.cis.cis455.m2.server.interfaces.Session;
 import edu.upenn.cis.cis455.methodHandlers.BasicRequestHandler;
 import edu.upenn.cis.cis455.methodHandlers.DeleteRequestHandler;
@@ -216,5 +217,14 @@ public class ServiceFactory {
 
 	public static String cookieToSessionId(String cookie) {
 		return cookieToSession.get(cookie);
+	}
+	
+	public static BasicCookie createCookie(String path, String name, String value, 
+			int maxAge, boolean secured, boolean httpOnly) {
+		return new BasicCookie(path, name, value, maxAge, secured, httpOnly);
+	}
+	
+	public static BasicCookie createMockCookie(String path, String name) {
+		return new BasicCookie(path, name, "", -1, false, false);
 	}
 }
