@@ -77,6 +77,7 @@ public class HttpWorker extends Thread {
 		while (keepActive) {
 			Request req = null;
 			Response res = null;
+			int version = 0;
 			try {
 				// generate the request
 				logger.info("parsing the inital line and headers one socket: " + sc);
@@ -85,21 +86,26 @@ public class HttpWorker extends Thread {
 				String clientAddr = sc.getInetAddress().toString();
 				InputUtil.skipBlankLines(in);
 				String uri = HttpParsing.parseRequest(clientAddr, in, headers, parms);
-				if (headers.containsKey("user-agent")) {
-					headers.put("useragent", headers.get("user-agent"));
-				}
+				
 				headers.put("port", String.valueOf(task.getPort()));
 				logger.info("Accepting request for " + uri + " from " + clientAddr + "\nwith header: " + headers);
-				// generate the request object, take care of chucked request
-				BasicRequest breq = null;
-				try {
-					breq = BasicRequest.getBasicRequestExceptBody(uri, headers, parms);
-					logger.info("Get request without body from: " + clientAddr);
-					breq.addBody(in);
-					logger.info("Get reqesut with body: " + breq);
-				} finally {
-					req = breq;
+				
+				// get the version of the default request for exception
+				String protocolVersion = headers.get("protocolVersion").split(";")[0].trim().toUpperCase();
+				if (protocolVersion.endsWith("1")) {
+					version = 1;
 				}
+				
+				// generate the request object, take care of chucked request
+				req = ServiceFactory.createRequest(sc, uri, false, headers, parms);
+				
+				// check if is persistent connection
+				boolean persist = false;
+				if (req.protocol().equals("HTTP/1.1")
+					&& ! "close".equals(req.headers("connection"))){
+					persist = true;
+				}
+				req.persistentConnection(persist);
 				// send an 100 response
 				if (req.headers("protocolVersion").equals("HTTP/1.1")) {
 					logger.info("sending 100 response");
@@ -130,7 +136,7 @@ public class HttpWorker extends Thread {
 				// return error response if error occurs
 				// persistent? (based on the handler's response)
 				if (req == null)
-					req = ServiceFactory.getRequestForException();
+					req = ServiceFactory.getRequestForException(version);
 				if (!HttpIoHandler.sendException(sc, req, e)) {
 					logger.info("closed connection: " + sc);
 					try {
@@ -145,6 +151,10 @@ public class HttpWorker extends Thread {
 				logger.error("Error caught: Unexception Exception on Task Working - " + e.getMessage());
 				e.printStackTrace();
 				HaltException he = new HaltException(500, e.getMessage());
+				if (req == null) {
+					req = ServiceFactory.getRequestForException(version);
+				}
+				
 				if (!HttpIoHandler.sendException(sc, req, he)) {
 					logger.info("closed connection: " + sc);
 					try {

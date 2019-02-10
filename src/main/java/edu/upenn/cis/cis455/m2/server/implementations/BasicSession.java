@@ -1,4 +1,4 @@
-package edu.upenn.cis.cis455.m1.server.implementations;
+package edu.upenn.cis.cis455.m2.server.implementations;
 
 import java.time.Instant;
 import java.util.UUID;

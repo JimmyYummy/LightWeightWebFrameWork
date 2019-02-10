@@ -66,7 +66,8 @@ public class PutRequestHandler extends BasicRequestHandler {
             // in file using OutputStream 
             OutputStream os = new FileOutputStream(requestedFile); 
             // Starts writing the bytes in it 
-            os.write(bytes); 
+            os.write(bytes);
+            os.flush();
             logger.info("file wrote: " + requestPath);
             // Close the file 
             os.close(); 

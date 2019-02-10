@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,6 +44,8 @@ public class ServiceFactory {
 	private static HandlerResolver hr;
 	private static HttpServer hs;
 	private static HttpThreadPool pool;
+	private static Request exceptionRequest0;
+	private static Request exceptionRequest1;
 	
     /**
      * Get the HTTP server associated with port 8080
@@ -66,10 +69,23 @@ public class ServiceFactory {
      * Create an HTTP request given an incoming socket
      */
     public static Request createRequest(Socket socket,
+            String uri,
+            boolean keepAlive,
+            Map<String, String> headers,
+            Map<String, List<String>> parms) {
+    	return createBasicRequest(socket, uri, keepAlive, headers, parms);
+    }
+    
+    
+    private static Request createBasicRequest(Socket socket,
                          String uri,
                          boolean keepAlive,
                          Map<String, String> headers,
                          Map<String, List<String>> parms) {
+    	
+    	if (headers.containsKey("user-agent")) {
+			headers.put("useragent", headers.get("user-agent"));
+		}
     	BasicRequest req = BasicRequest.getBasicRequestExceptBody(uri, headers, parms);
         try {
         	req.addBody(new BufferedInputStream(socket.getInputStream()));
@@ -78,10 +94,6 @@ public class ServiceFactory {
 			logger.error("Error on Creating new Request: " + e.getMessage());
 		}
         return req;
-    }
-    
-    public static Request getRequestForException() {
-    	return BasicRequest.getRequestForException();
     }
     
     /**
@@ -161,4 +173,38 @@ public class ServiceFactory {
         
         return null;
     }
+    
+    public static Request getRequestForException(int version) {
+    	if (version == 1) {
+    		return getRequestForException1();
+    	}
+		return getRequestForException0();
+
+    }
+
+	private static Request getRequestForException0() {
+		if (exceptionRequest0 == null) {
+			Map<String, String> headers = new HashMap<>();
+			headers.put("protocolVersion", "HTTP/1.0");
+			headers.put("Method", "GET");
+			Map<String, List<String>> params = new HashMap<>();
+			String url = "";
+			exceptionRequest0 = BasicRequest.getBasicRequestExceptBody(url, headers, params);
+    	}
+    	return exceptionRequest0;
+	}
+
+	private static Request getRequestForException1() {
+		if (exceptionRequest1 == null) {
+			Map<String, String> headers = new HashMap<>();
+			headers.put("protocolVersion", "HTTP/1.1");
+			headers.put("connection", "close");
+			headers.put("host", "This Host");
+			headers.put("Method", "GET");
+			Map<String, List<String>> params = new HashMap<>();
+			String url = "";
+			exceptionRequest1 = BasicRequest.getBasicRequestExceptBody(url, headers, params);
+    	}
+    	return exceptionRequest1;
+	}
 }

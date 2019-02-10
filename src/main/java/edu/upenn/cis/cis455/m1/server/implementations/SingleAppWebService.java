@@ -155,6 +155,7 @@ public class SingleAppWebService extends WebService {
 		context.threadNum = threads;
 	}
 	
+	@Override
 	public void before(Filter filter) {
 		if (context.isActive()) {
 			this.awaitInitialization();
@@ -162,6 +163,7 @@ public class SingleAppWebService extends WebService {
 		context.beforeGeneralFilters.add(filter);
 	}
 
+	@Override
     /**
      * Add filters that get called after a request
      */
@@ -171,6 +173,8 @@ public class SingleAppWebService extends WebService {
 		}
     	context.afterGeneralFilters.add(filter);
     }
+    
+    @Override
     /**
      * Add filters that get called before a request
      */
@@ -190,6 +194,8 @@ public class SingleAppWebService extends WebService {
     	}
     	typeFilterMap.get(acceptType).add(filter);
     }
+    
+    @Override
     /**
      * Add filters that get called after a request
      */

@@ -11159,3 +11159,35 @@
 <li>2019-Feb-09 12:21:34 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50031 HaltException on Request Processing - 400 null null</li>
 <li>2019-Feb-09 13:51:31 PM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
 <li>2019-Feb-09 13:52:41 PM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
+<li>2019-Feb-09 13:57:06 PM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50495 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-09 14:01:21 PM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50739 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-09 19:05:29 PM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
+<li>2019-Feb-09 19:08:37 PM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
+<li>2019-Feb-09 18:23:43 PM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
+<li>2019-Feb-09 18:23:51 PM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
+<li>2019-Feb-09 18:24:12 PM [Daemon Thread-Port:8888] ERROR edu.upenn.cis.cis455.m1.server.HttpServer - Error caught:IOException on Server Listening (might be called by user)- Address already in use (Bind failed)</li>
+<li>2019-Feb-09 18:26:16 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55897 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-09 18:26:16 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55897 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-09 18:28:07 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55936 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-09 18:28:07 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55936 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-09 18:28:16 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55942 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-09 18:28:16 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55942 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-09 18:32:33 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - No enum constant edu.upenn.cis.cis455.m1.server.HttpMethod.xxx</li>
+<li>2019-Feb-09 18:37:03 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - No enum constant edu.upenn.cis.cis455.m1.server.HttpMethod.xxx</li>
+<li>2019-Feb-09 18:38:02 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56271 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-09 18:38:02 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56271 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-09 18:55:40 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56929 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-09 18:55:40 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56929 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-09 18:55:41 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56933 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-09 18:55:42 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56933 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-09 18:56:05 PM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56948 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-09 18:56:05 PM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56948 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-09 18:58:15 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 57026 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-09 18:58:15 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 57026 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-09 19:08:22 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 57420 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-09 19:08:22 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 57420 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-09 19:16:11 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 57669 HaltException on Request Processing - 400 the HTTP/1.1 request miss the host header null</li>
+<li>2019-Feb-09 19:18:04 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - Connection reset</li>
+<li>2019-Feb-09 19:18:04 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
+<li>2019-Feb-09 19:18:34 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - Connection reset</li>
+<li>2019-Feb-09 19:18:34 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>

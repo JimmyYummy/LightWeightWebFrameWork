@@ -31,11 +31,8 @@ public class BasicRequest extends Request {
 	private Map<String, String> headers;
 	private byte[] body;
 	private String bodyStr;
-	private String sessionId;
-	
-	private static BasicRequest exceptionRequest;
-    
-    public BasicRequest() {};
+	    
+    private BasicRequest() {};
 	
     public static BasicRequest getBasicRequestExceptBody(String url, Map<String, String> headers,
             Map<String, List<String>> params) {
@@ -109,32 +106,12 @@ public class BasicRequest extends Request {
         	request.contentLength = 0;
         }
         
-        // check if is persistent connection
-        if (request.protocol().equals("HTTP/1.0")) {
-        	request.persistentConnection(false);
-        } else if (request.headers.containsKey("connection")
-    			&& request.headers.get("connection").toLowerCase().equals("close")) {
-        	request.persistentConnection(false);
-    	} else {
-    		request.persistentConnection(true);
-        }
         // user-agent
         if (! request.headers.containsKey("useragent")) {
         	request.headers.put("useragent", "UNKNOWN");
         }
         
         return request;
-    }
-    
-    public static BasicRequest getRequestForException() {
-    	if (exceptionRequest == null) {
-    		BasicRequest r = new BasicRequest();
-    		r.protocol = "HTTP/1.1";
-    		r.headers = new HashMap<>();
-    		r.headers.put("connection", "close");
-    		exceptionRequest = r;
-    	}
-    	return exceptionRequest;
     }
     
     public void addBody(InputStream in) throws IOException {
@@ -358,21 +335,6 @@ public class BasicRequest extends Request {
 	@Override
 	public String toString() {
 		return "" + method + " " + url + " " + protocol + " persist? " + persistentConnection() + " port: " + port + "\n" + headers + "\n" + body();
-	}
-	
-	public Session session() {
-		return session(true);
-	}
-	
-	public Session session(boolean create) {
-		if (ServiceFactory.getSession(sessionId) == null)  {
-			if (create) {
-				sessionId = ServiceFactory.createSession();
-			} else {
-				sessionId = null;
-			}
-		}
-		return ServiceFactory.getSession(sessionId);
 	}
 
 }

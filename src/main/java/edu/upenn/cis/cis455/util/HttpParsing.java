@@ -416,7 +416,8 @@ public class HttpParsing {
             return "image/gif";
         if (path.endsWith("jpg") || path.endsWith("jpeg"))
             return "image/jpeg";
-            
+        if (path.endsWith("ico"))
+            return "image/x-icon";
         return "octet/stream";
     }
     
