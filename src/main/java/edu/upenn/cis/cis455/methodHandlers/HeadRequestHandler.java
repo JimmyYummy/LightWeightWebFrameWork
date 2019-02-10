@@ -26,5 +26,4 @@ public class HeadRequestHandler extends GetRequestHandler {
 		response.body("");
 		return handled;
 	}
-
 }

@@ -50,7 +50,6 @@ public class HttpServer implements ThreadManager {
 		Thread daemonThread = new Thread(()-> {
 			ServerSocket socket = null;
 			try {
-				
 				appCount.incrementAndGet();
 				socket = new ServerSocket(context.getPort());
 				context.putServSocket(socket);
