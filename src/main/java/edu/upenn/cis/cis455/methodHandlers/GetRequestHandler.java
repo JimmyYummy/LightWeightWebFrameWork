@@ -13,6 +13,7 @@ import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m2.server.interfaces.Request;
 import edu.upenn.cis.cis455.m2.server.interfaces.Response;
+import edu.upenn.cis.cis455.util.DateTimeUtil;
 import edu.upenn.cis.cis455.util.HttpParsing;
 import edu.upenn.cis.cis455.util.PathUtil;
 
@@ -65,6 +66,7 @@ public class GetRequestHandler extends BasicRequestHandler {
 			response.bodyRaw(allBytes);
 			response.type(HttpParsing.getMimeType(request.pathInfo()));
 			response.status(200);
+			response.header("last-modified", DateTimeUtil.miliToDate(requestedFile.lastModified()));
 			return true;
 		} catch (IOException e) {
 			logger.error("Error caught: FileIOException on GET - " + e.getMessage());

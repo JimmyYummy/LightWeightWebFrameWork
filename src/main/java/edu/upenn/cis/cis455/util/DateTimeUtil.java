@@ -1,5 +1,6 @@
 package edu.upenn.cis.cis455.util;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -15,12 +16,17 @@ public abstract class DateTimeUtil {
 	private static DateTimeFormatter formater1 = DateTimeFormatter.ofPattern("EEE, dd MMM yyyy HH:mm:ss zzz");
 	private static DateTimeFormatter formater2 = DateTimeFormatter.ofPattern("EEEE, dd-MMM-yy HH:mm:ss zzz");
 	private static DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern("EEE MMM dd HH:mm:ss yyyy zzz");
-
+	private static ZoneId zone = ZoneId.of("GMT");
 
 	public static String getDate() {
-    	ZoneId zone = ZoneId.of("GMT");
+    	
     	ZonedDateTime zonedDT = ZonedDateTime.of(LocalDateTime.now(), zone);
     	return zonedDT.format(formater1);
+	}
+	
+	public static String miliToDate(long mili) {
+		ZonedDateTime zonedDT = ZonedDateTime.ofInstant(Instant.ofEpochSecond(mili), zone);
+		return zonedDT.format(formater1);
 	}
 	
 	public static ZonedDateTime parseDate(String dateStr) {
