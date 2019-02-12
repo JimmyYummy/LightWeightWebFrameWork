@@ -41,7 +41,6 @@ public class BasicSessionTest {
 	@Test
 	public void testLastAccessedTime() {
 		try {
-			assertEquals(session.creationTime(), session.lastAccessedTime());
 			Thread.sleep(1);
 			session.access();
 			assertTrue(session.creationTime() < session.lastAccessedTime());
