@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import edu.upenn.cis.cis455.ServiceFactory;
 import edu.upenn.cis.cis455.m2.server.interfaces.Session;
 
 public class BasicSession extends Session {
@@ -46,7 +47,7 @@ public class BasicSession extends Session {
 	public synchronized void invalidate() {
 		valid = false;
 		attrs.clear();
-		// checkout from service factory
+		ServiceFactory.deregisterSession(id);
 	}
 
 	@Override
@@ -62,7 +63,11 @@ public class BasicSession extends Session {
 
 	@Override
 	public synchronized void access() {
-		lastAccessedTime = Instant.now().toEpochMilli();
+		long now = Instant.now().toEpochMilli();
+		if (lastAccessedTime + (long) validInterval * 1000 < now) {
+			invalidate();
+		}
+		lastAccessedTime = now;
 	}
 
 	@Override

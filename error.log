@@ -11228,3 +11228,29 @@
 <li>2019-Feb-10 10:45:56 AM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
 <li>2019-Feb-10 10:46:50 AM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 57348 HaltException on Request Processing - 400 BAD REQUEST: Missing URI. Usage: GET /example/file.html null</li>
 <li>2019-Feb-10 10:46:50 AM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
+<li>2019-Feb-11 11:28:58 AM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 51196 HaltException on Request Processing - 404 Not Found api/kernels/63ae1603-bd01-41a1-a18a-506e2f44a7ea/channels null</li>
+<li>2019-Feb-11 11:28:58 AM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - Connection reset</li>
+<li>2019-Feb-11 11:28:58 AM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
+<li>2019-Feb-11 11:28:58 AM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 51197 HaltException on Request Processing - 404 Not Found api/kernels/344a1ff3-dd23-4051-b78a-f1f52ce6709b/channels null</li>
+<li>2019-Feb-11 11:28:58 AM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - Connection reset</li>
+<li>2019-Feb-11 11:28:58 AM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
+<li>2019-Feb-11 11:29:03 AM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 51201 HaltException on Request Processing - 404 Not Found api/kernels/63ae1603-bd01-41a1-a18a-506e2f44a7ea/channels null</li>
+<li>2019-Feb-11 11:29:03 AM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - Connection reset</li>
+<li>2019-Feb-11 11:29:03 AM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
+<li>2019-Feb-11 11:29:06 AM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 51202 HaltException on Request Processing - 404 Not Found api/sessions null</li>
+<li>2019-Feb-11 11:29:06 AM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 51203 HaltException on Request Processing - 404 Not Found api/terminals null</li>
+<li>2019-Feb-11 11:29:06 AM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 51202 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-11 11:29:06 AM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 51203 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-11 18:59:32 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 60574 HaltException on Request Processing - 404 Not Found api/kernels/77220c08-fe29-43d2-a286-91faa0210663/channels null</li>
+<li>2019-Feb-11 18:59:32 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - Connection reset</li>
+<li>2019-Feb-11 18:59:32 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
+<li>2019-Feb-11 18:59:35 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 60575 HaltException on Request Processing - 404 Not Found api/kernels/77220c08-fe29-43d2-a286-91faa0210663/channels null</li>
+<li>2019-Feb-11 18:59:35 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - Connection reset</li>
+<li>2019-Feb-11 18:59:35 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
+<li>2019-Feb-11 18:59:39 PM [Thread-9] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 60579 HaltException on Request Processing - 404 Not Found api/kernels/77220c08-fe29-43d2-a286-91faa0210663/channels null</li>
+<li>2019-Feb-11 18:59:39 PM [Thread-9] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - Connection reset</li>
+<li>2019-Feb-11 18:59:39 PM [Thread-9] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
+<li>2019-Feb-11 18:59:48 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 60590 HaltException on Request Processing - 404 Not Found api/kernels/77220c08-fe29-43d2-a286-91faa0210663/channels null</li>
+<li>2019-Feb-11 18:59:48 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - Connection reset</li>
+<li>2019-Feb-11 18:59:48 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
+<li>2019-Feb-11 19:16:00 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 60910 HaltException on Request Processing - 403 Access forbidden null</li>

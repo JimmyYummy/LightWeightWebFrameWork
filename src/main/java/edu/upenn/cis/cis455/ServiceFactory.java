@@ -27,6 +27,7 @@ import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
 import edu.upenn.cis.cis455.m1.server.interfaces.Response;
 import edu.upenn.cis.cis455.m2.server.implementations.BasicCookie;
+import edu.upenn.cis.cis455.m2.server.implementations.BasicSession;
 import edu.upenn.cis.cis455.m2.server.interfaces.Session;
 import edu.upenn.cis.cis455.methodHandlers.BasicRequestHandler;
 import edu.upenn.cis.cis455.methodHandlers.DeleteRequestHandler;
@@ -47,7 +48,7 @@ public class ServiceFactory {
 	private static HttpThreadPool pool;
 	private static Request exceptionRequest0;
 	private static Request exceptionRequest1;
-	private static Map<String, String> cookieToSession;
+	private static Map<String, Session> idToSession = new HashMap<>();
 	
     /**
      * Get the HTTP server associated with port 8080
@@ -170,7 +171,9 @@ public class ServiceFactory {
      * Creates a blank session ID and registers a Session object for the request
      */
     public static String createSession() {
-        return null;
+    	Session session = new BasicSession();
+    	idToSession.put(session.id(), session);
+        return session.id();
     }
     
     /**
@@ -178,8 +181,14 @@ public class ServiceFactory {
      */
     public static Session getSession(String id) {
         if (id == null) return null;
-        
-        return null;
+        Session session = idToSession.getOrDefault(id, null);
+        if (session == null) return null;
+        session.access();
+        return idToSession.getOrDefault(id, null);
+    }
+    
+    public static void deregisterSession(String id) {
+    	idToSession.remove(id);
     }
     
     public static Request getRequestForException(int version) {
@@ -214,10 +223,6 @@ public class ServiceFactory {
 			exceptionRequest1 = BasicRequest.getBasicRequestExceptBody(url, headers, params);
     	}
     	return exceptionRequest1;
-	}
-
-	public static String cookieToSessionId(String cookie) {
-		return cookieToSession.get(cookie);
 	}
 	
 	public static BasicCookie createCookie(String path, String name, String value, 

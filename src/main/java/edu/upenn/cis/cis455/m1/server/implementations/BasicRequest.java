@@ -111,6 +111,9 @@ public class BasicRequest extends Request {
         	request.headers.put("useragent", "UNKNOWN");
         }
         
+        // normalize path info
+        request.headers.put("pathinfo", "/" + request.headers.get("pathinfo"));
+        
         return request;
     }
     
