@@ -11,7 +11,7 @@ import java.util.Map;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import edu.upenn.cis.cis455.m2.server.interfaces.WebService;
+import edu.upenn.cis.cis455.m2.server.interfaces.*;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m1.server.HandlerResolver;
 import edu.upenn.cis.cis455.m1.server.HttpIoHandler;
@@ -24,11 +24,10 @@ import edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler;
 import edu.upenn.cis.cis455.m1.server.implementations.SingleAppWebService;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
-import edu.upenn.cis.cis455.m1.server.interfaces.Request;
-import edu.upenn.cis.cis455.m1.server.interfaces.Response;
 import edu.upenn.cis.cis455.m2.server.implementations.BasicCookie;
 import edu.upenn.cis.cis455.m2.server.implementations.BasicSession;
-import edu.upenn.cis.cis455.m2.server.interfaces.Session;
+import edu.upenn.cis.cis455.m2.server.implementations.EnhancedRequest;
+import edu.upenn.cis.cis455.m2.server.implementations.EnhancedResponse;
 import edu.upenn.cis.cis455.methodHandlers.BasicRequestHandler;
 import edu.upenn.cis.cis455.methodHandlers.DeleteRequestHandler;
 import edu.upenn.cis.cis455.methodHandlers.GetRequestHandler;
@@ -72,7 +71,7 @@ public class ServiceFactory {
             boolean keepAlive,
             Map<String, String> headers,
             Map<String, List<String>> parms) {
-    	return createBasicRequest(socket, uri, keepAlive, headers, parms);
+    	return createEnhancedRequest(socket, uri, keepAlive, headers, parms);
     }
     
     
@@ -100,6 +99,28 @@ public class ServiceFactory {
         return req;
     }
     
+    public static EnhancedRequest createEnhancedRequest(Socket socket,
+            String uri,
+            boolean keepAlive,
+            Map<String, String> headers,
+            Map<String, List<String>> parms) {
+    	return new EnhancedRequest(socket, uri, keepAlive, headers, parms);
+    }
+    
+    /**
+     * Gets a new HTTP Response object
+     */
+    public static Response createResponse() {
+        return createEnhancedResponse();
+    }
+    
+	public static BasicResponse createBasicResponse() {
+		return new BasicResponse();
+	}
+    
+	public static EnhancedResponse createEnhancedResponse() {
+		return new EnhancedResponse();
+	}
     /**
      * Gets a request handler for files (i.e., static content) or dynamic content
      */
@@ -125,18 +146,6 @@ public class ServiceFactory {
 			return new BasicRequestHandler();
 		}
 
-	}
-
-    /**
-     * Gets a new HTTP Response object
-     */
-    public static Response createResponse() {
-        return createBasicResponse();
-    }
-    
-	public static BasicResponse createBasicResponse() {
-		// TODO Auto-generated method stub
-		return new BasicResponse();
 	}
     
 	public static HandlerResolver getHandlerResolver() {
@@ -206,7 +215,8 @@ public class ServiceFactory {
 			headers.put("Method", "GET");
 			Map<String, List<String>> params = new HashMap<>();
 			String url = "";
-			exceptionRequest0 = BasicRequest.getBasicRequestExceptBody(url, headers, params);
+			BasicRequest breq = BasicRequest.getBasicRequestExceptBody(url, headers, params);
+			exceptionRequest0 = EnhancedRequest.wrapBasicRequest(breq);
     	}
     	return exceptionRequest0;
 	}
@@ -220,7 +230,8 @@ public class ServiceFactory {
 			headers.put("Method", "GET");
 			Map<String, List<String>> params = new HashMap<>();
 			String url = "";
-			exceptionRequest1 = BasicRequest.getBasicRequestExceptBody(url, headers, params);
+			BasicRequest breq = BasicRequest.getBasicRequestExceptBody(url, headers, params);
+			exceptionRequest1 = EnhancedRequest.wrapBasicRequest(breq);
     	}
     	return exceptionRequest1;
 	}

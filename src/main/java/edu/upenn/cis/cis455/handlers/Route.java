@@ -28,8 +28,8 @@
  */
 package edu.upenn.cis.cis455.handlers;
 
-import edu.upenn.cis.cis455.m1.server.interfaces.Request;
-import edu.upenn.cis.cis455.m1.server.interfaces.Response;
+import edu.upenn.cis.cis455.m2.server.interfaces.Request;
+import edu.upenn.cis.cis455.m2.server.interfaces.Response;
 
 /**
  * A Route Handler is called when an HTTP request maps to the assigned route.

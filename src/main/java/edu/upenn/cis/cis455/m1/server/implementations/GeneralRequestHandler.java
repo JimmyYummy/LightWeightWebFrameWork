@@ -16,8 +16,8 @@ import edu.upenn.cis.cis455.handlers.Route;
 import edu.upenn.cis.cis455.m1.server.HttpMethod;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
-import edu.upenn.cis.cis455.m1.server.interfaces.Request;
-import edu.upenn.cis.cis455.m1.server.interfaces.Response;
+import edu.upenn.cis.cis455.m2.server.interfaces.Request;
+import edu.upenn.cis.cis455.m2.server.interfaces.Response;
 import edu.upenn.cis.cis455.methodHandlers.*;
 import edu.upenn.cis.cis455.util.PathUtil;
 
@@ -59,8 +59,14 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		}
 		return m;
 	}
-
+	
 	@Override
+	public void handle(edu.upenn.cis.cis455.m1.server.interfaces.Request request,
+			edu.upenn.cis.cis455.m1.server.interfaces.Response response) throws HaltException {
+		handle((Request) request, (Response) response);
+		
+	}
+
 	public void handle(Request request, Response response) throws HaltException {
 		// get the path of the request
 		Path requestPath = Paths.get(request.pathInfo()).normalize();

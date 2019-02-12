@@ -50,6 +50,12 @@ public class EnhancedRequest extends Request {
 		}
 		sessionId = cookies.getOrDefault("id", null);
 	}
+	
+	public static EnhancedRequest wrapBasicRequest(BasicRequest breq) {
+		EnhancedRequest req = new EnhancedRequest();
+		req.innerRequest = breq;
+		return req;
+	}
 
 	@Override
 	public Session session() {

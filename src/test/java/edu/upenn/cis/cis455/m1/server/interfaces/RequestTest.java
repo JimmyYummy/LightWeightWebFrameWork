@@ -52,7 +52,7 @@ public class RequestTest {
 
 	@Test
 	public void testPathInfo() {
-		assertEquals("/index.html", req.pathInfo());
+		assertEquals("//index.html", req.pathInfo());
 	}
 
 	@Test

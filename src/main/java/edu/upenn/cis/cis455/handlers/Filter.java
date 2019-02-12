@@ -1,7 +1,7 @@
 package edu.upenn.cis.cis455.handlers;
 
-import edu.upenn.cis.cis455.m1.server.interfaces.Request;
-import edu.upenn.cis.cis455.m1.server.interfaces.Response;
+import edu.upenn.cis.cis455.m2.server.interfaces.Request;
+import edu.upenn.cis.cis455.m2.server.interfaces.Response;
 
 /**
  * A Filter is called by the Web server to process data before the Route

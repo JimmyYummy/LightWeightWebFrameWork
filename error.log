@@ -11254,3 +11254,5 @@
 <li>2019-Feb-11 18:59:48 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - Connection reset</li>
 <li>2019-Feb-11 18:59:48 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
 <li>2019-Feb-11 19:16:00 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 60910 HaltException on Request Processing - 403 Access forbidden null</li>
+<li>2019-Feb-11 20:48:55 PM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
+<li>2019-Feb-11 20:50:37 PM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
