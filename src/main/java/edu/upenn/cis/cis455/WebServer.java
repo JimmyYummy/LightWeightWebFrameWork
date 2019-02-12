@@ -115,6 +115,7 @@ public class WebServer {
         staticFileLocation(rootPath);
         port(port);
         awaitInitialization();
+        
         before((req, res) -> {
         	Path secured = Paths.get("/etc/passwd");
         	Path reqPath = Paths.get(req.pathInfo());
@@ -166,51 +167,51 @@ public class WebServer {
     		return "The server is shut down.";
         });
         
-        get("/", (req, res) -> {
-        	res.redirect("/index.html");
-        	return "";
-        });
-        
-        get("/session/get", (req, res) -> {
-        	Session session = req.session();
-        	session.attribute("ip", req.ip());
-        	res.cookie("/session", "session-id", session.id());
-        	return "session created";
-        });
-        
-        get("/session/check", (req, res) -> {
-        	Session session = req.session(false);
-        	if (session == null) return "No built session for the client";
-        	return "Hello, client ip: " + session.attribute("ip") + " session-id: " + session.id();
-        });
-        
-        get("/outcheck", (req, res) -> {
-        	return "No session: " + (req.session(false) == null);
-        });
-        
-        get("/:user/sayhello", (req, res) -> {
-        	StringBuilder sb = new StringBuilder();
-        	sb.append("Hello, ");
-        	sb.append(req.params("user"));
-        	sb.append("! Your qureries are:\n");
-        	Set<String> queries = req.queryParams();
-        	for (String query : queries) {
-        		sb.append(String.format("\t%s: %s\n", query, req.queryParams(query)));
-        	}
-        	return sb.toString();
-        });
-        
+//        get("/", (req, res) -> {
+//        	res.redirect("/index.html");
+//        	return "";
+//        });
+//        
+//        get("/session/get", (req, res) -> {
+//        	Session session = req.session();
+//        	session.attribute("ip", req.ip());
+//        	res.cookie("/session", "session-id", session.id());
+//        	return "session created";
+//        });
+//        
+//        get("/session/check", (req, res) -> {
+//        	Session session = req.session(false);
+//        	if (session == null) return "No built session for the client";
+//        	return "Hello, client ip: " + session.attribute("ip") + " session-id: " + session.id();
+//        });
+//        
+//        get("/outcheck", (req, res) -> {
+//        	return "No session: " + (req.session(false) == null);
+//        });
+//        
+//        get("/:user/sayhello", (req, res) -> {
+//        	StringBuilder sb = new StringBuilder();
+//        	sb.append("Hello, ");
+//        	sb.append(req.params("user"));
+//        	sb.append("! Your qureries are:\n");
+//        	Set<String> queries = req.queryParams();
+//        	for (String query : queries) {
+//        		sb.append(String.format("\t%s: %s\n", query, req.queryParams(query)));
+//        	}
+//        	return sb.toString();
+//        });
+//      WebService ws = ServiceFactory.getNewWebService();
+//      ws.port(8889);
+//      ws.get("/compute", (req, res) -> {
+//      	
+//      	return fibonacciNum(40);
+//      });
+//      ws.awaitInitialization();        
         
         
         System.out.println("Waiting to handle requests!");
         
-//        WebService ws = ServiceFactory.getNewWebService();
-//        ws.port(8889);
-//        ws.get("/compute", (req, res) -> {
-//        	
-//        	return fibonacciNum(40);
-//        });
-//        ws.awaitInitialization();
+
             
     }
     
