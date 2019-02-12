@@ -45,10 +45,11 @@ public class BasicRequestHandler {
 		Path[] paths = routes.keySet().toArray(new Path[0]);
 		Arrays.sort(paths, Comparator.reverseOrder());
 		for (Path routePath : paths) {
-			if (PathUtil.checkPathMatch(routePath, requestPath)) {
+			if (PathUtil.checkPathMatch(routePath, requestPath, request)) {
 				try {
 					logger.info("reqeust " + request + " caught on path: " + routePath);
 					Object body = routes.get(routePath).handle(request, response);
+					if (body == null) body = "";
 					response.body(body.toString());
 
 				} catch (Exception e) {

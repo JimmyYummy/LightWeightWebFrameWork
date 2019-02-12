@@ -75,7 +75,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		logger.info("checking before filter");
 		try {
 			for (Path filterPath : typeBeforeFilters.keySet()) {
-				if (PathUtil.checkPathMatch(filterPath, requestPath)) {
+				if (PathUtil.checkPathMatch(filterPath, requestPath, request)) {
 					Map<String, List<Filter>> typeToFilters = typeBeforeFilters.get(filterPath);
 					if (typeToFilters.containsKey(response.type())) {
 						List<Filter> filters = typeToFilters.get(response.type());
@@ -113,7 +113,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 		logger.info("checking after filters");
 		try {
 			for (Path filterPath : typeAfterFilters.keySet()) {
-				if (PathUtil.checkPathMatch(filterPath, requestPath)) {
+				if (PathUtil.checkPathMatch(filterPath, requestPath, request)) {
 					Map<String, List<Filter>> typeToFilters = typeAfterFilters.get(filterPath);
 					if (typeToFilters.containsKey(response.type())) {
 						List<Filter> filters = typeToFilters.get(response.type());

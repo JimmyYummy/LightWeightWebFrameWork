@@ -7,6 +7,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import edu.upenn.cis.cis455.exceptions.HaltException;
+import edu.upenn.cis.cis455.m2.server.interfaces.Request;
+
 public abstract class PathUtil {
 	private static Path unimatcher = Paths.get("*");
 	
@@ -18,9 +21,9 @@ public abstract class PathUtil {
 		return true;//requestPath.toFile().canWrite();
 	}
 
-	public static boolean checkPathMatch(Path webPath, Path requestPath) {
-		// TODO: support update on requestPath
-		return checkPathMatch(0, 0, webPath, requestPath, new HashMap<>());
+	public static boolean checkPathMatch(Path webPath, Path requestPath, Request req) {
+		
+		return checkPathMatch(0, 0, webPath, requestPath, req.params());
 	}
 
 	private static boolean checkPathMatch(int fIdx, int rIdx, Path fPath, Path rPath, Map<String, String> params) {
@@ -39,10 +42,10 @@ public abstract class PathUtil {
 		String fEleStr = fPathEle.toString();
 		if (fEleStr.startsWith(":")) {
 			if (fEleStr.length() == 1) {
-				throw new IllegalArgumentException("Bad filter / router path: \":\" without name");
+				throw new HaltException(400, "Bad filter / router path: \":\" without name");
 			}
 			if (params.containsKey(fEleStr)) {
-				throw new IllegalArgumentException("Bad filter / router path: duplicate route parameter");
+				throw new HaltException(400, "Bad filter / router path: duplicate route parameter");
 			}
 			params.put(fEleStr, rPath.getName(rIdx).toString());
 			if (checkPathMatch(fIdx + 1, rIdx + 1, fPath, rPath, params)) {

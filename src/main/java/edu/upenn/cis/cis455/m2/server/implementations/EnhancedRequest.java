@@ -48,7 +48,7 @@ public class EnhancedRequest extends Request {
 				cookies.put(key, val);
 			}
 		}
-		sessionId = cookies.getOrDefault("id", null);
+		sessionId = cookies.getOrDefault("session-id", null);
 	}
 	
 	public static EnhancedRequest wrapBasicRequest(BasicRequest breq) {
