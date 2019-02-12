@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -44,7 +46,7 @@ public class BasicRequest extends Request {
         if ("HTTP/1.0".equals(protocolVersion) || "HTTP/1.1".equals(protocolVersion)) {
             request.protocol = protocolVersion;
         } else {
-            throw new IllegalArgumentException("Unsupported Http protocol verison");
+            throw new HaltException(505, "Unsupported Http protocol verison");
         }
         // check host header for http/1.1
         if (! headers.containsKey("host")) {
@@ -191,7 +193,7 @@ public class BasicRequest extends Request {
     		if (splitbyte != 0) break;
     	}
     	if (splitbyte == 0) {
-    		throw new HaltException(400, "Request footer to long or malformated");
+    		throw new HaltException(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE, "Request footer to long or malformated");
     	}
     	in.reset();
     	in.skip(splitbyte);
@@ -204,7 +206,7 @@ public class BasicRequest extends Request {
     	int rlen = in.read(b);
     	int splitbyte = findLineBreak(b, rlen);
     	if (splitbyte == 0) {
-    		throw new HaltException(400, "Request too long or malformated");
+    		throw new HaltException(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE, "Request too long or malformated");
     	}
     	in.reset();
     	in.skip(splitbyte);

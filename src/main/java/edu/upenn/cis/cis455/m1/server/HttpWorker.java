@@ -46,8 +46,8 @@ public class HttpWorker extends Thread {
 			}
 			logger.info("" + this + " is turned off");
 		} catch (Exception e) {
-			server.error(this);
-			throw e;
+			e.printStackTrace();
+			logger.error("Uncaught error: " + e.getMessage());
 		}
 
 	}
