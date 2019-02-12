@@ -6,3 +6,19 @@
 <li>2019-Feb-12 04:35:57 AM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
 <li>2019-Feb-12 04:38:10 AM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
 <li>2019-Feb-12 04:39:15 AM [main] ERROR edu.upenn.cis.cis455.m1.server.HttpTaskQueue - offering task to a unactive task queue</li>
+<li>2019-Feb-12 18:34:45 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55155 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-12 18:34:45 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55155 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-12 18:35:07 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55164 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-12 18:35:07 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55161 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-12 18:35:18 PM [Thread-7] ERROR edu.upenn.cis.cis455.methodHandlers.BasicRequestHandler - Error caught: Exception on Router Handling - null</li>
+<li>2019-Feb-12 18:35:18 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55173 HaltException on Request Processing - 500 Error while handling the request. /shutdown null</li>
+<li>2019-Feb-12 18:35:18 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55173 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-12 18:35:22 PM [Thread-8] ERROR edu.upenn.cis.cis455.methodHandlers.BasicRequestHandler - Error caught: Exception on Router Handling - null</li>
+<li>2019-Feb-12 18:35:22 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55174 HaltException on Request Processing - 500 Error while handling the request. /shutdown null</li>
+<li>2019-Feb-12 18:35:22 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55174 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-12 18:35:26 PM [Thread-9] ERROR edu.upenn.cis.cis455.methodHandlers.BasicRequestHandler - Error caught: Exception on Router Handling - null</li>
+<li>2019-Feb-12 18:35:26 PM [Thread-9] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55176 HaltException on Request Processing - 500 Error while handling the request. /shutdown null</li>
+<li>2019-Feb-12 18:35:26 PM [Thread-9] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55176 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-12 18:39:26 PM [Daemon Thread-Port:8888] ERROR edu.upenn.cis.cis455.m1.server.HttpServer - Error caught:IOException on Server Listening (might be called by user)- Socket closed</li>
+<li>2019-Feb-12 18:39:26 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - Connection reset</li>
+<li>2019-Feb-12 18:39:26 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>

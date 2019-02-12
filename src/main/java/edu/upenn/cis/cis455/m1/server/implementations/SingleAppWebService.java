@@ -3,6 +3,7 @@ import edu.upenn.cis.cis455.ServiceFactory;
 import edu.upenn.cis.cis455.handlers.Filter;
 import edu.upenn.cis.cis455.handlers.Route;
 import edu.upenn.cis.cis455.m1.server.HttpMethod;
+import edu.upenn.cis.cis455.m1.server.HttpServer;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m2.server.interfaces.WebService;
 
@@ -23,12 +24,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SingleAppWebService extends WebService {
 		
 	protected final AppContext context;
+	
 	private static AtomicInteger portNum = new AtomicInteger(8888);
 	/**
 	 * 
 	 */
 	public SingleAppWebService() {
 		context = new AppContext();
+		basicServer = ServiceFactory.getHttpServer();
 	}
 
 	/* (non-Javadoc)
@@ -40,9 +43,6 @@ public class SingleAppWebService extends WebService {
 			throw new IllegalStateException("The service is already running");
 		}
 		context.isActive = true;
-		if (basicServer == null) {
-			basicServer = ServiceFactory.getHttpServer();
-		}
 		basicServer.start(context);
 	}
 
