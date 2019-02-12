@@ -35,14 +35,15 @@ public class BasicCookie {
 		sb.append(name);
 		sb.append('=');
 		sb.append(value);
-		if (maxAge != -1) {
+		sb.append(String.format(";path=\"%s\"", path));
+		if (maxAge >= 0) {
 			sb.append(";maxAge=" + maxAge);
 		}
 		if (secured) {
-			sb.append(";secured");
+			sb.append(";Secure");
 		}
 		if (httpOnly) {
-			sb.append(";httpOnly");
+			sb.append(";HttpOnly");
 		}
 		return sb.toString();
 	}

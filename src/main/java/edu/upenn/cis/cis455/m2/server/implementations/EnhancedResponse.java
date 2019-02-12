@@ -1,6 +1,7 @@
 package edu.upenn.cis.cis455.m2.server.implementations;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ public class EnhancedResponse extends Response {
 	
 	public EnhancedResponse() {
 		headers = new HashMap<>();
+		cookies = new HashSet<>();
 	}
 
 	@Override
@@ -96,5 +98,4 @@ public class EnhancedResponse extends Response {
 		}
 		return sb.toString();
 	}
-
 }
