@@ -33,7 +33,7 @@ public class ResponseTest {
 
 	@Test
 	public void testBodyRaw() {
-		assertEquals(null, res.bodyRaw());
+		assertArrayEquals(new byte[0], res.bodyRaw());
 	}
 
 	@Test
