@@ -39,7 +39,7 @@ public class DeleteRequestHandler extends BasicRequestHandler {
 			throw new HaltException(403, "Permission Denied on the requested path.");
 		}
 		Path filePath = rootPath.resolve(requestPath);
-		logger.info("requesting file on paht: " + filePath);
+		logger.info("try to delete file on path: " + filePath);
 		File requestedFile = filePath.toFile();
 		// Check whether the file exists
 		if (!requestedFile.exists() || !requestedFile.isFile()) {

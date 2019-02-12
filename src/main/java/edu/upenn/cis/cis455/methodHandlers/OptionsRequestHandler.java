@@ -36,6 +36,7 @@ public class OptionsRequestHandler extends BasicRequestHandler {
 	}
 
 	private boolean checkMethods(Path requestPath, Response response) {
+		logger.info("checking allowed methods in the routes matching the path: " + requestPath);
 		Set<HttpMethod> supportedMethods = new HashSet<>();
 		// 2. find the path in other's method handlers' routers
 		for (Map.Entry<HttpMethod, Map<Path, Route>> ent : allRoutes.entrySet()) {
@@ -43,8 +44,17 @@ public class OptionsRequestHandler extends BasicRequestHandler {
 				supportedMethods.add(ent.getKey());
 			}
 		}
+		
+		// find the file
+		if (supportedMethods.isEmpty()) {
+			logger.info("checking allowed methods for files matching the path: " + requestPath);
+			if (requestPath.toFile().exists()) {
+				supportedMethods.add(HttpMethod.GET);
+				supportedMethods.add(HttpMethod.HEAD);
+			}
+			// POST / PUT / DELETE are not added since they are not recommended
+		}
 
-		// 3. find the path as a file
 		if (supportedMethods.isEmpty()) {
 			return false;
 		}

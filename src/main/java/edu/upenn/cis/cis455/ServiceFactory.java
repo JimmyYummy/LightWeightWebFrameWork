@@ -54,12 +54,14 @@ public class ServiceFactory {
      */
     public static WebService getServerInstance() {
     	if (ws == null) {
+    		logger.info("creating the singlton web service instance");
     		ws = new SingleAppWebService();
     	}
         return ws;
     }
     
     public static WebService getNewWebService() {
+    	logger.info("creating the repeatable web service instance");
     	return new SingleAppWebService();
     }
     
@@ -150,6 +152,7 @@ public class ServiceFactory {
     
 	public static HandlerResolver getHandlerResolver() {
 		if (hr == null) {
+			logger.info("creating the request handler resolver instance");
 			hr = new HandlerResolver();
 		}
 		return hr;
@@ -160,6 +163,7 @@ public class ServiceFactory {
 			if (hs == null) {
 				throw new IllegalStateException("Cannot create the thread poll without server initialized");
 			}
+			logger.info("creating the thread pool instance");
 			pool = new HttpThreadPool(num);
 		}
 		return pool;
@@ -167,6 +171,7 @@ public class ServiceFactory {
 
 	public static HttpServer getHttpServer() {
 		if (hs == null) {
+			logger.info("creating the HttpServer instance to run all apps");
 			hs = new HttpServer();
 		}
 		return hs;
@@ -182,6 +187,7 @@ public class ServiceFactory {
     public static String createSession() {
     	Session session = new BasicSession();
     	idToSession.put(session.id(), session);
+    	logger.info("new session in the pool, id: " + session.id());
         return session.id();
     }
     
@@ -197,7 +203,11 @@ public class ServiceFactory {
     }
     
     public static void deregisterSession(String id) {
-    	idToSession.remove(id);
+    	if (idToSession.remove(id) != null) {
+    		logger.info("session removed from pool, id: " + id);
+    	} else {
+    		logger.info("pool does not contain this session, id: "+ id);
+    	}
     }
     
     public static Request getRequestForException(int version) {

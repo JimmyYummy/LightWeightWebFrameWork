@@ -2,22 +2,28 @@ package edu.upenn.cis.cis455.m2.server.implementations;
 
 import java.time.Instant;
 import java.util.UUID;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import edu.upenn.cis.cis455.ServiceFactory;
+import edu.upenn.cis.cis455.m1.server.implementations.GeneralRequestHandler;
 import edu.upenn.cis.cis455.m2.server.interfaces.Session;
 
 public class BasicSession extends Session {
+	
+	final static Logger logger = LogManager.getLogger(BasicSession.class);
+	
 	private final String id;
 	private final long creationTime;
 	private long lastAccessedTime;
 	private boolean valid;
 	private int validInterval;
 	private Map<String, Object> attrs;
-	
-	
 	
 	public BasicSession() {
 		id = UUID.randomUUID().toString();
@@ -45,6 +51,7 @@ public class BasicSession extends Session {
 
 	@Override
 	public synchronized void invalidate() {
+		logger.info("The session is invalidated, id: " + id);
 		valid = false;
 		attrs.clear();
 		ServiceFactory.deregisterSession(id);
@@ -67,6 +74,7 @@ public class BasicSession extends Session {
 		if (lastAccessedTime + (long) validInterval * 1000 < now) {
 			invalidate();
 		}
+		logger.info("The session is accessed, id: " + id);
 		lastAccessedTime = now;
 	}
 

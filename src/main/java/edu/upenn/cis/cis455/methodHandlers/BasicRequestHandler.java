@@ -63,6 +63,7 @@ public class BasicRequestHandler {
 	}
 	
 	protected void modificationHeaderCheck(Request request, File requestedFile, Path requestPath) {
+		logger.info("checking the if-mod / if-unmod headers");
 		if (request.headers().contains("if-modified-since")) {
 
 			ZonedDateTime reqDate = DateTimeUtil.parseDate(request.headers("if-modified-since"));
