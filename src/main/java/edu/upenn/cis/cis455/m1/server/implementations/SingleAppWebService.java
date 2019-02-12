@@ -73,7 +73,7 @@ public class SingleAppWebService extends WebService {
 		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
-		this.context.routes.get(HttpMethod.GET).put(Paths.get(path).normalize(), route);
+		this.context.routes.get(HttpMethod.GET).put(Paths.get("/" + path).normalize(), route);
 	}
 	
 	@Override
@@ -81,7 +81,7 @@ public class SingleAppWebService extends WebService {
 		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
-		this.context.routes.get(HttpMethod.POST).put(Paths.get(path).normalize(), route);
+		this.context.routes.get(HttpMethod.POST).put(Paths.get("/" + path).normalize(), route);
 		
 	}
 
@@ -90,7 +90,7 @@ public class SingleAppWebService extends WebService {
 		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
-		this.context.routes.get(HttpMethod.PUT).put(Paths.get(path).normalize(), route);
+		this.context.routes.get(HttpMethod.PUT).put(Paths.get("/" + path).normalize(), route);
 		
 	}
 
@@ -99,7 +99,7 @@ public class SingleAppWebService extends WebService {
 		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
-		this.context.routes.get(HttpMethod.DELETE).put(Paths.get(path).normalize(), route);
+		this.context.routes.get(HttpMethod.DELETE).put(Paths.get("/" + path).normalize(), route);
 		
 	}
 
@@ -108,7 +108,7 @@ public class SingleAppWebService extends WebService {
 		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
-		this.context.routes.get(HttpMethod.HEAD).put(Paths.get(path).normalize(), route);
+		this.context.routes.get(HttpMethod.HEAD).put(Paths.get("/" + path).normalize(), route);
 		
 	}
 
@@ -117,7 +117,7 @@ public class SingleAppWebService extends WebService {
 		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
-		this.context.routes.get(HttpMethod.OPTIONS).put(Paths.get(path).normalize(), route);
+		this.context.routes.get(HttpMethod.OPTIONS).put(Paths.get("/" + path).normalize(), route);
 		
 	}
 	
@@ -184,7 +184,7 @@ public class SingleAppWebService extends WebService {
 		}
     	
     	Map<Path, Map<String, List<Filter>>> filters = context.beforeFilters;
-    	Path normaledPath = Paths.get(path).normalize();
+    	Path normaledPath = Paths.get("/" + path).normalize();
     	if (! filters.containsKey(normaledPath)) {
     		filters.put(normaledPath, new HashMap<>());
     	}
@@ -205,7 +205,7 @@ public class SingleAppWebService extends WebService {
 		}
     	
     	Map<Path, Map<String, List<Filter>>> filters = context.afterFilters;
-    	Path normaledPath = Paths.get(path).normalize();
+    	Path normaledPath = Paths.get("/" + path).normalize();
     	if (! filters.containsKey(normaledPath)) {
     		filters.put(normaledPath, new HashMap<>());
     	}

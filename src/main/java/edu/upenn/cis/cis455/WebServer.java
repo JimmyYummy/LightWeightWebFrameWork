@@ -116,11 +116,13 @@ public class WebServer {
         port(port);
         awaitInitialization();
         before((req, res) -> {
-        	if (req.pathInfo().equals("/etc/passwd")) {
+        	Path secured = Paths.get("/etc/passwd");
+        	Path reqPath = Paths.get(req.pathInfo());
+        	if (reqPath.equals(secured)) {
         		throw new HaltException(403, "Access forbidden");
         	}
         });
-        
+                
         get("/control", (req, res) -> {
         	Path errorLogPath = Paths.get("error.log");
         	res.type("text/html");

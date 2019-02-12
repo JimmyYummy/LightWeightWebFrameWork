@@ -11,6 +11,6 @@ public class SampleWebApp {
         
         
         // TODO: Uncomment this for milestone 2: it will be a GET handler to a simple lambda function
-        // WebServiceController.get("index.html", (request, response) -> "Hello World");
+//         WebServiceController.get("index.html", (request, response) -> "Hello World");
     }
 }
