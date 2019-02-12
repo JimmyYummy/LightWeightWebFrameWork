@@ -13,6 +13,8 @@ public class EnhancedResponse extends Response {
 	Set<BasicCookie> cookies;
 	
 	public EnhancedResponse() {
+		contentType = "text/plain";
+		body = new byte[0];
 		headers = new HashMap<>();
 		cookies = new HashSet<>();
 	}

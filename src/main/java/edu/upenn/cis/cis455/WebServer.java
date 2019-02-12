@@ -4,7 +4,6 @@ import org.apache.logging.log4j.Level;
 
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m2.server.interfaces.Session;
-import edu.upenn.cis.cis455.m2.server.interfaces.WebService;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -142,8 +141,9 @@ public class WebServer {
     		// Error log
     		File errorLogFile = errorLogPath.toFile();
     		if (errorLogFile.exists() && errorLogFile.isFile() && errorLogFile.canRead()) {
+    			BufferedReader reader = null;
     			try {
-    				BufferedReader reader = new BufferedReader(new FileReader(errorLogFile));
+    				reader = new BufferedReader(new FileReader(errorLogFile));
     				sb.append("<li>Error Log:\n" + "	<ul>\n");
     				String line = null;
     				while ((line = reader.readLine()) != null) {
@@ -152,7 +152,7 @@ public class WebServer {
     			} catch (IOException e) {
     				e.printStackTrace();
     			} finally {
-
+    				if (reader != null) reader.close();
     			}
     		}
     		// end of doc

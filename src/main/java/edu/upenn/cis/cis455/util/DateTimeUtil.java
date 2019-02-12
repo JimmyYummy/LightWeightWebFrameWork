@@ -1,7 +1,6 @@
 package edu.upenn.cis.cis455.util;
 
 import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,12 +19,13 @@ public abstract class DateTimeUtil {
 
 	public static String getDate() {
     	
-    	ZonedDateTime zonedDT = ZonedDateTime.of(LocalDateTime.now(), zone);
+    	ZonedDateTime zonedDT = ZonedDateTime.now(zone);
     	return zonedDT.format(formater1);
 	}
 	
 	public static String miliToDate(long mili) {
-		ZonedDateTime zonedDT = ZonedDateTime.ofInstant(Instant.ofEpochSecond(mili), zone);
+		Instant instant = Instant.ofEpochMilli(mili);
+		ZonedDateTime zonedDT = ZonedDateTime.ofInstant(instant, zone);
 		return zonedDT.format(formater1);
 	}
 	
@@ -46,5 +46,12 @@ public abstract class DateTimeUtil {
     	logger.info("Failed parsing date: " + dateStr);
     	return null;	
     }
+	
+	public static void main(String[] args) {
+		long mili = Instant.now().toEpochMilli();
+		Instant instant = Instant.ofEpochMilli(mili);
+		ZonedDateTime zonedDT = ZonedDateTime.ofInstant(instant, zone);
+		System.out.println(zonedDT);
+	}
 
 }

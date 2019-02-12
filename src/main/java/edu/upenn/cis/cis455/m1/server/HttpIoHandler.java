@@ -1,6 +1,5 @@
 package edu.upenn.cis.cis455.m1.server;
 
-import java.io.BufferedWriter;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -28,7 +27,6 @@ public class HttpIoHandler {
 	 * connections).
 	 */
 	public static boolean sendException(Socket socket, Request request, HaltException except) {
-		BufferedWriter writer = null;
 		boolean keepOpen = false;
 		if (except == null) {
 			except = new HaltException(500, "Unknown Error");
@@ -101,9 +99,9 @@ public class HttpIoHandler {
 			sb.append("Server: CIS-550/JingWang\r\n");
 			if (request.protocol().equals("HTTP/1.1")) {
 				sb.append(String.format("Date: %s\r\n", DateTimeUtil.getDate()));
-			}
-			if (response.status() != 100 && !request.persistentConnection()) {
-				sb.append("Connection: close\r\n");
+				if (response.status() != 100 && !request.persistentConnection()) {
+					sb.append("Connection: close\r\n");
+				}
 			}
 			sb.append("Transfer-Encoding: chunked\r\n");
 			sb.append(String.format("Content-Type: %s\r\n", response.type()));
@@ -149,9 +147,9 @@ public class HttpIoHandler {
 			sb.append("Server: CIS-550/JingWang\r\n");
 			if (request.protocol().equals("HTTP/1.1")) {
 				sb.append(String.format("Date: %s\r\n", DateTimeUtil.getDate()));
-			}
-			if (response.status() != 100 && !request.persistentConnection()) {
-				sb.append("Connection: close\r\n");
+				if (response.status() != 100 && !request.persistentConnection()) {
+					sb.append("Connection: close\r\n");
+				}
 			}
 			sb.append(String.format("Content-Length: %d\r\n", response.bodyRaw().length));
 			sb.append(String.format("Content-Type: %s\r\n", response.type()));

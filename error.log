@@ -11267,3 +11267,6 @@
 <li>2019-Feb-11 21:33:46 PM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63021 HaltException on Request Processing - 400 null null</li>
 <li>2019-Feb-11 21:41:26 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63122 HaltException on Request Processing - 400 null null</li>
 <li>2019-Feb-11 21:41:46 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63128 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-11 22:11:39 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63643 HaltException on Request Processing - 404 Not Found session/get null</li>
+<li>2019-Feb-11 22:12:45 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63643 HaltException on Request Processing - 404 Not Found session/get null</li>
+<li>2019-Feb-11 22:14:06 PM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - null</li>

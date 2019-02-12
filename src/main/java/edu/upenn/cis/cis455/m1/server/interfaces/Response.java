@@ -30,8 +30,6 @@ package edu.upenn.cis.cis455.m1.server.interfaces;
 
 import java.io.UnsupportedEncodingException;
 
-import edu.upenn.cis.cis455.m1.server.implementations.BasicResponse;
-
 public abstract class Response {
 	
     protected int statusCode = 200;
@@ -50,7 +48,6 @@ public abstract class Response {
         try {
             return body == null ? "" : new String(body, "UTF-8");
         } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return "";
         }

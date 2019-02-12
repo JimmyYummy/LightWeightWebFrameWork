@@ -48,10 +48,14 @@ public class OptionsRequestHandler extends BasicRequestHandler {
 		if (supportedMethods.isEmpty()) {
 			return false;
 		}
-		
-		//TODO: modify response's header here
-		
 		supportedMethods.add(HttpMethod.OPTIONS);
+		StringBuilder sb = new StringBuilder();
+		for (HttpMethod method : supportedMethods) {
+			sb.append(method.toString());
+			sb.append(", ");
+		}
+		sb.delete(sb.length() - 2, sb.length());
+		response.header("Allow", sb.toString());
 		return true;
 	}
 }
