@@ -32,8 +32,8 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 
 
 	public GeneralRequestHandler(Path rootPath) {
-		SingleAppWebService ws = (SingleAppWebService) ServiceFactory.getServerInstance();
-		methodHandlerMap = createHandlerMap(ws.context);
+		Context context = new MockContext(rootPath.normalize().toString());
+		methodHandlerMap = createHandlerMap(context);
 	}
 
 	public GeneralRequestHandler(Context context) {
