@@ -3,7 +3,6 @@ import edu.upenn.cis.cis455.ServiceFactory;
 import edu.upenn.cis.cis455.handlers.Filter;
 import edu.upenn.cis.cis455.handlers.Route;
 import edu.upenn.cis.cis455.m1.server.HttpMethod;
-import edu.upenn.cis.cis455.m1.server.HttpServer;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m2.server.interfaces.WebService;
 
