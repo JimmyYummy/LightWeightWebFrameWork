@@ -67,7 +67,7 @@ public class BasicRequestHandler {
 		if (request.headers().contains("if-modified-since")) {
 
 			ZonedDateTime reqDate = DateTimeUtil.parseDate(request.headers("if-modified-since"));
-			if (reqDate != null && reqDate.toInstant().toEpochMilli() < requestedFile.lastModified()) {
+			if (reqDate != null && reqDate.toInstant().toEpochMilli() >= requestedFile.lastModified()) {
 				throw new HaltException(304, "Not Modified " + requestPath);
 			}
 		}
@@ -75,7 +75,7 @@ public class BasicRequestHandler {
 		if (request.headers().contains("if-unmodified-since")) {
 
 			ZonedDateTime reqDate = DateTimeUtil.parseDate(request.headers("if-unmodified-since"));
-			if (reqDate != null && reqDate.toInstant().toEpochMilli() > requestedFile.lastModified()) {
+			if (reqDate != null && reqDate.toInstant().toEpochMilli() < requestedFile.lastModified()) {
 				throw new HaltException(412, "Precondition Failed " + requestPath);
 			}
 		}

@@ -22,3 +22,18 @@
 <li>2019-Feb-12 18:39:26 PM [Daemon Thread-Port:8888] ERROR edu.upenn.cis.cis455.m1.server.HttpServer - Error caught:IOException on Server Listening (might be called by user)- Socket closed</li>
 <li>2019-Feb-12 18:39:26 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - Connection reset</li>
 <li>2019-Feb-12 18:39:26 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
+<li>2019-Feb-12 18:52:59 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55426 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-12 18:52:59 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 55426 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-12 19:07:27 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Uncaught error: null</li>
+<li>2019-Feb-12 19:07:27 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Uncaught error: null</li>
+<li>2019-Feb-12 19:07:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Uncaught error: null</li>
+<li>2019-Feb-12 19:07:27 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Uncaught error: null</li>
+<li>2019-Feb-12 19:07:27 PM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Uncaught error: null</li>
+<li>2019-Feb-12 19:07:27 PM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Uncaught error: null</li>
+<li>2019-Feb-12 19:07:27 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Uncaught error: null</li>
+<li>2019-Feb-12 19:07:27 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Uncaught error: null</li>
+<li>2019-Feb-12 19:07:27 PM [Thread-9] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Uncaught error: null</li>
+<li>2019-Feb-12 19:07:27 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Uncaught error: null</li>
+<li>2019-Feb-12 19:51:48 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56769 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-12 19:52:04 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56769 HaltException on Request Processing - 304 Not Modified index.html null</li>
+<li>2019-Feb-12 19:55:42 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56806 HaltException on Request Processing - 412 Precondition Failed index.html null</li>
