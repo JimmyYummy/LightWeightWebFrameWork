@@ -118,8 +118,8 @@ public class WebServer {
         awaitInitialization();
         
         before((req, res) -> {
-        	Path secured = Paths.get("/etc/passwd");
-        	Path reqPath = Paths.get(req.pathInfo());
+        	Path secured = Paths.get("/etc/passwd").normalize();
+        	Path reqPath = Paths.get(req.pathInfo()).normalize();
         	if (reqPath.equals(secured)) {
         		throw new HaltException(403, "Access forbidden");
         	}
@@ -212,9 +212,6 @@ public class WebServer {
         
         
         System.out.println("Waiting to handle requests!");
-        
-
-            
     }
     
     
