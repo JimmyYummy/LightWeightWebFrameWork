@@ -37,3 +37,41 @@
 <li>2019-Feb-12 19:51:48 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56769 HaltException on Request Processing - 404 Not Found  null</li>
 <li>2019-Feb-12 19:52:04 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56769 HaltException on Request Processing - 304 Not Modified index.html null</li>
 <li>2019-Feb-12 19:55:42 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 56806 HaltException on Request Processing - 412 Precondition Failed index.html null</li>
+<li>2019-Feb-14 12:23:07 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - Connection reset</li>
+<li>2019-Feb-14 12:23:07 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
+<li>2019-Feb-14 12:23:13 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 51461 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-14 12:23:13 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 51461 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:27:59 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 51463 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:27:59 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 51467 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:28:32 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Unexception Exception on Task Working - Connection reset</li>
+<li>2019-Feb-14 12:28:32 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Exception - Broken pipe (Write failed)</li>
+<li>2019-Feb-14 12:37:08 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 51949 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:37:45 PM [Thread-9] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-14 12:37:49 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52027 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:37:49 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52030 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:37:49 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52036 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:37:49 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52039 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:37:49 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52042 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:37:49 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-14 12:37:49 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52047 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:37:49 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52048 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:37:49 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52052 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:37:49 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52056 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:37:49 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52057 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:37:49 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52058 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:39:18 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-14 12:39:20 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-14 12:39:20 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52241 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:39:20 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52245 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:39:21 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52247 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:39:21 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52251 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:39:21 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52255 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:39:21 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52256 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:39:21 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52259 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:39:21 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52265 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:39:21 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52269 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:39:21 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52272 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:39:21 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52281 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:40:38 PM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52338 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:41:17 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52385 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-14 12:42:18 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52436 HaltException on Request Processing - 400 null null</li>

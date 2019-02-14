@@ -4,6 +4,7 @@ import org.apache.logging.log4j.Level;
 
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m2.server.interfaces.Session;
+import edu.upenn.cis.cis455.m2.server.interfaces.WebService;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -167,46 +168,47 @@ public class WebServer {
     		return "The server is shut down.";
         });
         
-//        get("/", (req, res) -> {
-//        	res.redirect("/index.html");
-//        	return "";
-//        });
-//        
-//        get("/session/get", (req, res) -> {
-//        	Session session = req.session();
-//        	session.attribute("ip", req.ip());
-//        	res.cookie("/session", "session-id", session.id());
-//        	return "session created";
-//        });
-//        
-//        get("/session/check", (req, res) -> {
-//        	Session session = req.session(false);
-//        	if (session == null) return "No built session for the client";
-//        	return "Hello, client ip: " + session.attribute("ip") + " session-id: " + session.id();
-//        });
-//        
-//        get("/outcheck", (req, res) -> {
-//        	return "No session: " + (req.session(false) == null);
-//        });
-//        
-//        get("/:user/sayhello", (req, res) -> {
-//        	StringBuilder sb = new StringBuilder();
-//        	sb.append("Hello, ");
-//        	sb.append(req.params("user"));
-//        	sb.append("! Your qureries are:\n");
-//        	Set<String> queries = req.queryParams();
-//        	for (String query : queries) {
-//        		sb.append(String.format("\t%s: %s\n", query, req.queryParams(query)));
-//        	}
-//        	return sb.toString();
-//        });
-//      WebService ws = ServiceFactory.getNewWebService();
-//      ws.port(8889);
-//      ws.get("/compute", (req, res) -> {
-//      	
-//      	return fibonacciNum(40);
-//      });
-//      ws.awaitInitialization();        
+        get("/", (req, res) -> {
+        	res.redirect("/index.html");
+        	return "";
+        });
+        
+        get("/session/get", (req, res) -> {
+        	Session session = req.session();
+        	session.attribute("ip", req.ip());
+        	res.cookie("/session", "session-id", session.id());
+        	return "session created";
+        });
+        
+        get("/session/check", (req, res) -> {
+        	Session session = req.session(false);
+        	if (session == null) return "No built session for the client";
+        	return "Hello, client ip: " + session.attribute("ip") + " session-id: " + session.id();
+        });
+        
+        get("/outcheck", (req, res) -> {
+        	return "No session: " + (req.session(false) == null);
+        });
+        
+        get("/:user/sayhello", (req, res) -> {
+        	StringBuilder sb = new StringBuilder();
+        	sb.append("Hello, ");
+        	sb.append(req.params("user"));
+        	sb.append("! Your qureries are:\n");
+        	Set<String> queries = req.queryParams();
+        	for (String query : queries) {
+        		sb.append(String.format("\t%s: %s\n", query, req.queryParams(query)));
+        	}
+        	return sb.toString();
+        });
+        
+      WebService ws = ServiceFactory.getNewWebService();
+      ws.port(9999);
+      ws.get("/compute", (req, res) -> {
+      	
+      	return fibonacciNum(40);
+      });
+      ws.awaitInitialization();        
         
         
         System.out.println("Waiting to handle requests!");
@@ -216,10 +218,10 @@ public class WebServer {
     }
     
     
-//    // return the n-th fibonacciNumber, computed through recursion
-//    private static int fibonacciNum(int n) {
-//    	if (n == 0 || n == 1) return 1;
-//    	return fibonacciNum(n - 1) + fibonacciNum(n - 2);
-//    }
+    // return the n-th fibonacciNumber, computed through recursion
+    private static int fibonacciNum(int n) {
+    	if (n == 0 || n == 1) return 1;
+    	return fibonacciNum(n - 1) + fibonacciNum(n - 2);
+    }
 
 }

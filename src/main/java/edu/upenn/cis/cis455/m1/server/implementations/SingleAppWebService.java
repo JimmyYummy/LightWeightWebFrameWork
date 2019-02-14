@@ -39,7 +39,7 @@ public class SingleAppWebService extends WebService {
 	@Override
 	public void start() {
 		if (context.isActive()) {
-			throw new IllegalStateException("The service is already running");
+			return;
 		}
 		context.isActive = true;
 		basicServer.start(context);
