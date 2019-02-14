@@ -77,7 +77,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			for (Path filterPath : typeBeforeFilters.keySet()) {
 				if (PathUtil.checkPathMatch(filterPath, requestPath, request)) {
 					Map<String, List<Filter>> typeToFilters = typeBeforeFilters.get(filterPath);
-					if (typeToFilters.containsKey(response.type())) {
+					if (typeToFilters.containsKey(request.requestMethod())) {
 						List<Filter> filters = typeToFilters.get(response.type());
 						for (Filter f : filters) {
 							f.handle(request, response);
@@ -115,7 +115,7 @@ public class GeneralRequestHandler implements HttpRequestHandler {
 			for (Path filterPath : typeAfterFilters.keySet()) {
 				if (PathUtil.checkPathMatch(filterPath, requestPath, request)) {
 					Map<String, List<Filter>> typeToFilters = typeAfterFilters.get(filterPath);
-					if (typeToFilters.containsKey(response.type())) {
+					if (typeToFilters.containsKey(request.requestMethod())) {
 						List<Filter> filters = typeToFilters.get(response.type());
 						for (Filter f : filters) {
 							f.handle(request, response);
