@@ -131,7 +131,7 @@ public class BasicRequest extends Request {
     //TODO enhance it
     private void parseChunkedBdoy(InputStream in) throws IOException {
     	// skip the blank lines
-    	InputUtil.skipBlankLines(in);
+//    	InputUtil.skipBlankLines(in);
     	
     	//get the body
     	ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -253,10 +253,13 @@ public class BasicRequest extends Request {
 
     private void parsePlainBody(InputStream in) throws IOException {
     	body = new byte[contentLength];
-    	if (contentLength != 0) {
-    		InputUtil.skipBlankLines(in);
+//    	if (contentLength != 0) {
+//    		InputUtil.skipBlankLines(in);
+//    	}
+    	int readLength = 0;
+    	while (readLength < contentLength) {
+    		readLength += in.read(body, readLength, contentLength - readLength);
     	}
-    	in.read(body);
     }
 
 	@Override
