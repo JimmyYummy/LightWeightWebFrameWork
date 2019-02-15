@@ -97,7 +97,12 @@ public class HttpWorker extends Thread {
 				
 				// generate the request object, take care of chucked request
 				req = ServiceFactory.createRequest(sc, uri, false, headers, parms);
-				
+				// check if the PUT/POST request has a proper body
+				if ("POST".equals(req.requestMethod()) || "PUT".equals(req.requestMethod())) {
+					if (req.contentLength() == 0) {
+						throw new HaltException(400, "No content for the " + req.requestMethod() + " request");
+					}
+				}
 				// check if is persistent connection
 				boolean persist = false;
 				if (req.protocol().equals("HTTP/1.1")
