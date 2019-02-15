@@ -210,7 +210,6 @@ public class WebServer {
       });
       ws.awaitInitialization();        
         
-        
         System.out.println("Waiting to handle requests!");
     }
     

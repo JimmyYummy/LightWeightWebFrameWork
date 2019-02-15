@@ -3,6 +3,7 @@ import edu.upenn.cis.cis455.ServiceFactory;
 import edu.upenn.cis.cis455.handlers.Filter;
 import edu.upenn.cis.cis455.handlers.Route;
 import edu.upenn.cis.cis455.m1.server.HttpMethod;
+import edu.upenn.cis.cis455.m1.server.TimedPath;
 import edu.upenn.cis.cis455.m1.server.interfaces.Context;
 import edu.upenn.cis.cis455.m2.server.interfaces.WebService;
 
@@ -69,57 +70,44 @@ public class SingleAppWebService extends WebService {
 	 */
 	@Override
 	public void get(String path, Route route) {
-		if (! context.isActive()) {
-			this.awaitInitialization();
-		}
-		this.context.routes.get(HttpMethod.GET).put(Paths.get("/" + path).normalize(), route);
+		putInRoutes(path, route, HttpMethod.GET);
 	}
 	
 	@Override
 	public void post(String path, Route route) {
-		if (! context.isActive()) {
-			this.awaitInitialization();
-		}
-		this.context.routes.get(HttpMethod.POST).put(Paths.get("/" + path).normalize(), route);
-		
+		putInRoutes(path, route, HttpMethod.POST);
 	}
 
 	@Override
 	public void put(String path, Route route) {
-		if (! context.isActive()) {
-			this.awaitInitialization();
-		}
-		this.context.routes.get(HttpMethod.PUT).put(Paths.get("/" + path).normalize(), route);
-		
+		putInRoutes(path, route, HttpMethod.PUT);		
 	}
 
 	@Override
 	public void delete(String path, Route route) {
-		if (! context.isActive()) {
-			this.awaitInitialization();
-		}
-		this.context.routes.get(HttpMethod.DELETE).put(Paths.get("/" + path).normalize(), route);
-		
+		putInRoutes(path, route, HttpMethod.DELETE);	
 	}
 
 	@Override
 	public void head(String path, Route route) {
-		if (! context.isActive()) {
-			this.awaitInitialization();
-		}
-		this.context.routes.get(HttpMethod.HEAD).put(Paths.get("/" + path).normalize(), route);
-		
+		putInRoutes(path, route, HttpMethod.HEAD);
 	}
 
 	@Override
 	public void options(String path, Route route) {
+		putInRoutes(path, route, HttpMethod.OPTIONS);
+	}
+	
+	private void putInRoutes(String path, Route route, HttpMethod method) {
 		if (! context.isActive()) {
 			this.awaitInitialization();
 		}
-		this.context.routes.get(HttpMethod.OPTIONS).put(Paths.get("/" + path).normalize(), route);
-		
+		Map<Path, Route> pathToRoute = this.context.routes.get(method);
+		Path timedPath = new TimedPath(path);
+		if (! pathToRoute.containsKey(timedPath)) {
+			pathToRoute.put(timedPath, route);
+		}
 	}
-	
 
 	/* (non-Javadoc)
 	 * @see edu.upenn.cis.cis455.m1.server.interfaces.WebService#ipAddress(java.lang.String)
@@ -183,18 +171,10 @@ public class SingleAppWebService extends WebService {
 		}
     	
     	Map<Path, Map<String, List<Filter>>> filters = context.beforeFilters;
-    	Path normaledPath = Paths.get("/" + path).normalize();
-    	if (! filters.containsKey(normaledPath)) {
-    		filters.put(normaledPath, new HashMap<>());
-    	}
-    	Map<String, List<Filter>> typeFilterMap = filters.get(normaledPath);
-    	if (! typeFilterMap.containsKey(acceptType)) {
-    		typeFilterMap.put(acceptType, new ArrayList<>());
-    	}
-    	typeFilterMap.get(acceptType).add(filter);
+    	putFilters(filters, path, acceptType, filter);
     }
-    
-    @Override
+
+	@Override
     /**
      * Add filters that get called after a request
      */
@@ -204,11 +184,16 @@ public class SingleAppWebService extends WebService {
 		}
     	
     	Map<Path, Map<String, List<Filter>>> filters = context.afterFilters;
-    	Path normaledPath = Paths.get("/" + path).normalize();
-    	if (! filters.containsKey(normaledPath)) {
-    		filters.put(normaledPath, new HashMap<>());
+    	putFilters(filters, path, acceptType, filter);
+    }
+    
+    private void putFilters(Map<Path, Map<String, List<Filter>>> filters, 
+    		String path, String acceptType, Filter filter) {
+    	Path timedPath = new TimedPath(path);
+    	if (! filters.containsKey(timedPath)) {
+    		filters.put(timedPath, new HashMap<>());
     	}
-    	Map<String, List<Filter>> typeFilterMap = filters.get(normaledPath);
+    	Map<String, List<Filter>> typeFilterMap = filters.get(timedPath);
     	if (! typeFilterMap.containsKey(acceptType)) {
     		typeFilterMap.put(acceptType, new ArrayList<>());
     	}
@@ -232,12 +217,12 @@ public class SingleAppWebService extends WebService {
 		private AppContext() {
 			routes = new HashMap<>();
 			for (HttpMethod method : HttpMethod.values()) {
-				routes.put(method, new HashMap<>());
+				routes.put(method, new TreeMap<>());
 			}
 			beforeGeneralFilters = new ArrayList<>();
 			afterGeneralFilters = new ArrayList<>();
-			beforeFilters = new HashMap<>();
-			afterFilters = new HashMap<>();
+			beforeFilters = new TreeMap<>();
+			afterFilters = new TreeMap<>();
 			port = portNum.getAndIncrement();
 			ipaddr = "0.0.0.0";
 			fileLocation = "./www";

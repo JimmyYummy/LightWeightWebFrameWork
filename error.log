@@ -75,3 +75,9 @@
 <li>2019-Feb-14 12:40:38 PM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52338 HaltException on Request Processing - 400 null null</li>
 <li>2019-Feb-14 12:41:17 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52385 HaltException on Request Processing - 400 null null</li>
 <li>2019-Feb-14 12:42:18 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 52436 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 18:36:12 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 61261 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-15 18:36:12 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 61261 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 18:37:07 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 61280 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-15 18:37:07 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 61280 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 18:38:25 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 61313 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-15 18:38:25 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 61313 HaltException on Request Processing - 400 null null</li>
