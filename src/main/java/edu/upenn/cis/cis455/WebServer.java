@@ -87,7 +87,7 @@ import static edu.upenn.cis.cis455.WebServiceController.*;
  * 	it does not specify the "Content-Length" header, the request will be regarded as having no body, and 
  *  its body will be regarded as another request (wrongly formatted), and a 400 error will be sent back.
  * 
- *  2) Performance testing: Not finished yet
+ *  2) Performance testing: see performance.pdf
  * 
  *  3) Multiple simultaneous sockets / servers
  * 
