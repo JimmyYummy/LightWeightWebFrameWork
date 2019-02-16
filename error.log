@@ -81,3 +81,85 @@
 <li>2019-Feb-15 18:37:07 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 61280 HaltException on Request Processing - 400 null null</li>
 <li>2019-Feb-15 18:38:25 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 61313 HaltException on Request Processing - 404 Not Found  null</li>
 <li>2019-Feb-15 18:38:25 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 61313 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 18:47:55 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 61511 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 18:48:54 PM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 61535 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 18:49:04 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 61556 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 18:49:13 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 61601 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:00:44 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 61970 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:01:56 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62018 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:02:30 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62066 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:02:55 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62113 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:03:01 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62156 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:03:13 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62200 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:04:02 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62260 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:04:11 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62318 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:04:57 PM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62388 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:05:10 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62453 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:05:28 PM [Thread-9] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62516 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:05:42 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62581 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:06:35 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62659 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:06:54 PM [Thread-9] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62736 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:07:13 PM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62816 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:07:37 PM [Thread-9] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:07:37 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 62896 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63078 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:27 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpIoHandler - Error caught: IOException on Sending Noraml ResponseBroken pipe (Write failed)</li>
+<li>2019-Feb-15 19:08:28 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63125 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:08:49 PM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63207 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:08:50 PM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63209 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:09:46 PM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63294 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:10:42 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63390 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:11:12 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63480 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:11:56 PM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63560 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:12:12 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63641 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:12:42 PM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63739 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:13:16 PM [Thread-9] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63834 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:13:57 PM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 63930 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:14:16 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 64031 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:15:20 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 64137 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:15:45 PM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 64245 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:17:29 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 64290 HaltException on Request Processing - 400 null null</li>

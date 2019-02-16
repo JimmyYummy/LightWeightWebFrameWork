@@ -226,7 +226,7 @@ public class SingleAppWebService extends WebService {
 			port = portNum.getAndIncrement();
 			ipaddr = "0.0.0.0";
 			fileLocation = "./www";
-			threadNum = 10;
+			threadNum = 20;
 			isActive = false;
 		}
 
