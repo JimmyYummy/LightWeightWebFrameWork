@@ -26,13 +26,6 @@ public abstract class InputUtil {
 		in.skip(skipBytes);
 		return skipBytes;
 	}
-	
-	public static boolean reachedEndOfStream(InputStream in) throws IOException {
-		in.mark(200);
-		boolean reachedEnd = (in.read() == -1);
-		in.reset();
-		return reachedEnd;
-	}
 
 	public static void checkNewMessage(InputStream in) throws IOException {
 		double timeout = Instant.now().toEpochMilli() + 15000;

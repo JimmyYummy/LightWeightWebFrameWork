@@ -123,7 +123,7 @@ public class HttpWorker extends Thread {
 				handler.handle(req, res);
 				// use IO handler to send response
 				// persistent? (based on the handler's response) and the input stream
-				if (!HttpIoHandler.sendResponse(sc, req, res) || InputUtil.reachedEndOfStream(in)) {
+				if (!HttpIoHandler.sendResponse(sc, req, res)) {
 					try {
 						sc.close();
 					} catch (IOException e1) {
