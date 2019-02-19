@@ -202,13 +202,13 @@ public class WebServer {
         	return sb.toString();
         });
         
-      WebService ws = ServiceFactory.getNewWebService();
-      ws.port(9999);
-      ws.get("/compute", (req, res) -> {
-      	
-      	return fibonacciNum(40);
-      });
-      ws.awaitInitialization();        
+//      WebService ws = ServiceFactory.getNewWebService();
+//      ws.port(9999);
+//      ws.get("/compute", (req, res) -> {
+//      	
+//      	return fibonacciNum(40);
+//      });
+//      ws.awaitInitialization();        
         
         System.out.println("Waiting to handle requests!");
     }

@@ -160,19 +160,20 @@ public class TimedPath implements Path {
 
 	@Override
 	public int compareTo(Path other) {
-		if (other instanceof TimedPath) {
-			TimedPath to = (TimedPath) other;
-			if (to.time > this.time) return -1;
-			if (to.time == this.time) return 0;
+		if (! (other instanceof TimedPath)) {
+			return 1;
 		}
-		return 1;
+		TimedPath to = (TimedPath) other;
+		if (this.time > to.time) return 1;
+		if (this.time < to.time) return -1;
+		return this.p.compareTo(to.p);
 	}
-	
-	@Override
-	public int hashCode() {
-		return this.p.hashCode();
-	}
-	
+//	
+//	@Override
+//	public int hashCode() {
+//		return this.p.hashCode();
+//	}
+//	
 	@Override
 	public boolean equals(Object o) {
 		if (o == this) return true;

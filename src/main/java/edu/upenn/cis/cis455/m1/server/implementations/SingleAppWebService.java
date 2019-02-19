@@ -106,6 +106,8 @@ public class SingleAppWebService extends WebService {
 		Path timedPath = new TimedPath(path);
 		if (! pathToRoute.containsKey(timedPath)) {
 			pathToRoute.put(timedPath, route);
+		} else {
+			System.err.println("path already added to the router: " + method + " " + path);
 		}
 	}
 

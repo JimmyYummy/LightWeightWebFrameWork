@@ -183,3 +183,12 @@
 <li>2019-Feb-18 20:18:57 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50398 HaltException on Request Processing - 304 Not Modified index.html null</li>
 <li>2019-Feb-18 20:19:03 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50394 HaltException on Request Processing - 0 null null</li>
 <li>2019-Feb-18 20:19:12 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50398 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:22:01 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50459 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-18 20:22:16 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50459 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:22:45 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50466 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:23:08 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50471 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:25:04 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50500 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-18 20:25:22 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50500 HaltException on Request Processing - 400 BAD REQUEST: Missing URI. Usage: GET /example/file.html null</li>
+<li>2019-Feb-18 20:25:33 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50507 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-18 20:25:48 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50507 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:31:05 PM [Daemon Thread-Port:8889] ERROR edu.upenn.cis.cis455.m1.server.HttpServer - Error caught:IOException on Server Listening (might be called by user)- Address already in use (Bind failed)</li>
