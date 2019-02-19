@@ -2,6 +2,9 @@ package edu.upenn.cis.cis455.util;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.Instant;
+
+import edu.upenn.cis.cis455.exceptions.ClosedConnectionException;
 
 public abstract class InputUtil {
 	
@@ -29,5 +32,15 @@ public abstract class InputUtil {
 		boolean reachedEnd = (in.read() == -1);
 		in.reset();
 		return reachedEnd;
+	}
+
+	public static void checkNewMessage(InputStream in) throws IOException {
+		double timeout = Instant.now().toEpochMilli() + 15000;
+		while(Instant.now().toEpochMilli() < timeout) {
+			if (in.available() != 0) {
+				return;
+			}
+		}
+		throw new ClosedConnectionException();
 	}
 }

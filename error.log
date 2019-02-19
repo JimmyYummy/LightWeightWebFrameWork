@@ -163,3 +163,23 @@
 <li>2019-Feb-15 19:15:20 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 64137 HaltException on Request Processing - 400 null null</li>
 <li>2019-Feb-15 19:15:45 PM [Thread-6] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 64245 HaltException on Request Processing - 400 null null</li>
 <li>2019-Feb-15 19:17:29 PM [Thread-10] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 64290 HaltException on Request Processing - 400 null null</li>
+<li>2019-Feb-15 19:48:35 PM [Daemon Thread-Port:8889] ERROR edu.upenn.cis.cis455.m1.server.HttpServer - Error caught:IOException on Server Listening (might be called by user)- Socket closed</li>
+<li>2019-Feb-18 20:15:21 PM [Thread-1] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50315 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:15:53 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50320 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-18 20:16:08 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50320 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:16:58 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50344 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-18 20:17:01 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50345 HaltException on Request Processing - 304 Not Modified favicon.ico null</li>
+<li>2019-Feb-18 20:17:13 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50344 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:17:16 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50345 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:17:19 PM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50359 HaltException on Request Processing - 304 Not Modified index.html null</li>
+<li>2019-Feb-18 20:17:28 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50368 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-18 20:17:28 PM [Thread-3] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50346 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:17:32 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50371 HaltException on Request Processing - 404 Not Found  null</li>
+<li>2019-Feb-18 20:17:34 PM [Thread-5] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50359 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:17:43 PM [Thread-7] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50368 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:17:47 PM [Thread-9] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50374 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:17:47 PM [Thread-8] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50371 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:18:48 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50394 HaltException on Request Processing - 304 Not Modified index.html null</li>
+<li>2019-Feb-18 20:18:57 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50398 HaltException on Request Processing - 304 Not Modified index.html null</li>
+<li>2019-Feb-18 20:19:03 PM [Thread-2] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50394 HaltException on Request Processing - 0 null null</li>
+<li>2019-Feb-18 20:19:12 PM [Thread-4] ERROR edu.upenn.cis.cis455.m1.server.HttpWorker - Error caught: Port 50398 HaltException on Request Processing - 0 null null</li>

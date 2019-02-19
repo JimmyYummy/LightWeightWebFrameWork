@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import edu.upenn.cis.cis455.ServiceFactory;
+import edu.upenn.cis.cis455.exceptions.ClosedConnectionException;
 import edu.upenn.cis.cis455.exceptions.HaltException;
 import edu.upenn.cis.cis455.m1.server.interfaces.HttpRequestHandler;
 import edu.upenn.cis.cis455.m1.server.interfaces.Request;
@@ -78,6 +79,8 @@ public class HttpWorker extends Thread {
 			Response res = null;
 			int version = 0;
 			try {
+				// check if there is any new message
+				InputUtil.checkNewMessage(in);
 				// generate the request
 				logger.info("parsing the inital line and headers one socket: " + sc);
 				Map<String, String> headers = new HashMap<>();
