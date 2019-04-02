@@ -41,21 +41,23 @@ public class ServiceFactory {
 	
 	final static Logger logger = LogManager.getLogger(ServiceFactory.class);
 	
-	private static WebService ws;
-	private static HandlerResolver hr;
-	private static HttpServer hs;
-	private static HttpThreadPool pool;
-	private static Request exceptionRequest0;
-	private static Request exceptionRequest1;
-	private static Map<String, Session> idToSession = new HashMap<>();
+	private static volatile WebService ws;
+	private static volatile HandlerResolver hr;
+	private static volatile HttpServer hs;
+	private static volatile HttpThreadPool pool;
+	private static volatile Request exceptionRequest0;
+	private static volatile Request exceptionRequest1;
+	private static volatile Map<String, Session> idToSession = new HashMap<>();
 	
     /**
      * Get the HTTP server associated with port 8080
      */
     public static WebService getServerInstance() {
     	if (ws == null) {
-    		logger.info("creating the singlton web service instance");
-    		ws = new SingleAppWebService();
+		synchronized (SingleAppWebService.class) {
+    			logger.info("creating the singlton web service instance");
+    			ws = new SingleAppWebService();
+		}
     	}
         return ws;
     }
@@ -150,7 +152,7 @@ public class ServiceFactory {
 
 	}
     
-	public static HandlerResolver getHandlerResolver() {
+	public synchronized static HandlerResolver getHandlerResolver() {
 		if (hr == null) {
 			logger.info("creating the request handler resolver instance");
 			hr = new HandlerResolver();
@@ -158,7 +160,7 @@ public class ServiceFactory {
 		return hr;
 	}
 	
-	public static HttpThreadPool getThreadPool(int num) {
+	public synchronized static HttpThreadPool getThreadPool(int num) {
 		if (pool == null) {
 			if (hs == null) {
 				throw new IllegalStateException("Cannot create the thread poll without server initialized");
@@ -169,7 +171,7 @@ public class ServiceFactory {
 		return pool;
 	}
 
-	public static HttpServer getHttpServer() {
+	public synchronized static HttpServer getHttpServer() {
 		if (hs == null) {
 			logger.info("creating the HttpServer instance to run all apps");
 			hs = new HttpServer();
@@ -177,7 +179,7 @@ public class ServiceFactory {
 		return hs;
 	}
 	
-	public static boolean webServiceCreated() {
+	public synchronized static boolean webServiceCreated() {
 		return ! (ws == null);
 	}
 
